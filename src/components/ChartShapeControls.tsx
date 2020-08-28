@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
+import { useDispatch, useSelector } from '@/reducer'
 import { ChartShape } from '@/types'
 import { MAX_COLLAGE_ROWS_X, MAX_COLLAGE_ROWS_Y } from '@/constants'
 import { ControlledSlider } from '@/components/ControlledSlider'
@@ -9,27 +9,18 @@ import { ControlledRadioButton } from '@/components/ControlledRadioButton'
 import { SidebarGroup } from '@/components/SidebarGroup'
 
 
-export type ChartShapeControlsProps = DispatchProps<'UpdateChartShape'> & {
-    shape: ChartShape
-    rowsX: number
-    rowsY: number
-}
-
-
 const style = css({
     display: 'flex'
 })
 
 
-export const ChartShapeControls: FC<ChartShapeControlsProps> = ({
-    dispatch,
-    shape,
-    rowsX,
-    rowsY
-}) => {
+export const ChartShapeControls: FC = () => {
+    const dispatch = useDispatch()
+    const { shape, rowsX, rowsY } = useSelector(state => state.charts[state.activeChartIndex])
+
     function changeShape(shape: ChartShape) {
         dispatch({
-            tag: 'UpdateChartShape',
+            type: 'UpdateChartShape',
             shape,
             rowsX,
             rowsY
@@ -57,14 +48,14 @@ export const ChartShapeControls: FC<ChartShapeControlsProps> = ({
     if (shape.tag === 'Collage') {
         const updateRowsX = (rowsX: number) =>
             dispatch({
-                tag: 'UpdateChartShape',
+                type: 'UpdateChartShape',
                 shape: { tag: 'Collage' },
                 rowsX,
                 rowsY
             })
         const updateRowsY = (rowsY: number) =>
             dispatch({
-                tag: 'UpdateChartShape',
+                type: 'UpdateChartShape',
                 shape: { tag: 'Collage' },
                 rowsX,
                 rowsY

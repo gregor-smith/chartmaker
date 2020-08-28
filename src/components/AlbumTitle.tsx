@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
 import { RenameAlbumButton } from '@/components/RenameAlbumButton'
 import { DeleteAlbumButton } from '@/components/DeleteAlbumButton'
 import { SIDEBAR_LABEL_PADDING_SIZE } from '@/style'
@@ -20,16 +19,16 @@ const childrenStyle = css({
 })
 
 
-export type AlbumTitleProps = DispatchProps<'PromptToRenameAlbum' | 'DeleteAlbum'> & {
+export type AlbumTitleProps = {
     id: number
 }
 
 
-export const AlbumTitle: FC<AlbumTitleProps> = ({ dispatch, id, children }) =>
+export const AlbumTitle: FC<AlbumTitleProps> = ({ id, children }) =>
     <div className={style}>
         <span className={childrenStyle}>
             {children}
         </span>
-        <RenameAlbumButton dispatch={dispatch} id={id}/>
-        <DeleteAlbumButton dispatch={dispatch} id={id}/>
+        <RenameAlbumButton id={id}/>
+        <DeleteAlbumButton id={id}/>
     </div>

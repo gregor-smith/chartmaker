@@ -1,12 +1,10 @@
 import React, { FC, useRef, ChangeEvent } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
 import { SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
 import { Button } from '@/components/Button'
-
-
-export type ImportStateButtonProps = DispatchProps<'ImportStateFile'>
+import { useDispatch } from '@/reducer'
+import { importStateFile } from '@/thunks'
 
 
 const inputStyle = css({
@@ -19,7 +17,8 @@ const buttonStyle = css({
 })
 
 
-export const ImportStateButton: FC<ImportStateButtonProps> = ({ dispatch }) => {
+export const ImportStateButton: FC = () => {
+    const dispatch = useDispatch()
     const inputRef = useRef<HTMLInputElement>(null)
 
     function loadSelectedFile(event: ChangeEvent<HTMLInputElement>) {
@@ -29,10 +28,7 @@ export const ImportStateButton: FC<ImportStateButtonProps> = ({ dispatch }) => {
         if (file === undefined) {
             return
         }
-        dispatch({
-            tag: 'ImportStateFile',
-            file
-        })
+        dispatch(importStateFile(file))
     }
 
     function clickInput() {

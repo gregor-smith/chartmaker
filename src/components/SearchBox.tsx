@@ -1,25 +1,16 @@
 import React, { FC } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
 import { SIDEBAR_LABEL_PADDING_SIZE, ERROR_TEXT_COLOUR } from '@/style'
-import { SearchState } from '@/types'
 import { Label } from '@/components/Label'
 import { ControlledForm } from '@/components/ControlledForm'
 import { SidebarGroup } from '@/components/SidebarGroup'
 import { ControlledInput } from '@/components/ControlledInput'
+import { useDispatch, useSelector } from '@/reducer'
+import { cancelSearchRequest, sendSearchRequest } from '@/thunks'
 
 
 export const id = 'search'
-
-
-export type SearchBoxProps = DispatchProps<
-    | 'UpdateSearchQuery'
-    | 'SendSearchRequest'
-    | 'CancelSearchRequest'
-> & {
-    searchState: SearchState
-}
 
 
 const errorStyle = css({
@@ -29,15 +20,18 @@ const errorStyle = css({
 })
 
 
-export const SearchBox: FC<SearchBoxProps> = ({ dispatch, searchState }) => {
-    function sendSearchRequest() {
-        dispatch({ tag: 'CancelSearchRequest' })
-        dispatch({ tag: 'SendSearchRequest' })
+export const SearchBox: FC = () => {
+    const dispatch = useDispatch()
+    const searchState = useSelector(state => state.search)
+
+    function dispatchSearch() {
+        dispatch(cancelSearchRequest())
+        dispatch(sendSearchRequest())
     }
 
     function updateQuery(query: string) {
         dispatch({
-            tag: 'UpdateSearchQuery',
+            type: 'UpdateSearchQuery',
             query
         })
     }
@@ -52,7 +46,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ dispatch, searchState }) => {
 
     return (
         <SidebarGroup>
-            <ControlledForm onSubmit={sendSearchRequest}>
+            <ControlledForm onSubmit={dispatchSearch}>
                 <Label target={id}>
                     Search for albums
                 </Label>

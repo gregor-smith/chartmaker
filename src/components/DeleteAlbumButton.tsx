@@ -1,20 +1,19 @@
 import React, { FC } from 'react'
 
-import { DispatchProps } from '@/reducer'
+import { useDispatch } from '@/reducer'
 import { AlbumActionButton } from '@/components/AlbumActionButton'
 
 
-export type DeleteAlbumButtonProps = DispatchProps<'DeleteAlbum'> & {
+export type DeleteAlbumButtonProps = {
     id: number
 }
 
 
-export const DeleteAlbumButton: FC<DeleteAlbumButtonProps> = ({ dispatch, id }) => {
+export const DeleteAlbumButton: FC<DeleteAlbumButtonProps> = ({ id }) => {
+    const dispatch = useDispatch()
+
     function remove() {
-        dispatch({
-            tag: 'DeleteAlbum',
-            id
-        })
+        dispatch({ type: 'DeleteAlbum', id })
     }
 
     return (

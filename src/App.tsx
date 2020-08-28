@@ -1,13 +1,7 @@
 import React, { FC, useRef, useEffect } from 'react'
 import { css } from 'emotion'
-import { useSideEffectReducer } from 'react-use-side-effect-reducer'
 
-import { reducer } from '@/reducer'
-import {
-    createInitialState,
-    loadStateFromLocalStorage,
-    saveStateToLocalStorage
-} from '@/state'
+import { useSelector } from '@/reducer'
 import {
     BACKGROUND_COLOUR,
     TEXT_COLOUR,
@@ -16,6 +10,7 @@ import {
 } from '@/style'
 import { Chart } from '@/components/Chart'
 import { Sidebar } from '@/components/Sidebar'
+import { saveStateToLocalStorage } from '@/state'
 
 
 const rootStyle = css({
@@ -32,10 +27,8 @@ const rootStyle = css({
 
 export const App: FC = () => {
     const chartRef = useRef<HTMLElement>(null)
-    const [ state, dispatch ] = useSideEffectReducer(
-        () => loadStateFromLocalStorage() ?? createInitialState(),
-        reducer
-    )
+    const state = useSelector(state => state)
+
     useEffect(
         () => saveStateToLocalStorage(state),
         [ state ]
@@ -43,16 +36,8 @@ export const App: FC = () => {
 
     return (
         <div className={rootStyle}>
-            <Sidebar dispatch={dispatch}
-                charts={state.charts}
-                activeChartIndex={state.activeChartIndex}
-                apiKey={state.apiKey}
-                searchState={state.search}
-                screenshotState={state.screenshot}
-                chartRef={chartRef}/>
-            <Chart {...state.charts[state.activeChartIndex]}
-                innerRef={chartRef}
-                dispatch={dispatch}/>
+            <Sidebar chartRef={chartRef}/>
+            <Chart innerRef={chartRef}/>
         </div>
     )
 }

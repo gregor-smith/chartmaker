@@ -1,20 +1,13 @@
 import React, { FC } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
-import { Chart } from '@/types'
 import { SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
 import { Label } from '@/components/Label'
 import { ControlledSelect } from '@/components/ControlledSelect'
+import { useDispatch, useSelector } from '@/reducer'
 
 
 export const id = 'chartSelector'
-
-
-export type ChartSelectorProps = DispatchProps<'UpdateActiveChart'> & {
-    charts: Chart[]
-    activeChartIndex: number
-}
 
 
 const containerStyle = css({
@@ -24,16 +17,13 @@ const containerStyle = css({
 })
 
 
-export const ChartSelector: FC<ChartSelectorProps> = ({
-    dispatch,
-    charts,
-    activeChartIndex
-}) => {
+export const ChartSelector: FC = () => {
+    const dispatch = useDispatch()
+    const charts = useSelector(state => state.charts)
+    const activeChartIndex = useSelector(state => state.activeChartIndex)
+
     function updateActiveChart(index: number) {
-        dispatch({
-            tag: 'UpdateActiveChart',
-            index
-        })
+        dispatch({ type: 'UpdateActiveChart', index })
     }
 
     const options = charts.map((chart, index) =>

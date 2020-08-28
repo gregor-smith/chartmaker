@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
 
-import { DispatchProps } from '@/reducer'
 import { Button } from '@/components/Button'
+import { useDispatch } from '@/reducer'
+import { promptToDeleteActiveChart } from '@/thunks'
 
 
-export type DeleteActiveChartButtonProps = DispatchProps<'PromptToDeleteActiveChart'>
+export const DeleteActiveChartButton: FC = () => {
+    const dispatch = useDispatch()
 
-
-export const DeleteActiveChartButton: FC<DeleteActiveChartButtonProps> = ({ dispatch }) => {
     function deleteActiveChart() {
-        dispatch({ tag: 'PromptToDeleteActiveChart' })
+        dispatch(promptToDeleteActiveChart())
     }
 
     return (

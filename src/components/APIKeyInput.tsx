@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { DispatchProps } from '@/reducer'
+import { useDispatch, useSelector } from '@/reducer'
 import { SidebarGroup } from '@/components/SidebarGroup'
 import { Label } from '@/components/Label'
 import { ControlledInput } from '@/components/ControlledInput'
@@ -9,17 +9,12 @@ import { ControlledInput } from '@/components/ControlledInput'
 export const id = 'apiKeyInput'
 
 
-export type APIKeyInputProps = DispatchProps<'UpdateAPIKey'> & {
-    apiKey: string
-}
+export const APIKeyInput: FC = () => {
+    const dispatch = useDispatch()
+    const apiKey = useSelector(state => state.apiKey)
 
-
-export const APIKeyInput: FC<APIKeyInputProps> = ({ dispatch, apiKey }) => {
     function updateAPIKey(apiKey: string) {
-        dispatch({
-            tag: 'UpdateAPIKey',
-            apiKey
-        })
+        dispatch({ type: 'UpdateAPIKey', apiKey })
     }
 
     return (

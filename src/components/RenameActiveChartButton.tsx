@@ -1,12 +1,10 @@
 import React, { FC } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
 import { Button } from '@/components/Button'
 import { SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
-
-
-export type RenameActiveChartButtonProps = DispatchProps<'PromptToRenameActiveChart'>
+import { useDispatch } from '@/reducer'
+import { promptToRenameActiveChart } from '@/thunks'
 
 
 const style = css({
@@ -14,9 +12,11 @@ const style = css({
 })
 
 
-export const RenameActiveChartButton: FC<RenameActiveChartButtonProps> = ({ dispatch }) => {
+export const RenameActiveChartButton: FC = () => {
+    const dispatch = useDispatch()
+
     function renameActiveChart() {
-        dispatch({ tag: 'PromptToRenameActiveChart' })
+        dispatch(promptToRenameActiveChart())
     }
 
     return (

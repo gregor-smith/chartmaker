@@ -1,8 +1,6 @@
 import React, { FC } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
-import { Chart } from '@/types'
 import { ChartSelector } from '@/components/ChartSelector'
 import { NewChartButton } from '@/components/NewChartButton'
 import { RenameActiveChartButton } from '@/components/RenameActiveChartButton'
@@ -10,34 +8,17 @@ import { DeleteActiveChartButton } from '@/components/DeleteActiveChartButton'
 import { SidebarGroup } from '@/components/SidebarGroup'
 
 
-export type ChartManagerProps = DispatchProps<
-    | 'UpdateActiveChart'
-    | 'PromptForNewChart'
-    | 'PromptToRenameActiveChart'
-    | 'PromptToDeleteActiveChart'
-> & {
-    charts: Chart[]
-    activeChartIndex: number
-}
-
-
 const buttonsContainerStyle = css({
     display: 'flex'
 })
 
 
-export const ChartManager: FC<ChartManagerProps> = ({
-    dispatch,
-    charts,
-    activeChartIndex
-}) =>
+export const ChartManager: FC = () =>
     <SidebarGroup>
-        <ChartSelector dispatch={dispatch}
-            charts={charts}
-            activeChartIndex={activeChartIndex}/>
+        <ChartSelector/>
         <div className={buttonsContainerStyle}>
-            <NewChartButton dispatch={dispatch}/>
-            <RenameActiveChartButton dispatch={dispatch}/>
-            <DeleteActiveChartButton dispatch={dispatch}/>
+            <NewChartButton/>
+            <RenameActiveChartButton/>
+            <DeleteActiveChartButton/>
         </div>
     </SidebarGroup>

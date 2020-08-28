@@ -1,8 +1,7 @@
 import React, { FC, RefObject } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
-import { Chart, SearchState, ScreenshotState } from '@/types'
+import { useSelector } from '@/reducer'
 import { SIDEBAR_WIDTH, CONTAINER_PADDING_SIZE } from '@/style'
 import { ChartManager } from '@/components/ChartManager'
 import { APIKeyInput } from '@/components/APIKeyInput'
@@ -12,26 +11,7 @@ import { SearchResults } from '@/components/SearchResults'
 import { ChartShapeControls } from '@/components/ChartShapeControls'
 
 
-export type SidebarProps = DispatchProps<
-    | 'UpdateActiveChart'
-    | 'PromptForNewChart'
-    | 'PromptToRenameActiveChart'
-    | 'PromptToDeleteActiveChart'
-    | 'UpdateAPIKey'
-    | 'ImportStateFile'
-    | 'PromptToExportState'
-    | 'UpdateSearchQuery'
-    | 'SendSearchRequest'
-    | 'CancelSearchRequest'
-    | 'UpdateScreenshotScale'
-    | 'TakeScreenshot'
-    | 'UpdateChartShape'
-> & {
-    charts: Chart[]
-    activeChartIndex: number
-    apiKey: string
-    searchState: SearchState
-    screenshotState: ScreenshotState
+export type SidebarProps = {
     chartRef: RefObject<HTMLElement>
 }
 
@@ -46,15 +26,9 @@ const style = css({
 })
 
 
-export const Sidebar: FC<SidebarProps> = ({
-    dispatch,
-    charts,
-    activeChartIndex,
-    apiKey,
-    searchState,
-    screenshotState,
-    chartRef
-}) => {
+export const Sidebar: FC<SidebarProps> = ({ chartRef }) => {
+    const searchState = useSelector(state => state.search)
+
     let searchResults: JSX.Element | undefined
     if (searchState.tag === 'Complete' && searchState.albums.length > 0) {
         searchResults = <SearchResults albums={searchState.albums}/>
@@ -62,16 +36,11 @@ export const Sidebar: FC<SidebarProps> = ({
 
     return (
         <aside className={style}>
-            <ChartManager dispatch={dispatch}
-                charts={charts}
-                activeChartIndex={activeChartIndex}/>
-            <ImportExportScreenshotButtons dispatch={dispatch}
-                chartRef={chartRef}
-                screenshotState={screenshotState}/>
-            <ChartShapeControls {...charts[activeChartIndex]}
-                dispatch={dispatch}/>
-            <APIKeyInput dispatch={dispatch} apiKey={apiKey}/>
-            <SearchBox dispatch={dispatch} searchState={searchState}/>
+            <ChartManager/>
+            <ImportExportScreenshotButtons chartRef={chartRef}/>
+            <ChartShapeControls/>
+            <APIKeyInput/>
+            <SearchBox/>
             {searchResults}
         </aside>
     )

@@ -1,19 +1,19 @@
 import React, { FC } from 'react'
 
-import { DispatchProps } from '@/reducer'
 import { Button } from '@/components/Button'
+import { useDispatch } from '@/reducer'
+import { promptToExportState } from '@/thunks'
 
 
-export type ExportStateButtonProps = DispatchProps<'PromptToExportState'>
+export const ExportStateButton: FC = () => {
+    const dispatch = useDispatch()
 
-
-export const ExportStateButton: FC<ExportStateButtonProps> = ({ dispatch }) => {
-    function promptToExportState() {
-        dispatch({ tag: 'PromptToExportState' })
+    function dispatchPromptToExportState() {
+        dispatch(promptToExportState())
     }
 
     return (
-        <Button onClick={promptToExportState}>
+        <Button onClick={dispatchPromptToExportState}>
             Export state
         </Button>
     )

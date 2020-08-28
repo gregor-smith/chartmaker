@@ -1,27 +1,21 @@
 import React, { FC, RefObject } from 'react'
 import { css } from 'emotion'
 
-import { DispatchProps } from '@/reducer'
-import { ScreenshotState } from '@/types'
 import { MAX_SCREENSHOT_SCALE } from '@/constants'
 import { ControlledSlider } from '@/components/ControlledSlider'
 import { SidebarGroup } from '@/components/SidebarGroup'
 import { Button } from '@/components/Button'
 import { ImportStateButton } from '@/components/ImportStateButton'
 import { ExportStateButton } from '@/components/ExportStateButton'
+import { useDispatch, useSelector } from '@/reducer'
+import { takeScreenshot } from '@/thunks'
 
 
 export const sliderID = 'screenshotScale'
 export const buttonID = 'screenshot'
 
 
-export type ImportExportScreenshotButtonsProps = DispatchProps<
-    | 'UpdateScreenshotScale'
-    | 'TakeScreenshot'
-    | 'ImportStateFile'
-    | 'PromptToExportState'
-> & {
-    screenshotState: ScreenshotState
+export type ImportExportScreenshotButtonsProps = {
     chartRef: RefObject<HTMLElement>
 }
 
@@ -37,23 +31,19 @@ const buttonContainerStyle = css({
 })
 
 
-export const ImportExportScreenshotButtons: FC<ImportExportScreenshotButtonsProps> = ({
-    dispatch,
-    screenshotState: { loading, scale },
-    chartRef
-}) => {
+export const ImportExportScreenshotButtons: FC<ImportExportScreenshotButtonsProps> = ({ chartRef }) => {
+    const dispatch = useDispatch()
+    const { loading, scale } = useSelector(state => state.screenshot)
+
     function updateScreenshotScale(scale: number) {
-        dispatch({ tag: 'UpdateScreenshotScale', scale })
+        dispatch({ type: 'UpdateScreenshotScale', scale })
     }
 
-    function takeScreenshot() {
+    function dispatchTakeScreenshot() {
         if (chartRef.current == null) {
             return
         }
-        dispatch({
-            tag: 'TakeScreenshot',
-            element: chartRef.current
-        })
+        dispatch(takeScreenshot(chartRef.current))
     }
 
     return (
@@ -68,12 +58,12 @@ export const ImportExportScreenshotButtons: FC<ImportExportScreenshotButtonsProp
                 Scale
             </ControlledSlider>
             <div className={buttonContainerStyle}>
-                <Button id={buttonID} onClick={takeScreenshot} disabled={loading}>
+                <Button id={buttonID} onClick={dispatchTakeScreenshot} disabled={loading}>
                     Screenshot
                 </Button>
                 <div className={stateButtonsContainerStyle}>
-                    <ImportStateButton dispatch={dispatch}/>
-                    <ExportStateButton dispatch={dispatch}/>
+                    <ImportStateButton/>
+                    <ExportStateButton/>
                 </div>
             </div>
         </SidebarGroup>

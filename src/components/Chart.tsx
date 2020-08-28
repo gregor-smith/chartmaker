@@ -2,12 +2,10 @@ import React, { FC, Ref } from 'react'
 import { css } from 'emotion'
 
 import {
-    Chart as ChartDetails,
     Album,
     NamedAlbum,
     Size
 } from '@/types'
-import { DispatchProps } from '@/reducer'
 import {
     VERY_LARGE_ALBUM_SIZE,
     LARGE_ALBUM_SIZE,
@@ -20,17 +18,12 @@ import {
 } from '@/style'
 import { AlbumRow } from '@/components/AlbumRow'
 import { AlbumTitleGroup } from '@/components/AlbumTitleGroup'
+import { useSelector } from '@/reducer'
 
 
-export type ChartProps = DispatchProps<
-    | 'DragChartAlbum'
-    | 'DropSearchAlbum'
-    | 'PromptToRenameAlbum'
-    | 'DeleteAlbum'
-    | 'DropExternalFile'
-> & {
+export type ChartProps = {
     innerRef: Ref<HTMLElement>
-} & ChartDetails
+}
 
 
 const outContainerStyle = css({
@@ -214,15 +207,11 @@ function collageGroups(albums: Album[], rowsX: number, rowsY: number): [ AlbumRo
 }
 
 
-export const Chart: FC<ChartProps> = ({
-    dispatch,
-    albums,
-    name,
-    shape,
-    rowsX,
-    rowsY,
-    innerRef
-}) => {
+export const Chart: FC<ChartProps> = ({ innerRef }) => {
+    const { albums, name, shape, rowsX, rowsY } = useSelector(state =>
+        state.charts[state.activeChartIndex]
+    )
+
     let rows: AlbumRow[]
     let groups: AlbumTitleGroup[]
     if (shape.tag === 'Top') {
@@ -244,11 +233,10 @@ export const Chart: FC<ChartProps> = ({
 
     const rowElements = rows.map((row, index) =>
         <AlbumRow {...row}
-            key={index}
-            dispatch={dispatch}/>
+            key={index}/>
     )
     const titleElements = groups.map((albums, index) =>
-        <AlbumTitleGroup key={index} dispatch={dispatch} albums={albums}/>
+        <AlbumTitleGroup key={index} albums={albums}/>
     )
 
     return (

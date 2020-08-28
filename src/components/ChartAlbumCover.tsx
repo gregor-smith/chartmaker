@@ -2,11 +2,12 @@ import React, { FC, DragEvent } from 'react'
 import { css } from 'emotion'
 
 import { Album, Size } from '@/types'
-import { DispatchProps } from '@/reducer'
+import { useDispatch } from '@/reducer'
 import { ALBUM_BUTTONS_PADDING_SIZE } from '@/style'
 import { AlbumCover } from '@/components/AlbumCover'
 import { RenameAlbumButton } from '@/components/RenameAlbumButton'
 import { DeleteAlbumButton } from '@/components/DeleteAlbumButton'
+import { dropExternalFile } from '@/thunks'
 
 
 const chartPattern = /^chart-(.+)$/
@@ -52,23 +53,15 @@ const overlayStyle = css({
 })
 
 
-export type ChartAlbumCoverProps = DispatchProps<
-    | 'DragChartAlbum'
-    | 'DropSearchAlbum'
-    | 'PromptToRenameAlbum'
-    | 'DeleteAlbum'
-    | 'DropExternalFile'
-> & {
+export type ChartAlbumCoverProps = {
     album: Album
     size: Size
 }
 
 
-export const ChartAlbumCover: FC<ChartAlbumCoverProps> = ({
-    dispatch,
-    album,
-    size
-}) => {
+export const ChartAlbumCover: FC<ChartAlbumCoverProps> = ({ album, size }) => {
+    const dispatch = useDispatch()
+
     function dragStart(event: DragEvent<HTMLDivElement>) {
         event.dataTransfer.setData(`chart-${album.id}`, '')
         event.dataTransfer.effectAllowed = 'copyMove'
@@ -80,7 +73,7 @@ export const ChartAlbumCover: FC<ChartAlbumCoverProps> = ({
             return
         }
         dispatch({
-            tag: 'DragChartAlbum',
+            type: 'DragChartAlbum',
             sourceID,
             targetID: album.id
         })
@@ -90,11 +83,7 @@ export const ChartAlbumCover: FC<ChartAlbumCoverProps> = ({
     function drop(event: DragEvent<HTMLDivElement>) {
         const file: File | undefined = event.dataTransfer.files[0]
         if (file !== undefined) {
-            dispatch({
-                tag: 'DropExternalFile',
-                file,
-                targetID: album.id
-            })
+            dispatch(dropExternalFile(file, album.id))
             event.preventDefault()
             return
         }
@@ -104,7 +93,7 @@ export const ChartAlbumCover: FC<ChartAlbumCoverProps> = ({
             return
         }
         dispatch({
-            tag: 'DropSearchAlbum',
+            type: 'DropSearchAlbum',
             sourceID,
             targetID: album.id
         })
@@ -115,8 +104,8 @@ export const ChartAlbumCover: FC<ChartAlbumCoverProps> = ({
     if (!album.placeholder) {
         buttons = (
             <>
-                <RenameAlbumButton dispatch={dispatch} id={album.id}/>
-                <DeleteAlbumButton dispatch={dispatch} id={album.id}/>
+                <RenameAlbumButton id={album.id}/>
+                <DeleteAlbumButton id={album.id}/>
             </>
         )
     }

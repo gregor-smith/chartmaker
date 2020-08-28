@@ -1,15 +1,15 @@
 import React, { FC } from 'react'
 
-import { DispatchProps } from '@/reducer'
 import { Button } from '@/components/Button'
+import { useDispatch } from '@/reducer'
+import { promptForNewChart } from '@/thunks'
 
 
-export type NewChartButtonProps = DispatchProps<'PromptForNewChart'>
+export const NewChartButton: FC = () => {
+    const dispatch = useDispatch()
 
-
-export const NewChartButton: FC<NewChartButtonProps> = ({ dispatch }) => {
     function addNewChart() {
-        dispatch({ tag: 'PromptForNewChart' })
+        dispatch(promptForNewChart())
     }
 
     return (

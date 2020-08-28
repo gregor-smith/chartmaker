@@ -1,20 +1,20 @@
 import React, { FC } from 'react'
 
-import { DispatchProps } from '@/reducer'
+import { useDispatch } from '@/reducer'
 import { AlbumActionButton } from '@/components/AlbumActionButton'
+import { promptToRenameAlbum } from '@/thunks'
 
 
-export type RenameAlbumButtonProps = DispatchProps<'PromptToRenameAlbum'> & {
+export type RenameAlbumButtonProps = {
     id: number
 }
 
 
-export const RenameAlbumButton: FC<RenameAlbumButtonProps> = ({ dispatch, id }) => {
+export const RenameAlbumButton: FC<RenameAlbumButtonProps> = ({ id }) => {
+    const dispatch = useDispatch()
+
     function rename() {
-        dispatch({
-            tag: 'PromptToRenameAlbum',
-            id
-        })
+        dispatch(promptToRenameAlbum(id))
     }
 
     return (
