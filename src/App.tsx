@@ -24,6 +24,11 @@ import { APIKeyInput, APIKeyInputProps } from './components/APIKeyInput.js'
 import { CopyLinkButton, CopyLinkButtonProps } from './components/CopyLinkButton.js'
 
 
+export type { Searcher, SearcherArguments } from './types.js'
+export type { APIKeyInputProps as KeyInputComponentProps } from './components/APIKeyInput.js'
+export type { CopyLinkButtonProps as CopyLinkComponentProps } from './components/CopyLinkButton.js'
+
+
 function loadState(): State {
     return loadStateFromLocalStorage() ?? createInitialState()
 }
