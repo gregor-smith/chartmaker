@@ -1,3 +1,4 @@
+import 'bootstrap/scss/bootstrap-reboot.scss'
 import { FC, useRef, useEffect, ComponentType } from 'react'
 import { css } from 'emotion'
 import { useSideEffectReducer } from 'react-use-side-effect-reducer'

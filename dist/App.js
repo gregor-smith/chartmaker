@@ -1,4 +1,5 @@
 import { jsx as _jsx } from "react/jsx-runtime";
+import 'bootstrap/scss/bootstrap-reboot.scss';
 import { useRef, useEffect } from 'react';
 import { css } from 'emotion';
 import { useSideEffectReducer } from 'react-use-side-effect-reducer';
@@ -11,7 +12,8 @@ import { searchLastFM } from './api.js';
 import { APIKeyInput } from './components/APIKeyInput.js';
 import { CopyLinkButton } from './components/CopyLinkButton.js';
 function loadState() {
-    return loadStateFromLocalStorage() ?? createInitialState();
+    var _a;
+    return (_a = loadStateFromLocalStorage()) !== null && _a !== void 0 ? _a : createInitialState();
 }
 const rootStyle = css({
     display: 'flex',
@@ -24,6 +26,7 @@ const rootStyle = css({
     padding: CONTAINER_PADDING_SIZE
 });
 export const App = ({ searcher = searchLastFM, keyInputComponent = APIKeyInput, copyLinkComponent = CopyLinkButton }) => {
+    var _a;
     const chartRef = useRef(null);
     const [state, dispatch] = useSideEffectReducer(loadState, createReducer(searcher));
     useEffect(() => saveStateToLocalStorage(state), [state]);
@@ -39,7 +42,7 @@ export const App = ({ searcher = searchLastFM, keyInputComponent = APIKeyInput, 
         return () => removeEventListener('popstate', popRoute);
     }, []);
     let page;
-    switch (state.route?.tag) {
+    switch ((_a = state.route) === null || _a === void 0 ? void 0 : _a.tag) {
         case 'Editor':
             page = (_jsx(Editor, Object.assign({}, state, { dispatch: dispatch, chartRef: chartRef, keyInputComponent: keyInputComponent, copyLinkComponent: copyLinkComponent }), void 0));
             break;

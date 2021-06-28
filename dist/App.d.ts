@@ -1,3 +1,4 @@
+import 'bootstrap/scss/bootstrap-reboot.scss';
 import { FC, ComponentType } from 'react';
 import type { Searcher } from './types.js';
 import { APIKeyInputProps } from './components/APIKeyInput.js';
