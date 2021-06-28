@@ -21,7 +21,7 @@
     "autoprefixer": "^9.8.6",
     "babel-jest": "^27.0.5",
     "babel-loader": "^8.2.2",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^5.0.2",
     "css-loader": "^4.2.0",
     "emotion": "^10.0.27",
     "html-webpack-plugin": "^4.3.0",

@@ -35,6 +35,6 @@ export const AlbumCover = ({ album, size, onDragStart, onDragEnter, onDragOver, 
         _jsx("img", { className: imageStyle, src: album.url, alt: album.name, crossOrigin: 'anonymous' }, void 0));
         children = (_jsx("div", Object.assign({ className: cx(baseOverlayStyle, overlayClass) }, { children: children }), void 0));
     }
-    return (_jsxs("div", Object.assign({ className: containerStyle, draggable: !unidentifiedAlbumIsPlaceholder(album), onDragStart: onDragStart, onDragEnter: onDragEnter, onDragOver: onDragOver, onDrop: onDrop, onMouseEnter: onMouseEnter, title: album?.name }, { children: [image, children] }), void 0));
+    return (_jsxs("div", Object.assign({ className: containerStyle, draggable: !unidentifiedAlbumIsPlaceholder(album), onDragStart: onDragStart, onDragEnter: onDragEnter, onDragOver: onDragOver, onDrop: onDrop, onMouseEnter: onMouseEnter, title: album === null || album === void 0 ? void 0 : album.name }, { children: [image, children] }), void 0));
 };
 //# sourceMappingURL=AlbumCover.js.map

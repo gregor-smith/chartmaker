@@ -6,7 +6,7 @@ export declare type EditorChartProps = DispatchProps & ChartState & {
 };
 export declare const EditorChart: import("react").ForwardRefExoticComponent<DispatchProps & {
     name: string;
-    shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
+    shape: [2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3, 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3];
     size: 40 | 42 | 100 | null;
     albums: (number | ({
         name: string;

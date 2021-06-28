@@ -6,8 +6,9 @@ import { ChartAlbumCover } from './ChartAlbumCover.js';
 const chartPattern = /^chart-([0-9]+)$/;
 const searchPattern = /^search-([0-9]+)$/;
 function matchDragEventData(event, pattern) {
+    var _a;
     for (const type of event.dataTransfer.types) {
-        const match = type.match(pattern)?.[1];
+        const match = (_a = type.match(pattern)) === null || _a === void 0 ? void 0 : _a[1];
         if (match !== undefined) {
             return Number(match);
         }

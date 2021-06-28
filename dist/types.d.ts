@@ -93,8 +93,8 @@ export declare const V1State: Record_<{
         })[], unknown>;
     }, false>, false>, {
         name: string;
-        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsX: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
+        rowsY: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
         shape: {
             tag: "Top";
             size: 40 | 42 | 100;
@@ -144,8 +144,8 @@ export declare const V2State: Record_<{
             id: number;
         }))[];
         name: string;
-        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsX: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
+        rowsY: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
         shape: {
             tag: "Top";
             size: 40 | 42 | 100;
@@ -183,7 +183,7 @@ export declare const ExportState: Record_<{
             url: string;
         } | null)[];
         name: string;
-        shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
+        shape: [2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3, 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3];
         size: 40 | 42 | 100 | null;
     }[], unknown>;
 }, false>;

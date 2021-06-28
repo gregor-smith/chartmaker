@@ -88,7 +88,7 @@ function encodeExportAlbums(albums) {
         const album = albums[index];
         if (identifiedAlbumIsPlaceholder(album)) {
             exportAlbums.push(null);
-            sliceIndex ??= index;
+            sliceIndex !== null && sliceIndex !== void 0 ? sliceIndex : (sliceIndex = index);
         }
         else {
             exportAlbums.push({
@@ -224,9 +224,10 @@ export function findAlbumIndexWithID(albums, id) {
         : index;
 }
 function encodeViewerChart(chart) {
+    var _a;
     const viewerChart = {
         name: chart.name,
-        size: chart.size ?? chart.shape,
+        size: (_a = chart.size) !== null && _a !== void 0 ? _a : chart.shape,
         albums: encodeExportAlbums(chart.albums)
     };
     const json = JSON.stringify(viewerChart);

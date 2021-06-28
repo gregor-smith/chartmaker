@@ -3,6 +3,7 @@ import { produce } from 'immer';
 import { createChart, createExportState, validateUnknownState, findAlbumIndexWithID, getAlbumID, identifiedAlbumIsPlaceholder, routeToHash, elementToDataURI, downloadURI, jsonToDataURI, fileToDataURI } from './utils.js';
 export function createReducer(searcher) {
     return (state, action) => {
+        var _a, _b, _c;
         switch (action.tag) {
             case 'PopRoute':
                 return update({
@@ -10,7 +11,7 @@ export function createReducer(searcher) {
                     route: action.route
                 });
             case 'PushRoute': {
-                if (state.route?.tag === action.route.tag) {
+                if (((_a = state.route) === null || _a === void 0 ? void 0 : _a.tag) === action.route.tag) {
                     return noUpdate;
                 }
                 return updateWithSideEffect({
@@ -37,8 +38,9 @@ export function createReducer(searcher) {
                 }));
             case 'PromptForNewChart':
                 return sideEffect((dispatch, state) => {
+                    var _a;
                     const activeChart = state.charts[state.activeChartIndex];
-                    const name = prompt('Enter new chart name:', activeChart.name)?.trim();
+                    const name = (_a = prompt('Enter new chart name:', activeChart.name)) === null || _a === void 0 ? void 0 : _a.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -60,8 +62,9 @@ export function createReducer(searcher) {
             }
             case 'PromptToRenameActiveChart':
                 return sideEffect((dispatch, state) => {
+                    var _a;
                     const activeChart = state.charts[state.activeChartIndex];
-                    const name = prompt('Enter new chart name:', activeChart.name)?.trim();
+                    const name = (_a = prompt('Enter new chart name:', activeChart.name)) === null || _a === void 0 ? void 0 : _a.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -148,7 +151,7 @@ export function createReducer(searcher) {
             case 'ShowInvalidStateImportMessage':
                 return sideEffect(() => alert('Selected file is invalid'));
             case 'LoadState': {
-                if (state.route?.tag !== 'Editor') {
+                if (((_b = state.route) === null || _b === void 0 ? void 0 : _b.tag) !== 'Editor') {
                     return noUpdate;
                 }
                 return update({
@@ -302,13 +305,14 @@ export function createReducer(searcher) {
             }
             case 'PromptToRenameAlbum':
                 return sideEffect((dispatch, state) => {
+                    var _a;
                     const album = state.charts[state.activeChartIndex]
                         .albums
                         .find(album => getAlbumID(album) === action.id);
                     if (album === undefined || identifiedAlbumIsPlaceholder(album)) {
                         return;
                     }
-                    const name = prompt('Enter new album name:', album.name)?.trim();
+                    const name = (_a = prompt('Enter new album name:', album.name)) === null || _a === void 0 ? void 0 : _a.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -414,7 +418,7 @@ export function createReducer(searcher) {
                     state.highlightedID = null;
                 }));
             case 'ImportViewerChart': {
-                if (state.route?.tag !== 'Viewer' || state.route.chart === null) {
+                if (((_c = state.route) === null || _c === void 0 ? void 0 : _c.tag) !== 'Viewer' || state.route.chart === null) {
                     return noUpdate;
                 }
                 const { chart } = state.route;

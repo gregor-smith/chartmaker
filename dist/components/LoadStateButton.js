@@ -12,9 +12,10 @@ const buttonStyle = css({
 export const LoadStateButton = ({ dispatch }) => {
     const inputRef = useRef(null);
     function loadSelectedFile(event) {
+        var _a;
         // files are accessed through the event rather than the ref for easier
         // mocking during testing
-        const file = event.target.files?.[0];
+        const file = (_a = event.target.files) === null || _a === void 0 ? void 0 : _a[0];
         if (file === undefined) {
             return;
         }
@@ -24,7 +25,8 @@ export const LoadStateButton = ({ dispatch }) => {
         });
     }
     function clickInput() {
-        inputRef.current?.click();
+        var _a;
+        (_a = inputRef.current) === null || _a === void 0 ? void 0 : _a.click();
     }
     return (_jsxs(_Fragment, { children: [_jsx("input", { ref: inputRef, className: inputStyle, type: 'file', accept: 'application/json', onChange: loadSelectedFile }, void 0), _jsx(Button, Object.assign({ className: buttonStyle, onClick: clickInput }, { children: "Load state" }), void 0)] }, void 0));
 };

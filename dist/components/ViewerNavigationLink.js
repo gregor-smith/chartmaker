@@ -12,7 +12,7 @@ const hash = routeToHash(route);
 export const ViewerNavigationLink = ({ dispatch, className, onClick, children }) => {
     function routeToEditor(event) {
         event.preventDefault();
-        onClick?.();
+        onClick === null || onClick === void 0 ? void 0 : onClick();
         dispatch(action);
     }
     return (_jsx("a", Object.assign({ className: cx(buttonStyle, className), onClick: routeToEditor, href: location.pathname + hash }, { children: children }), void 0));
