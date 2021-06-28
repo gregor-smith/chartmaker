@@ -1,11 +1,11 @@
 import { render } from 'react-dom'
 
-import { AlbumTitleGroup } from '@/components/AlbumTitleGroup'
+import { AlbumTitleGroup } from './AlbumTitleGroup.js'
 
-import { RenderContainer } from '@/test-utils/utils'
+import { RenderContainer } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/AlbumTitle', () => require('@/components/AlbumTitle.mock'))
+jest.mock('./AlbumTitle.js', () => require('./AlbumTitle.mock.js'))
 
 
 const container = new RenderContainer()

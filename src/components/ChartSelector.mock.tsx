@@ -1,4 +1,4 @@
-const mock: typeof import('@/components/ChartSelector') = {
+const mock: typeof import('./ChartSelector.js') = {
     id: 'chartSelector',
 
     ChartSelector: ({ charts, activeChartIndex }) => {

@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { EditorAlbumTitlesProps } from '@/components/EditorAlbumTitles'
+import type { EditorAlbumTitlesProps } from './EditorAlbumTitles.js'
 
 
 export const EditorAlbumTitles: FC<EditorAlbumTitlesProps> = ({

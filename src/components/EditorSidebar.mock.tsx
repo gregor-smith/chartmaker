@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { EditorSidebarProps } from '@/components/EditorSidebar'
+import type { EditorSidebarProps } from './EditorSidebar.js'
 
 
 export const EditorSidebar: FC<EditorSidebarProps> = ({

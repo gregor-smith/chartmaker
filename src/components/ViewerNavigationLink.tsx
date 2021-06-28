@@ -1,10 +1,10 @@
 import type { FC, MouseEvent } from 'react'
 import { cx } from 'emotion'
 
-import type { Action, DispatchProps } from '@/reducer'
-import { buttonStyle } from '@/style'
-import type { Route } from '@/types'
-import { routeToHash } from '@/utils'
+import type { Action, DispatchProps } from '../reducer.js'
+import { buttonStyle } from '../style.js'
+import type { Route } from '../types.js'
+import { routeToHash } from '../utils.js'
 
 
 const route: Route = { tag: 'Editor' }

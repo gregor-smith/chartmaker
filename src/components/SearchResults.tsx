@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { UnidentifiedNamedAlbum } from '@/types'
-import { SidebarGroup } from '@/components/SidebarGroup'
-import { SearchAlbumCover } from '@/components/SearchAlbumCover'
+import type { UnidentifiedNamedAlbum } from '../types.js'
+import { SidebarGroup } from './SidebarGroup.js'
+import { SearchAlbumCover } from './SearchAlbumCover.js'
 
 
 export type SearchResultsProps = {

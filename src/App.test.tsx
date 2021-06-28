@@ -2,11 +2,11 @@
 
 // import { App } from '@/App'
 
-// import { RenderContainer } from '@/test-utils/utils'
+// import { RenderContainer } from './test-utils/utils.js'
 
 
-jest.mock('@/pages/Editor', () => require('@/pages/Editor.mock'))
-jest.mock('@/pages/Viewer', () => require('@/pages/Viewer.mock'))
+jest.mock('./pages/Editor.js', () => require('./pages/Editor.js.mock'))
+jest.mock('./pages/Viewer.js', () => require('./pages/Viewer.js.mock'))
 
 
 // const container = new RenderContainer()

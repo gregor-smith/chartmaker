@@ -1,15 +1,15 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { APIKeyInput, id } from '@/components/APIKeyInput'
-import type { Action } from '@/reducer'
+import { APIKeyInput, id } from './APIKeyInput.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/SidebarGroup', () => require('@/components/SidebarGroup.mock'))
-jest.mock('@/components/Label', () => require('@/components/Label.mock'))
-jest.mock('@/components/ControlledInput', () => require('@/components/ControlledInput.mock'))
+jest.mock('./SidebarGroup.js', () => require('./SidebarGroup.mock.js'))
+jest.mock('./Label.js', () => require('./Label.mock.js'))
+jest.mock('./ControlledInput.js', () => require('./ControlledInput.mock.js'))
 
 
 const container = new RenderContainer()

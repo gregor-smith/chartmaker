@@ -1,11 +1,11 @@
 import { forwardRef, PropsWithChildren } from 'react'
 
-import type { Chart as ChartState } from '@/types'
-import type { DispatchProps } from '@/reducer'
-import { Chart } from '@/components/Chart'
-import { splitAlbumsAccordingToShape } from '@/utils'
-import { EditorAlbumRows } from '@/components/EditorAlbumRows'
-import { EditorAlbumTitles } from '@/components/EditorAlbumTitles'
+import type { Chart as ChartState } from '../types.js'
+import type { DispatchProps } from '../reducer.js'
+import { Chart } from './Chart.js'
+import { splitAlbumsAccordingToShape } from '../utils.js'
+import { EditorAlbumRows } from './EditorAlbumRows.js'
+import { EditorAlbumTitles } from './EditorAlbumTitles.js'
 
 
 export type EditorChartProps =

@@ -1,9 +1,9 @@
 import { createRef } from 'react'
 import { render } from 'react-dom'
 
-import { Chart } from '@/components/Chart'
+import { Chart } from './Chart.js'
 
-import { RenderContainer } from '@/test-utils/utils'
+import { RenderContainer } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

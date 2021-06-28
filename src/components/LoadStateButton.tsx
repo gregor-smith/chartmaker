@@ -1,9 +1,9 @@
 import { FC, useRef, ChangeEvent } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import { SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
-import { Button } from '@/components/Button'
+import type { DispatchProps } from '../reducer.js'
+import { SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
+import { Button } from './Button.js'
 
 
 export type LoadStateButtonProps = DispatchProps

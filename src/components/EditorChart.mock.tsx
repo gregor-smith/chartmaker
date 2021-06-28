@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { EditorChartProps } from '@/components/EditorChart'
+import type { EditorChartProps } from './EditorChart.js'
 
 
 export const EditorChart: FC<EditorChartProps> = ({

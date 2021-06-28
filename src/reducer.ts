@@ -15,14 +15,12 @@ import {
     findAlbumIndexWithID,
     getAlbumID,
     identifiedAlbumIsPlaceholder,
-    routeToHash
-} from '@/utils'
-import {
+    routeToHash,
     elementToDataURI,
     downloadURI,
     jsonToDataURI,
     fileToDataURI
-} from '@/utils'
+} from './utils.js'
 import type {
     State,
     SearchState,
@@ -31,7 +29,7 @@ import type {
     TopSize,
     ScreenshotScale,
     Searcher
-} from '@/types'
+} from './types.js'
 
 
 export type Action =

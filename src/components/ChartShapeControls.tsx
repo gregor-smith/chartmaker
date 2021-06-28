@@ -1,11 +1,11 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import { CollageDimension, CollageSize, TopSize } from '@/types'
-import { ControlledSlider } from '@/components/ControlledSlider'
-import { ControlledRadioButton } from '@/components/ControlledRadioButton'
-import { SidebarGroup } from '@/components/SidebarGroup'
+import type { DispatchProps } from '../reducer.js'
+import { CollageDimension, CollageSize, TopSize } from '../types.js'
+import { ControlledSlider } from './ControlledSlider.js'
+import { ControlledRadioButton } from './ControlledRadioButton.js'
+import { SidebarGroup } from './SidebarGroup.js'
 
 
 export type ChartShapeControlsProps = DispatchProps & {

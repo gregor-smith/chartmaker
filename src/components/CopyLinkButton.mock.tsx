@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { CopyLinkButtonProps } from '@/components/CopyLinkButton'
+import type { CopyLinkButtonProps } from './CopyLinkButton.js'
 
 
 export const CopyLinkButton: FC<CopyLinkButtonProps> = () =>

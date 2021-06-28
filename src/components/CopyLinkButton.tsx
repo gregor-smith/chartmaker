@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 
-import { Button } from '@/components/Button'
-import type { Chart } from '@/types'
-import { routeToHash } from '@/utils'
+import { Button } from './Button.js'
+import type { Chart } from '../types.js'
+import { routeToHash } from '../utils.js'
 
 
 export type CopyLinkButtonProps = {

@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 import { css, cx } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import { SIDEBAR_LABEL_PADDING_SIZE, highlightBackgroundStyle } from '@/style'
+import type { DispatchProps } from '../reducer.js'
+import { SIDEBAR_LABEL_PADDING_SIZE, highlightBackgroundStyle } from '../style.js'
 
 
 const style = css({

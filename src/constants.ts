@@ -1,4 +1,4 @@
-import type { CollageSize, TopSize } from '@/types'
+import type { CollageSize, TopSize } from './types.js'
 
 
 export const CHART_ALBUMS_COUNT = 100

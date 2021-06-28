@@ -1,11 +1,11 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import type { Chart } from '@/types'
-import { SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
-import { Label } from '@/components/Label'
-import { ControlledSelect } from '@/components/ControlledSelect'
+import type { DispatchProps } from '../reducer.js'
+import type { Chart } from '../types.js'
+import { SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
+import { Label } from './Label.js'
+import { ControlledSelect } from './ControlledSelect.js'
 
 
 export const id = 'chartSelector'

@@ -1,7 +1,7 @@
 import { unmountComponentAtNode } from 'react-dom'
 import { Simulate } from 'react-dom/test-utils'
 
-import type { NamedAlbum, State, Chart } from '@/types'
+import type { NamedAlbum, State, Chart } from '../types.js'
 
 
 export function fireEvent(

@@ -1,11 +1,11 @@
 import { css } from 'emotion'
 import type { FC, RefObject } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import type { Chart, ScreenshotState } from '@/types'
-import { ViewerSidebar } from '@/components/ViewerSidebar'
-import { ViewerChart } from '@/components/ViewerChart'
-import { ERROR_TEXT_COLOUR } from '@/style'
+import type { DispatchProps } from '../reducer.js'
+import type { Chart, ScreenshotState } from '../types.js'
+import { ViewerSidebar } from '../components/ViewerSidebar.js'
+import { ViewerChart } from '../components/ViewerChart.js'
+import { ERROR_TEXT_COLOUR } from '../style.js'
 
 
 const errorStyle = css({

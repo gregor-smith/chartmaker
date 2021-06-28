@@ -5,6 +5,5 @@ export default {
         '^(.*)\\.js$': '$1'
     },
     snapshotSerializers: [ 'jest-emotion' ],
-    snapshotResolver: './jest.snapshotResolver.cjs',
-    resolver: 'jest-webpack-resolver'
+    snapshotResolver: './jest.snapshotResolver.cjs'
 }

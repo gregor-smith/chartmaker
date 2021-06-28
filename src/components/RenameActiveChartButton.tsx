@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import { Button } from '@/components/Button'
-import { SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
+import type { DispatchProps } from '../reducer.js'
+import { Button } from './Button.js'
+import { SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
 
 
 export type RenameActiveChartButtonProps = DispatchProps

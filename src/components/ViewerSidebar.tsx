@@ -1,10 +1,10 @@
 import type { FC, RefObject } from 'react'
 
-import type { ScreenshotState } from '@/types'
-import { Sidebar } from '@/components/Sidebar'
-import { ScreenshotButtons } from '@/components/ScreenshotButtons'
-import type { DispatchProps } from '@/reducer'
-import { ViewerNavigationButtons } from '@/components/ViewerNavigationButtons'
+import type { ScreenshotState } from '../types.js'
+import { Sidebar } from './Sidebar.js'
+import { ScreenshotButtons } from './ScreenshotButtons.js'
+import type { DispatchProps } from '../reducer.js'
+import { ViewerNavigationButtons } from './ViewerNavigationButtons.js'
 
 
 export type ViewerSidebarProps = DispatchProps & {

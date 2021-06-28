@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { EditorProps } from '@/pages/Editor'
+import type { EditorProps } from './Editor.js'
 
 
 export const Editor: FC<EditorProps> = ({

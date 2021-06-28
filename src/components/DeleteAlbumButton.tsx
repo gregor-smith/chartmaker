@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import { AlbumActionButton } from '@/components/AlbumActionButton'
+import type { DispatchProps } from '../reducer.js'
+import { AlbumActionButton } from './AlbumActionButton.js'
 
 
 export type DeleteAlbumButtonProps = DispatchProps & {

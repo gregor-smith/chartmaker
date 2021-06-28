@@ -1,4 +1,4 @@
-const mock: typeof import('@/components/ChartManager') = {
+const mock: typeof import('./ChartManager.js') = {
     ChartManager: ({ charts, activeChartIndex }) => {
         const json = JSON.stringify(charts)
         return (

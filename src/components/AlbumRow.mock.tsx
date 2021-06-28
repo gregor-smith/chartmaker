@@ -1,4 +1,4 @@
-const mock: typeof import('@/components/AlbumRow') = {
+const mock: typeof import('./AlbumRow.js') = {
     AlbumRow: ({ children }) =>
         <div className='mock-album-row'>
             {children}

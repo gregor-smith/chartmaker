@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import { AlbumRow as RowState, getAlbumID } from '@/utils'
-import { AlbumRowsContainer } from '@/components/AlbumRowsContainer'
-import { ChartAlbumCover } from '@/components/ChartAlbumCover'
-import { AlbumRow } from '@/components/AlbumRow'
+import type { DispatchProps } from '../reducer.js'
+import { AlbumRow as RowState, getAlbumID } from '../utils.js'
+import { AlbumRowsContainer } from './AlbumRowsContainer.js'
+import { ChartAlbumCover } from './ChartAlbumCover.js'
+import { AlbumRow } from './AlbumRow.js'
 
 
 export type ViewerAlbumRowsProps = DispatchProps & {

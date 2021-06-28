@@ -1,11 +1,11 @@
 import { forwardRef, PropsWithChildren } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import type { Chart as ChartState } from '@/types'
-import { splitAlbumsAccordingToShape } from '@/utils'
-import { Chart } from '@/components/Chart'
-import { ViewerAlbumRows } from '@/components/ViewerAlbumRows'
-import { ViewerAlbumTitles } from '@/components/ViewerAlbumTitles'
+import type { DispatchProps } from '../reducer.js'
+import type { Chart as ChartState } from '../types.js'
+import { splitAlbumsAccordingToShape } from '../utils.js'
+import { Chart } from './Chart.js'
+import { ViewerAlbumRows } from './ViewerAlbumRows.js'
+import { ViewerAlbumTitles } from './ViewerAlbumTitles.js'
 
 
 export type ViewerChartProps =

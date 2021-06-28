@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { LoadSaveButtonsProps } from '@/components/LoadSaveButtons'
+import type { LoadSaveButtonsProps } from './LoadSaveButtons.js'
 
 
 export const LoadSaveButtons: FC<LoadSaveButtonsProps> = () =>

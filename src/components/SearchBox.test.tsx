@@ -1,18 +1,18 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import type { SearchState } from '@/types'
-import { SearchBox, id } from '@/components/SearchBox'
-import type { Action } from '@/reducer'
+import type { SearchState } from '../types.js'
+import { SearchBox, id } from './SearchBox.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
 // no need to mock the ControlledForm because it has no styles or anything,
 // it's just a plain form once rendered
-jest.mock('@/components/SidebarGroup')
-jest.mock('@/components/Label')
-jest.mock('@/components/ControlledInput')
+jest.mock('./SidebarGroup.js')
+jest.mock('./Label.js')
+jest.mock('./ControlledInput.js')
 
 
 const container = new RenderContainer()

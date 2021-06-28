@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { SearchBoxProps } from '@/components/SearchBox'
+import type { SearchBoxProps } from './SearchBox.js'
 
 
 export const SearchBox: FC<SearchBoxProps> = ({ searchState }) => {

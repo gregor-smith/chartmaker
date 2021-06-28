@@ -1,15 +1,15 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { ChartAlbumCover } from '@/components/ChartAlbumCover'
+import { ChartAlbumCover } from './ChartAlbumCover.js'
 
-import { fireEvent, RenderContainer } from '@/test-utils/utils'
-import type { Album } from '@/types'
-import type { Action } from '@/reducer'
-import { getAlbumID } from '@/utils'
+import { fireEvent, RenderContainer } from '../test-utils/utils.js'
+import type { Album } from '../types.js'
+import type { Action } from '../reducer.js'
+import { getAlbumID } from '../utils.js'
 
 
-jest.mock('@/components/AlbumCover', () => require('@/components/AlbumCover.mock'))
+jest.mock('./AlbumCover.js', () => require('./AlbumCover.mock.js'))
 
 
 const container = new RenderContainer()

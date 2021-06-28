@@ -1,4 +1,4 @@
-const mock: typeof import('@/components/AlbumActionButton') = {
+const mock: typeof import('./AlbumActionButton.js') = {
     AlbumActionButton: props =>
         <div {...props} className='mock-album-action-button'/>
 }

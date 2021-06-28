@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import { SIDEBAR_WIDTH, CONTAINER_PADDING_SIZE } from '@/style'
+import { SIDEBAR_WIDTH, CONTAINER_PADDING_SIZE } from '../style.js'
 
 
 const style = css({

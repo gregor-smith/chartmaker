@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import { SidebarGroup } from '@/components/SidebarGroup'
-import { Label } from '@/components/Label'
-import { ControlledInput } from '@/components/ControlledInput'
+import type { DispatchProps } from '../reducer.js'
+import { SidebarGroup } from './SidebarGroup.js'
+import { Label } from './Label.js'
+import { ControlledInput } from './ControlledInput.js'
 
 
 export const id = 'apiKeyInput'

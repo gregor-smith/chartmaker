@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import { Button } from '@/components/Button'
+import type { DispatchProps } from '../reducer.js'
+import { Button } from './Button.js'
 
 
 export type DeleteActiveChartButtonProps = DispatchProps

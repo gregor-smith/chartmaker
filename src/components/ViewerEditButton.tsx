@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import { ViewerNavigationLink } from '@/components/ViewerNavigationLink'
+import type { DispatchProps } from '../reducer.js'
+import { ViewerNavigationLink } from './ViewerNavigationLink.js'
 
 
 export type ViewerEditButtonProps = DispatchProps

@@ -1,6 +1,6 @@
 import type { FC, ChangeEvent } from 'react'
 
-import { inputStyle } from '@/style'
+import { inputStyle } from '../style.js'
 
 
 export type ControlledInputProps = {

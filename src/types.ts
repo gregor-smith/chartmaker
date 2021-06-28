@@ -12,7 +12,7 @@ import {
     Boolean as Boolean_
 } from 'runtypes'
 
-import { CHART_ALBUMS_COUNT } from '@/constants'
+import { CHART_ALBUMS_COUNT } from './constants.js'
 
 
 function FixedSizeArray<T extends Runtype>(element: T, size: number) {

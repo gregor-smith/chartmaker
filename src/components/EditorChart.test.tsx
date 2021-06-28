@@ -1,14 +1,14 @@
 import { render } from 'react-dom'
 
-import type { ChartShape } from '@/types'
-import { EditorChart } from '@/components/EditorChart'
+import type { ChartShape } from '../types.js'
+import { EditorChart } from './EditorChart.js'
 
-import { RenderContainer, ignore, createTestNamedAlbums } from '@/test-utils/utils'
+import { RenderContainer, ignore, createTestNamedAlbums } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/EditorAlbumRowsContainer')
-jest.mock('@/components/EditorAlbumTitlesContainer')
-jest.mock('@/components/Chart')
+jest.mock('./EditorAlbumRowsContainer.js')
+jest.mock('./EditorAlbumTitlesContainer.js')
+jest.mock('./Chart.js')
 
 
 const container = new RenderContainer()

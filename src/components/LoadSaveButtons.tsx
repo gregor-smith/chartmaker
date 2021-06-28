@@ -1,12 +1,12 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import { SidebarGroup } from '@/components/SidebarGroup'
-import type { DispatchProps } from '@/reducer'
-import { LoadStateButton } from '@/components/LoadStateButton'
-import { SaveStateButton } from '@/components/SaveStateButton'
-import { CopyLinkButton } from '@/components/CopyLinkButton'
-import type { Chart } from '@/types'
+import { SidebarGroup } from './SidebarGroup.js'
+import type { DispatchProps } from '../reducer.js'
+import { LoadStateButton } from './LoadStateButton.js'
+import { SaveStateButton } from './SaveStateButton.js'
+import { CopyLinkButton } from './CopyLinkButton.js'
+import type { Chart } from '../types.js'
 
 
 const outerStyle = css({

@@ -1,9 +1,9 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { ControlledInput } from '@/components/ControlledInput'
+import { ControlledInput } from './ControlledInput.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

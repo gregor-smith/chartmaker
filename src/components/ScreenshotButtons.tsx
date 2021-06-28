@@ -1,10 +1,10 @@
 import type { FC, RefObject } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import { ScreenshotState, ScreenshotScale } from '@/types'
-import { ControlledSlider } from '@/components/ControlledSlider'
-import { SidebarGroup } from '@/components/SidebarGroup'
-import { Button } from '@/components/Button'
+import type { DispatchProps } from '../reducer.js'
+import { ScreenshotState, ScreenshotScale } from '../types.js'
+import { ControlledSlider } from './ControlledSlider.js'
+import { SidebarGroup } from './SidebarGroup.js'
+import { Button } from './Button.js'
 
 
 export const sliderID = 'screenshotScale'

@@ -1,0 +1,5 @@
+import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
+import { EditorSidebar } from '../components/EditorSidebar.js';
+import { EditorChart } from '../components/EditorChart.js';
+export const Editor = ({ dispatch, charts, activeChartIndex, apiKey, searchState, screenshotState, highlightedID, chartRef, showAPIKeyInput, showCopyLinkButton }) => _jsxs(_Fragment, { children: [_jsx(EditorSidebar, { dispatch: dispatch, charts: charts, activeChartIndex: activeChartIndex, apiKey: apiKey, searchState: searchState, screenshotState: screenshotState, chartRef: chartRef, showAPIKeyInput: showAPIKeyInput, showCopyLinkButton: showCopyLinkButton }, void 0), _jsx(EditorChart, Object.assign({}, charts[activeChartIndex], { ref: chartRef, dispatch: dispatch, highlighted: highlightedID }), void 0)] }, void 0);
+//# sourceMappingURL=Editor.js.map

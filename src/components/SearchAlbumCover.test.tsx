@@ -1,17 +1,17 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import type { UnidentifiedNamedAlbum } from '@/types'
-import { SearchAlbumCover } from '@/components/SearchAlbumCover'
+import type { UnidentifiedNamedAlbum } from '../types.js'
+import { SearchAlbumCover } from './SearchAlbumCover.js'
 
 import {
     RenderContainer,
     DragEventDataTransferMock,
     fireEvent
-} from '@/test-utils/utils'
+} from '../test-utils/utils.js'
 
 
-jest.mock('@/components/AlbumCover')
+jest.mock('./AlbumCover.js')
 
 
 const container = new RenderContainer()

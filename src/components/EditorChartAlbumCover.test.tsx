@@ -1,22 +1,22 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import type { Album } from '@/types'
-import { EditorChartAlbumCover } from '@/components/EditorChartAlbumCover'
-import type { Action } from '@/reducer'
-import { getAlbumID } from '@/utils'
+import type { Album } from '../types.js'
+import { EditorChartAlbumCover } from './EditorChartAlbumCover.js'
+import type { Action } from '../reducer.js'
+import { getAlbumID } from '../utils.js'
 
 import {
     RenderContainer,
     ignore,
     fireEvent,
     DragEventDataTransferMock
-} from '@/test-utils/utils'
+} from '../test-utils/utils.js'
 
 
-jest.mock('@/components/ChartAlbumCover')
-jest.mock('@/components/RenameAlbumButton')
-jest.mock('@/components/DeleteAlbumButton')
+jest.mock('./ChartAlbumCover.js')
+jest.mock('./RenameAlbumButton.js')
+jest.mock('./DeleteAlbumButton.js')
 
 
 const container = new RenderContainer()

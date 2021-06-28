@@ -5,22 +5,21 @@ const InlineSourceWebpackPlugin = require('inline-source-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const PreCSS = require('precss')
 const Autoprefixer = require('autoprefixer')
-const TSConfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 
 const sourceDirectory = path.join(__dirname, 'src')
+const bundleDirectory = path.join(__dirname, 'bundle')
 
 
 module.exports = {
     entry: path.join(sourceDirectory, 'index.tsx'),
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, 'dist'),
+        path: bundleDirectory,
         publicPath: '/'
     },
     devtool: 'source-map',
     resolve: {
-        plugins: [ new TSConfigPathsPlugin() ],
         extensions: [ '.ts', '.tsx', '.js' ]
     },
     module: {
@@ -28,7 +27,19 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 exclude: '/node_modules/',
-                loader: 'babel-loader'
+                use: [
+                    { loader: 'babel-loader' },
+                    {
+                        loader: 'string-replace-loader',
+                        options: {
+                            // required for ts files to import other ts files
+                            // with a .js extension, which is in turn required
+                            // to distribute a valid es module
+                            search: /from '(.+?)\.js/g,
+                            replace: (_, match) => `from '${match}`
+                        }
+                    }
+                ]
             },
             {
                 test: /\.js$/,

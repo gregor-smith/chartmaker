@@ -1,13 +1,13 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { SaveStateButton } from '@/components/SaveStateButton'
-import type { Action } from '@/reducer'
+import { SaveStateButton } from './SaveStateButton.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/Button')
+jest.mock('./Button.js')
 
 
 const container = new RenderContainer()

@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import { CONTAINER_PADDING_SIZE } from '@/style'
+import type { DispatchProps } from '../reducer.js'
+import { CONTAINER_PADDING_SIZE } from '../style.js'
 
 
 export const id = 'rows'

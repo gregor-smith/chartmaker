@@ -1,7 +1,7 @@
 import { cx } from 'emotion'
 
 
-const mock: typeof import('@/components/AlbumCover') = {
+const mock: typeof import('./AlbumCover.js') = {
     AlbumCover: ({
         album,
         size,

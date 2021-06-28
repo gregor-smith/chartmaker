@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 
-import { AlbumRow as RowState, getAlbumID } from '@/utils'
-import type { DispatchProps } from '@/reducer'
-import { AlbumRowsContainer } from '@/components/AlbumRowsContainer'
-import { EditorChartAlbumCover } from '@/components/EditorChartAlbumCover'
-import { AlbumRow } from '@/components/AlbumRow'
+import { AlbumRow as RowState, getAlbumID } from '../utils.js'
+import type { DispatchProps } from '../reducer.js'
+import { AlbumRowsContainer } from './AlbumRowsContainer.js'
+import { EditorChartAlbumCover } from './EditorChartAlbumCover.js'
+import { AlbumRow } from './AlbumRow.js'
 
 
 export type EditorAlbumRowsProps = DispatchProps & {

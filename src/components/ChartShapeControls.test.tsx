@@ -1,15 +1,15 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { ChartShapeControls } from '@/components/ChartShapeControls'
-import type { Action } from '@/reducer'
+import { ChartShapeControls } from './ChartShapeControls.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/SidebarGroup')
-jest.mock('@/components/ControlledRadioButton')
-jest.mock('@/components/ControlledSlider')
+jest.mock('./SidebarGroup.js')
+jest.mock('./ControlledRadioButton.js')
+jest.mock('./ControlledSlider.js')
 
 
 const container = new RenderContainer()

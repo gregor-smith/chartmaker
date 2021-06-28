@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef } from 'react'
 
 
-const mock: typeof import('@/components/Chart') = {
+const mock: typeof import('./Chart.js') = {
     Chart: forwardRef(({ name, children }, ref) =>
         <div ref={ref as ForwardedRef<HTMLDivElement>} className='mock-chart'>
             {`Name: ${name}`}

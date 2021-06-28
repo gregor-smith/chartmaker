@@ -2,23 +2,23 @@ import { FC, useRef, useEffect } from 'react'
 import { css } from 'emotion'
 import { useSideEffectReducer } from 'react-use-side-effect-reducer'
 
-import { createReducer } from '@/reducer'
+import { createReducer } from './reducer.js'
 import {
     createInitialState,
     loadStateFromLocalStorage,
     routeFromHash,
     saveStateToLocalStorage
-} from '@/utils'
+} from './utils.js'
 import {
     BACKGROUND_COLOUR,
     TEXT_COLOUR,
     FONT_SIZE,
     CONTAINER_PADDING_SIZE
-} from '@/style'
-import { Editor } from '@/pages/Editor'
-import { Viewer } from '@/pages/Viewer'
-import type { Searcher, State } from '@/types'
-import { searchLastFM } from '@/api'
+} from './style.js'
+import { Editor } from './pages/Editor.js'
+import { Viewer } from './pages/Viewer.js'
+import type { Searcher, State } from './types.js'
+import { searchLastFM } from './api.js'
 
 
 function loadState(): State {

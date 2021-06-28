@@ -1,15 +1,15 @@
 import type { FC, RefObject } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import type { Chart, SearchState, ScreenshotState } from '@/types'
-import { ChartManager } from '@/components/ChartManager'
-import { APIKeyInput } from '@/components/APIKeyInput'
-import { ScreenshotButtons } from '@/components/ScreenshotButtons'
-import { SearchBox } from '@/components/SearchBox'
-import { SearchResults } from '@/components/SearchResults'
-import { ChartShapeControls } from '@/components/ChartShapeControls'
-import { Sidebar } from '@/components/Sidebar'
-import { LoadSaveButtons } from '@/components/LoadSaveButtons'
+import type { DispatchProps } from '../reducer.js'
+import type { Chart, SearchState, ScreenshotState } from '../types.js'
+import { ChartManager } from './ChartManager.js'
+import { APIKeyInput } from './APIKeyInput.js'
+import { ScreenshotButtons } from './ScreenshotButtons.js'
+import { SearchBox } from './SearchBox.js'
+import { SearchResults } from './SearchResults.js'
+import { ChartShapeControls } from './ChartShapeControls.js'
+import { Sidebar } from './Sidebar.js'
+import { LoadSaveButtons } from './LoadSaveButtons.js'
 
 
 export type EditorSidebarProps = DispatchProps & {

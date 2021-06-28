@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { EditorChartAlbumCoverProps } from '@/components/EditorChartAlbumCover'
+import type { EditorChartAlbumCoverProps } from './EditorChartAlbumCover.js'
 
 
 export const EditorChartAlbumCover: FC<EditorChartAlbumCoverProps> = ({ album, size, highlighted }) => {

@@ -1,0 +1,22 @@
+import { Chart, State, ExportState as V3ExportState, Album, NamedAlbum, UnidentifiedAlbum, CollageSize, TopSize, Route } from './types.js';
+export declare function elementToDataURI(element: HTMLElement, scale: number): Promise<string>;
+export declare function jsonToDataURI(json: string): string;
+export declare function fileToDataURI(file: File): Promise<string>;
+export declare function downloadURI(uri: string, filename: string): void;
+export declare function createChart(name?: string): Chart;
+export declare function createInitialState(): State;
+export declare function validateUnknownState(state: unknown): State | null;
+export declare function createExportState(state: State): V3ExportState;
+export declare function loadStateFromLocalStorage(): State | null;
+export declare function saveStateToLocalStorage(state: State): void;
+export declare function identifiedAlbumIsPlaceholder(album: Album): album is number;
+export declare function unidentifiedAlbumIsPlaceholder(album: UnidentifiedAlbum): album is null;
+export declare function getAlbumID(album: Album): number;
+export declare function findAlbumIndexWithID(albums: ReadonlyArray<Album>, id: number): number | null;
+export declare type AlbumRow = {
+    albums: Album[];
+    size: string;
+};
+export declare function splitAlbumsAccordingToShape(albums: Album[], shape: CollageSize, size: TopSize | null): [AlbumRow[], NamedAlbum[][]];
+export declare function routeToHash(route: Route): string;
+export declare function routeFromHash(hash: string): Route;

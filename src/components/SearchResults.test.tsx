@@ -1,12 +1,12 @@
 import { render } from 'react-dom'
 
-import { SearchResults } from '@/components/SearchResults'
+import { SearchResults } from './SearchResults.js'
 
-import { RenderContainer, createTestNamedAlbums } from '@/test-utils/utils'
+import { RenderContainer, createTestNamedAlbums } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/SidebarGroup')
-jest.mock('@/components/SearchAlbumCover')
+jest.mock('./SidebarGroup.js')
+jest.mock('./SearchAlbumCover.js')
 
 
 const container = new RenderContainer()

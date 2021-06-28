@@ -11,16 +11,16 @@ import {
     LOCAL_STORAGE_KEY,
     DEFAULT_CHART_SHAPE,
     DEFAULT_CHART_SIZE
-} from '@/constants'
+} from './constants.js'
 import {
     LARGE_ALBUM_SIZE,
     MEDIUM_ALBUM_SIZE,
     SMALL_ALBUM_SIZE,
     TINY_ALBUM_SIZE,
     VERY_LARGE_ALBUM_SIZE,
-    VERY_SMALL_ALBUM_SIZE
-} from '@/style'
-import { BACKGROUND_COLOUR } from '@/style'
+    VERY_SMALL_ALBUM_SIZE,
+    BACKGROUND_COLOUR
+} from './style.js'
 import {
     Chart,
     State,
@@ -34,7 +34,7 @@ import {
     CollageSize,
     TopSize,
     Route
-} from '@/types'
+} from './types.js'
 
 
 export async function elementToDataURI(element: HTMLElement, scale: number): Promise<string> {

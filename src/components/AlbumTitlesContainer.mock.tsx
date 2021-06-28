@@ -1,4 +1,4 @@
-const mock: typeof import('@/components/AlbumTitlesContainer') = {
+const mock: typeof import('./AlbumTitlesContainer.js') = {
     id: 'titles',
 
     AlbumTitlesContainer: ({ children }) =>

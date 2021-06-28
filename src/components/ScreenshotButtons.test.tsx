@@ -6,16 +6,16 @@ import {
     ScreenshotButtons,
     sliderID,
     buttonID
-} from '@/components/ScreenshotButtons'
-import type { ScreenshotState } from '@/types'
-import type { Action } from '@/reducer'
+} from './ScreenshotButtons.js'
+import type { ScreenshotState } from '../types.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/Button')
-jest.mock('@/components/ControlledSlider')
-jest.mock('@/components/SidebarGroup')
+jest.mock('./Button.js')
+jest.mock('./ControlledSlider.js')
+jest.mock('./SidebarGroup.js')
 
 
 const container = new RenderContainer()

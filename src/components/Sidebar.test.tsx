@@ -1,8 +1,8 @@
 import { render } from 'react-dom'
 
-import { Sidebar } from '@/components/Sidebar'
+import { Sidebar } from './Sidebar.js'
 
-import { RenderContainer } from '@/test-utils/utils'
+import { RenderContainer } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

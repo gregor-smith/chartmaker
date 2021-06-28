@@ -1,12 +1,12 @@
 import type { FC } from 'react'
 
-import type { NamedAlbum } from '@/types'
-import type { DispatchProps } from '@/reducer'
-import { AlbumTitlesContainer } from '@/components/AlbumTitlesContainer'
-import { AlbumTitle } from '@/components/AlbumTitle'
-import { RenameAlbumButton } from '@/components/RenameAlbumButton'
-import { DeleteAlbumButton } from '@/components/DeleteAlbumButton'
-import { AlbumTitleGroup } from '@/components/AlbumTitleGroup'
+import type { NamedAlbum } from '../types.js'
+import type { DispatchProps } from '../reducer.js'
+import { AlbumTitlesContainer } from './AlbumTitlesContainer.js'
+import { AlbumTitle } from './AlbumTitle.js'
+import { RenameAlbumButton } from './RenameAlbumButton.js'
+import { DeleteAlbumButton } from './DeleteAlbumButton.js'
+import { AlbumTitleGroup } from './AlbumTitleGroup.js'
 
 
 export type EditorAlbumTitlesProps = DispatchProps & {

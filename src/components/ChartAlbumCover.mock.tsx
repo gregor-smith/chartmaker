@@ -1,4 +1,4 @@
-const mock: typeof import('@/components/ChartAlbumCover') = {
+const mock: typeof import('./ChartAlbumCover.js') = {
     ChartAlbumCover: ({ album, size, highlighted, children, ...props }) => {
         const json = JSON.stringify(album)
         return (

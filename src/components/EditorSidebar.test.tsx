@@ -1,18 +1,18 @@
 import { render } from 'react-dom'
 
-import type { SearchState, Chart } from '@/types'
-import { EditorSidebar } from '@/components/EditorSidebar'
+import type { SearchState, Chart } from '../types.js'
+import { EditorSidebar } from './EditorSidebar.js'
 
-import { RenderContainer, ignore, createTestNamedAlbums } from '@/test-utils/utils'
+import { RenderContainer, ignore, createTestNamedAlbums } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/ChartManager')
-jest.mock('@/components/ImportExportScreenshotButtons')
-jest.mock('@/components/ChartShapeControls')
-jest.mock('@/components/APIKeyInput')
-jest.mock('@/components/SearchBox')
-jest.mock('@/components/SearchResults')
-jest.mock('@/components/Sidebar')
+jest.mock('./ChartManager.js')
+jest.mock('./ImportExportScreenshotButtons.js')
+jest.mock('./ChartShapeControls.js')
+jest.mock('./APIKeyInput.js')
+jest.mock('./SearchBox.js')
+jest.mock('./SearchResults.js')
+jest.mock('./Sidebar.js')
 
 
 const container = new RenderContainer()

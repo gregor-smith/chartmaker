@@ -1,14 +1,14 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import type { Chart } from '@/types'
-import { ChartSelector } from '@/components/ChartSelector'
-import { NewChartButton } from '@/components/NewChartButton'
-import { RenameActiveChartButton } from '@/components/RenameActiveChartButton'
-import { DeleteActiveChartButton } from '@/components/DeleteActiveChartButton'
-import { SidebarGroup } from '@/components/SidebarGroup'
-import { MoveChartButton } from '@/components/MoveChartButton'
+import type { DispatchProps } from '../reducer.js'
+import type { Chart } from '../types.js'
+import { ChartSelector } from './ChartSelector.js'
+import { NewChartButton } from './NewChartButton.js'
+import { RenameActiveChartButton } from './RenameActiveChartButton.js'
+import { DeleteActiveChartButton } from './DeleteActiveChartButton.js'
+import { SidebarGroup } from './SidebarGroup.js'
+import { MoveChartButton } from './MoveChartButton.js'
 
 
 export type ChartManagerProps = DispatchProps & {

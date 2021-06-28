@@ -1,11 +1,11 @@
 import type { FC, DragEvent } from 'react'
 
-import type { Album } from '@/types'
-import type { DispatchProps } from '@/reducer'
-import { RenameAlbumButton } from '@/components/RenameAlbumButton'
-import { DeleteAlbumButton } from '@/components/DeleteAlbumButton'
-import { getAlbumID, identifiedAlbumIsPlaceholder } from '@/utils'
-import { ChartAlbumCover } from '@/components/ChartAlbumCover'
+import type { Album } from '../types.js'
+import type { DispatchProps } from '../reducer.js'
+import { RenameAlbumButton } from './RenameAlbumButton.js'
+import { DeleteAlbumButton } from './DeleteAlbumButton.js'
+import { getAlbumID, identifiedAlbumIsPlaceholder } from '../utils.js'
+import { ChartAlbumCover } from './ChartAlbumCover.js'
 
 
 const chartPattern = /^chart-([0-9]+)$/

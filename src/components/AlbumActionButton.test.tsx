@@ -1,9 +1,9 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { AlbumActionButton } from '@/components/AlbumActionButton'
+import { AlbumActionButton } from './AlbumActionButton.js'
 
-import { fireEvent, RenderContainer } from '@/test-utils/utils'
+import { fireEvent, RenderContainer } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

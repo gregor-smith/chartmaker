@@ -1,9 +1,9 @@
 import type { FC, RefObject } from 'react'
 
-import type { DispatchProps } from '@/reducer'
-import type { State } from '@/types'
-import { EditorSidebar } from '@/components/EditorSidebar'
-import { EditorChart } from '@/components/EditorChart'
+import type { DispatchProps } from '../reducer.js'
+import type { State } from '../types.js'
+import { EditorSidebar } from '../components/EditorSidebar.js'
+import { EditorChart } from '../components/EditorChart.js'
 
 
 export type EditorProps =

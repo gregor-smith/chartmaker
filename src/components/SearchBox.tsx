@@ -1,13 +1,13 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import { SIDEBAR_LABEL_PADDING_SIZE, ERROR_TEXT_COLOUR } from '@/style'
-import type { SearchState } from '@/types'
-import { Label } from '@/components/Label'
-import { ControlledForm } from '@/components/ControlledForm'
-import { SidebarGroup } from '@/components/SidebarGroup'
-import { ControlledInput } from '@/components/ControlledInput'
+import type { DispatchProps } from '../reducer.js'
+import { SIDEBAR_LABEL_PADDING_SIZE, ERROR_TEXT_COLOUR } from '../style.js'
+import type { SearchState } from '../types.js'
+import { Label } from './Label.js'
+import { ControlledForm } from './ControlledForm.js'
+import { SidebarGroup } from './SidebarGroup.js'
+import { ControlledInput } from './ControlledInput.js'
 
 
 export const id = 'search'

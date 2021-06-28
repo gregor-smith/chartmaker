@@ -1,4 +1,4 @@
-const mock: typeof import('@/components/APIKeyInput') = {
+const mock: typeof import('./APIKeyInput.js') = {
     id: 'apiKeyInput',
 
     APIKeyInput: ({ apiKey }) =>

@@ -1,7 +1,7 @@
 import { forwardRef, PropsWithChildren } from 'react'
 import { css } from 'emotion'
 
-import { CONTAINER_PADDING_SIZE, BORDER } from '@/style'
+import { CONTAINER_PADDING_SIZE, BORDER } from '../style.js'
 
 
 const outContainerStyle = css({

@@ -1,8 +1,8 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import { SIDEBAR_LABEL_PADDING_SIZE, SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
-import { Label } from '@/components/Label'
+import { SIDEBAR_LABEL_PADDING_SIZE, SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
+import { Label } from './Label.js'
 
 
 export type ControlledRadioButtonProps = {

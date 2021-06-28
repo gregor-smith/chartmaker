@@ -1,8 +1,8 @@
 import type { FC, DragEvent } from 'react'
 
-import type { UnidentifiedNamedAlbum } from '@/types'
-import { AlbumCover } from '@/components/AlbumCover'
-import { SMALL_ALBUM_SIZE } from '@/style'
+import type { UnidentifiedNamedAlbum } from '../types.js'
+import { AlbumCover } from './AlbumCover.js'
+import { SMALL_ALBUM_SIZE } from '../style.js'
 
 
 export type SearchAlbumCoverProps = {

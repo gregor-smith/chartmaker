@@ -1,6 +1,6 @@
 import type { FC, ChangeEvent } from 'react'
 
-import type { ControlledSliderProps } from '@/components/ControlledSlider'
+import type { ControlledSliderProps } from './ControlledSlider.js'
 
 
 export const ControlledSlider: FC<ControlledSliderProps> = ({

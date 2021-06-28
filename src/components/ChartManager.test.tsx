@@ -1,17 +1,17 @@
 import { render } from 'react-dom'
 
-import { ChartManager } from '@/components/ChartManager'
-import type { Chart } from '@/types'
+import { ChartManager } from './ChartManager.js'
+import type { Chart } from '../types.js'
 
-import { RenderContainer, ignore } from '@/test-utils/utils'
+import { RenderContainer, ignore } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/SidebarGroup', () => require('@/components/SidebarGroup.mock'))
-jest.mock('@/components/ChartSelector', () => require('@/components/ChartSelector.mock'))
-jest.mock('@/components/NewChartButton', () => require('@/components/NewChartButton.mock'))
-jest.mock('@/components/RenameActiveChartButton', () => require('@/components/RenameActiveChartButton.mock'))
-jest.mock('@/components/DeleteActiveChartButton', () => require('@/components/DeleteActiveChartButton.mock'))
-jest.mock('@/components/MoveChartButton', () => require('@/components/MoveChartButton.mock'))
+jest.mock('./SidebarGroup.js', () => require('./SidebarGroup.mock.js'))
+jest.mock('./ChartSelector.js', () => require('./ChartSelector.mock.js'))
+jest.mock('./NewChartButton.js', () => require('./NewChartButton.mock.js'))
+jest.mock('./RenameActiveChartButton.js', () => require('./RenameActiveChartButton.mock.js'))
+jest.mock('./DeleteActiveChartButton.js', () => require('./DeleteActiveChartButton.mock.js'))
+jest.mock('./MoveChartButton.js', () => require('./MoveChartButton.mock.js'))
 
 
 const container = new RenderContainer()

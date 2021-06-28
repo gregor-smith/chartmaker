@@ -1,10 +1,10 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { AlbumTitle } from '@/components/AlbumTitle'
-import type { Action } from '@/reducer'
+import { AlbumTitle } from './AlbumTitle.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

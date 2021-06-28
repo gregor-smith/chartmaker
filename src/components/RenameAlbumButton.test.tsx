@@ -1,13 +1,13 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { RenameAlbumButton } from '@/components/RenameAlbumButton'
-import type { Action } from '@/reducer'
+import { RenameAlbumButton } from './RenameAlbumButton.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/AlbumActionButton')
+jest.mock('./AlbumActionButton.js')
 
 
 const container = new RenderContainer()

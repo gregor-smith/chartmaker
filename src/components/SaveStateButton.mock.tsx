@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { SaveStateButtonProps } from '@/components/SaveStateButton'
+import type { SaveStateButtonProps } from './SaveStateButton.js'
 
 
 export const SaveStateButton: FC<SaveStateButtonProps> = () =>

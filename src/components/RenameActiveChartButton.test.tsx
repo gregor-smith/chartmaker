@@ -1,13 +1,13 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { RenameActiveChartButton } from '@/components/RenameActiveChartButton'
-import type { Action } from '@/reducer'
+import { RenameActiveChartButton } from './RenameActiveChartButton.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/Button')
+jest.mock('./Button.js')
 
 
 const container = new RenderContainer()

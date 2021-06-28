@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import { SidebarGroup } from '@/components/SidebarGroup'
-import type { DispatchProps } from '@/reducer'
-import { ViewerBackButton } from '@/components/ViewerBackButton'
-import { ViewerEditButton } from '@/components/ViewerEditButton'
+import { SidebarGroup } from './SidebarGroup.js'
+import type { DispatchProps } from '../reducer.js'
+import { ViewerBackButton } from './ViewerBackButton.js'
+import { ViewerEditButton } from './ViewerEditButton.js'
 
 
 const style = css({

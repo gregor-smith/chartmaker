@@ -10,9 +10,9 @@ import {
     getAlbumID,
     findAlbumIndexWithID,
     createViewerChart
-} from '@/utils'
-import { LOCAL_STORAGE_KEY } from '@/constants'
-import type { Album, State } from '@/types'
+} from './utils.js'
+import { LOCAL_STORAGE_KEY } from './constants.js'
+import type { Album, State } from './types.js'
 
 import {
     createTestNamedAlbums,
@@ -20,7 +20,7 @@ import {
     createTestState,
     createTestStateForEscaping,
     ignore
-} from '@/test-utils/utils'
+} from './test-utils/utils.js'
 
 
 describe('createChart', () => {

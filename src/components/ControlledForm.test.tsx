@@ -1,9 +1,9 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { ControlledForm } from '@/components/ControlledForm'
+import { ControlledForm } from './ControlledForm.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

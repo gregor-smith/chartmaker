@@ -1,13 +1,13 @@
 import { render } from 'react-dom'
 
-import type { NamedAlbum } from '@/types'
-import { EditorAlbumTitles } from '@/components/EditorAlbumTitles'
+import type { NamedAlbum } from '../types.js'
+import { EditorAlbumTitles } from './EditorAlbumTitles.js'
 
-import { createTestNamedAlbums, ignore, RenderContainer } from '@/test-utils/utils'
+import { createTestNamedAlbums, ignore, RenderContainer } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/EditorAlbumTitleGroup')
-jest.mock('@/components/AlbumTitlesContainer')
+jest.mock('./EditorAlbumTitleGroup.js')
+jest.mock('./AlbumTitlesContainer.js')
 
 
 const container = new RenderContainer()

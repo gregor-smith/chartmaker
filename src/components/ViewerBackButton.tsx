@@ -1,9 +1,9 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import type { DispatchProps } from '@/reducer'
-import { SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
-import { ViewerNavigationLink } from '@/components/ViewerNavigationLink'
+import type { DispatchProps } from '../reducer.js'
+import { SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
+import { ViewerNavigationLink } from './ViewerNavigationLink.js'
 
 
 export type ViewerBackButtonProps = DispatchProps

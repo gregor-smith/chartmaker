@@ -1,8 +1,8 @@
 import type { FC, ChangeEvent } from 'react'
 import { css, cx } from 'emotion'
 
-import { inputStyle, SIDEBAR_ITEM_PADDING_SIZE } from '@/style'
-import { Label } from '@/components/Label'
+import { inputStyle, SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
+import { Label } from './Label.js'
 
 
 export type ControlledSliderProps = {

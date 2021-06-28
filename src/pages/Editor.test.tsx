@@ -1,18 +1,18 @@
 import { render } from 'react-dom'
 
-import type { State } from '@/types'
-import { Editor } from '@/pages/Editor'
+import type { State } from '../types.js'
+import { Editor } from './Editor.js'
 
 import {
     RenderContainer,
     ignore,
     createTestPlaceholderAlbums,
     createTestNamedAlbums
-} from '@/test-utils/utils'
+} from '../test-utils/utils.js'
 
 
-jest.mock('@/components/EditorSidebar')
-jest.mock('@/components/EditorChart')
+jest.mock('./components/EditorSidebar.js')
+jest.mock('./components/EditorChart.js')
 
 
 const container = new RenderContainer()

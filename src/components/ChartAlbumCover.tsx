@@ -1,11 +1,11 @@
 import type { FC } from 'react'
 import { css } from 'emotion'
 
-import { ALBUM_BUTTONS_PADDING_SIZE } from '@/style'
-import { AlbumCover, AlbumCoverProps } from '@/components/AlbumCover'
-import type { Album } from '@/types'
-import type { DispatchProps } from '@/reducer'
-import { getAlbumID, identifiedAlbumIsPlaceholder } from '@/utils'
+import { ALBUM_BUTTONS_PADDING_SIZE } from '../style.js'
+import { AlbumCover, AlbumCoverProps } from './AlbumCover.js'
+import type { Album } from '../types.js'
+import type { DispatchProps } from '../reducer.js'
+import { getAlbumID, identifiedAlbumIsPlaceholder } from '../utils.js'
 
 
 const overlayStyle = css({

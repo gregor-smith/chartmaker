@@ -1,4 +1,4 @@
-import type { DispatchProps } from '@/reducer'
+import type { DispatchProps } from '../reducer.js'
 import type { FC } from 'react'
 
 

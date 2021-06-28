@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { RenameActiveChartButtonProps } from '@/components/RenameActiveChartButton'
+import type { RenameActiveChartButtonProps } from './RenameActiveChartButton.js'
 
 
 export const RenameActiveChartButton: FC<RenameActiveChartButtonProps> = () =>

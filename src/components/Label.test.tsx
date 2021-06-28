@@ -1,8 +1,8 @@
 import { render } from 'react-dom'
 
-import { Label } from '@/components/Label'
+import { Label } from './Label.js'
 
-import { RenderContainer } from '@/test-utils/utils'
+import { RenderContainer } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

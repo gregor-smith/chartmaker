@@ -3,10 +3,10 @@ import { render } from 'react-dom'
 import { css } from 'emotion'
 import { act } from 'react-dom/test-utils'
 
-import type { UnidentifiedNamedAlbum } from '@/types'
-import { AlbumCover } from '@/components/AlbumCover'
+import type { UnidentifiedNamedAlbum } from '../types.js'
+import { AlbumCover } from './AlbumCover.js'
 
-import { ignore, fireEvent, RenderContainer } from '@/test-utils/utils'
+import { ignore, fireEvent, RenderContainer } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

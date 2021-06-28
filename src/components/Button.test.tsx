@@ -1,9 +1,9 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { Button } from '@/components/Button'
+import { Button } from './Button.js'
 
-import { RenderContainer, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, fireEvent } from '../test-utils/utils.js'
 
 
 const container = new RenderContainer()

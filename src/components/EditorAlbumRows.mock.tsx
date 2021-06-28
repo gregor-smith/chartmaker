@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { EditorAlbumRowsProps } from '@/components/EditorAlbumRows'
+import type { EditorAlbumRowsProps } from './EditorAlbumRows.js'
 
 
 export const EditorAlbumRows: FC<EditorAlbumRowsProps> = ({

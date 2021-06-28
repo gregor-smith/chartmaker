@@ -1,15 +1,15 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import type { Chart } from '@/types'
-import { ChartSelector, id } from '@/components/ChartSelector'
-import type { Action } from '@/reducer'
+import type { Chart } from '../types.js'
+import { ChartSelector, id } from './ChartSelector.js'
+import type { Action } from '../reducer.js'
 
-import { RenderContainer, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/Label', () => require('@/components/Label.mock'))
-jest.mock('@/components/ControlledSelect', () => require('@/components/ControlledSelect.mock'))
+jest.mock('./Label.js', () => require('./Label.mock.js'))
+jest.mock('./ControlledSelect.js', () => require('./ControlledSelect.mock.js'))
 
 
 const container = new RenderContainer()

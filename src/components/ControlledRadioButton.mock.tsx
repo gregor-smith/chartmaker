@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-import type { ControlledRadioButtonProps } from '@/components/ControlledRadioButton'
+import type { ControlledRadioButtonProps } from './ControlledRadioButton.js'
 
 
 export const ControlledRadioButton: FC<ControlledRadioButtonProps> = ({

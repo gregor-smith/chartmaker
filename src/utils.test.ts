@@ -2,7 +2,7 @@ import fs from 'fs'
 import util from 'util'
 import path from 'path'
 
-import { jsonToDataURI, downloadURI, fileToDataURI } from '@/utils'
+import { jsonToDataURI, downloadURI, fileToDataURI } from './utils.js'
 
 
 describe('elementToDataURI', () => {

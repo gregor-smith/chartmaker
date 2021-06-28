@@ -5,7 +5,7 @@ import {
     Static
 } from 'runtypes'
 
-import type { Searcher, UnidentifiedNamedAlbum } from '@/types'
+import type { Searcher, UnidentifiedNamedAlbum } from './types.js'
 
 
 const LastFMAlbum = Record_({

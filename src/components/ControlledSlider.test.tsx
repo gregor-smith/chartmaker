@@ -1,12 +1,12 @@
 import { render } from 'react-dom'
 import { act } from 'react-dom/test-utils'
 
-import { ControlledSlider } from '@/components/ControlledSlider'
+import { ControlledSlider } from './ControlledSlider.js'
 
-import { RenderContainer, ignore, fireEvent } from '@/test-utils/utils'
+import { RenderContainer, ignore, fireEvent } from '../test-utils/utils.js'
 
 
-jest.mock('@/components/Label')
+jest.mock('./Label.js')
 
 
 const container = new RenderContainer()

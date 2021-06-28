@@ -1,15 +1,15 @@
 import { SideEffectUpdate, update, noUpdate } from 'react-use-side-effect-reducer'
 import produce from 'immer'
 
-import { reducer, Action } from '@/reducer'
-import { searchLastFM } from '@/api'
-import type { State, SearchState, ChartShape, UnidentifiedNamedAlbum } from '@/types'
-import { MAX_SCREENSHOT_SCALE, MAX_COLLAGE_ROWS_X, MAX_COLLAGE_ROWS_Y } from '@/constants'
+import { reducer, Action } from './reducer.js''
+import { searchLastFM } from './api.js'
+import type { State, SearchState, ChartShape, UnidentifiedNamedAlbum } from './types.js'
+import { MAX_SCREENSHOT_SCALE, MAX_COLLAGE_ROWS_X, MAX_COLLAGE_ROWS_Y } from './constants.js'
 
-import { createTestState, createTestNamedAlbums } from '@/test-utils/utils'
+import { createTestState, createTestNamedAlbums } from './test-utils/utils.js'
 
 
-jest.mock('@/api')
+jest.mock('./api.js')
 const dispatchMock = jest.fn<void, [ Action ]>()
 const searchMock = searchLastFM as jest.MockedFunction<typeof searchLastFM>
 afterEach(jest.resetAllMocks)
