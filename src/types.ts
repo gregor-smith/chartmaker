@@ -167,6 +167,19 @@ export type State = {
 }
 
 
+export type SearchResult =
+    | { tag: 'Ok', albums: UnidentifiedNamedAlbum[] }
+    | { tag: 'Error', message: string }
+    | { tag: 'Aborted' }
+
+export type SearcherArguments = {
+    key: string
+    query: string
+    signal: AbortSignal
+}
+
+export type Searcher = (args: SearcherArguments) => PromiseLike<SearchResult> | SearchResult
+
 export type SearchState = (
     | { tag: 'Waiting' }
     | { tag: 'Loading', controller: AbortController }

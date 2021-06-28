@@ -19,6 +19,8 @@ export type EditorSidebarProps = DispatchProps & {
     searchState: SearchState
     screenshotState: ScreenshotState
     chartRef: RefObject<HTMLElement>
+    showAPIKeyInput: boolean
+    showCopyLinkButton: boolean
 }
 
 
@@ -29,17 +31,25 @@ export const EditorSidebar: FC<EditorSidebarProps> = ({
     apiKey,
     searchState,
     screenshotState,
-    chartRef
+    chartRef,
+    showAPIKeyInput,
+    showCopyLinkButton
 }) => {
     let searchResults: JSX.Element | undefined
     if (searchState.tag === 'Complete' && searchState.albums.length > 0) {
         searchResults = <SearchResults albums={searchState.albums}/>
     }
 
+    let apiKeyInput: JSX.Element | undefined
+    if (showAPIKeyInput) {
+        apiKeyInput = <APIKeyInput dispatch={dispatch} apiKey={apiKey}/>
+    }
+
     return (
         <Sidebar>
             <LoadSaveButtons dispatch={dispatch}
-                chart={charts[activeChartIndex]!}/>
+                chart={charts[activeChartIndex]!}
+                showCopyLinkButton={showCopyLinkButton}/>
             <ChartManager dispatch={dispatch}
                 charts={charts}
                 activeChartIndex={activeChartIndex}/>
@@ -48,7 +58,7 @@ export const EditorSidebar: FC<EditorSidebarProps> = ({
                 screenshotState={screenshotState}/>
             <ChartShapeControls {...charts[activeChartIndex]!}
                 dispatch={dispatch}/>
-            <APIKeyInput dispatch={dispatch} apiKey={apiKey}/>
+            {apiKeyInput}
             <SearchBox dispatch={dispatch} searchState={searchState}/>
             {searchResults}
         </Sidebar>

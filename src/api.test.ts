@@ -1,4 +1,4 @@
-import { LastFMAlbum, LastFMResult, search, SearchResult } from '@/api'
+import { LastFMAlbum, LastFMResult, searchLastFM, SearchResult } from '@/api'
 
 import { ignore } from '@/test-utils/utils'
 
@@ -54,7 +54,7 @@ test('returns Ok for successful request', async () => {
     )
     const signal = mockSignal(false)
 
-    const result = await search({
+    const result = await searchLastFM({
         key: 'Test key',
         query: 'Test query',
         signal
@@ -102,7 +102,7 @@ test('excludes null albums from successful request', async () => {
             })
         })
     )
-    const result = await search({
+    const result = await searchLastFM({
         key: 'Test key',
         query: 'Test query',
         signal: mockSignal(false)
@@ -113,7 +113,7 @@ test('excludes null albums from successful request', async () => {
 
 test('returns Cancelled for cancelled request', async () => {
     fetchMock.mockImplementation(Promise.reject)
-    const result = await search({
+    const result = await searchLastFM({
         key: 'Test key',
         query: 'Test query',
         signal: mockSignal(true)
@@ -124,7 +124,7 @@ test('returns Cancelled for cancelled request', async () => {
 
 test('returns NetworkError for failed request', async () => {
     fetchMock.mockImplementation(Promise.reject)
-    const result = await search({
+    const result = await searchLastFM({
         key: 'Test key',
         query: 'Test query',
         signal: mockSignal(false)
@@ -141,7 +141,7 @@ test('returns JSONDecodeError for invalid json response', async () => {
             json: Promise.reject
         })
     )
-    const result = await search({
+    const result = await searchLastFM({
         key: 'Test key',
         query: 'Test query',
         signal: mockSignal(false)
@@ -164,7 +164,7 @@ test('returns InvalidResponseData for invalid response data', async () => {
             })
         })
     )
-    const result = await search({
+    const result = await searchLastFM({
         key: 'Test key',
         query: 'Test query',
         signal: mockSignal(false)

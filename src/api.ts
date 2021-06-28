@@ -5,7 +5,7 @@ import {
     Static
 } from 'runtypes'
 
-import type { UnidentifiedNamedAlbum } from '@/types'
+import type { Searcher, UnidentifiedNamedAlbum } from '@/types'
 
 
 const LastFMAlbum = Record_({
@@ -57,22 +57,6 @@ function formatLastFMResult(result: LastFMResult): UnidentifiedNamedAlbum[] {
 }
 
 
-export type SearchArguments = {
-    key: string
-    query: string
-    signal: AbortSignal
-}
-
-
-export type SearchResult =
-    | { tag: 'Ok', albums: UnidentifiedNamedAlbum[] }
-    | { tag: 'StatusError', status: number }
-    | { tag: 'JSONDecodeError' }
-    | { tag: 'InvalidResponseData' }
-    | { tag: 'NetworkError' }
-    | { tag: 'Cancelled' }
-
-
 function joinURLQuery(base: string, query: Record<string, string>): string {
     const joinedQuery = Object.entries(query)
         .map(([ key, value ]) => {
@@ -85,11 +69,7 @@ function joinURLQuery(base: string, query: Record<string, string>): string {
 }
 
 
-export async function search({
-    key,
-    query,
-    signal
-}: SearchArguments): Promise<SearchResult> {
+export const searchLastFM: Searcher = async ({ key, query, signal }) => {
     const url = joinURLQuery('https://ws.audioscrobbler.com/2.0/', {
         method: 'album.search',
         format: 'json',
@@ -99,20 +79,15 @@ export async function search({
 
     let response: Response
     try {
-        response = await fetch(url, { signal })
+        response = await fetch(url, { signal, credentials: 'omit' })
     }
     catch {
-        return {
-            tag: signal.aborted
-                ? 'Cancelled'
-                : 'NetworkError'
-        }
+        return signal.aborted
+            ? { tag: 'Aborted' }
+            : { tag: 'Error', message: 'Network error sending request to Last.fm' }
     }
     if (!response.ok) {
-        return {
-            tag: 'StatusError',
-            status: response.status
-        }
+        return { tag: 'Error', message: `Last.fm responded with ${response.status}` }
     }
 
     let result: unknown
@@ -120,11 +95,11 @@ export async function search({
         result = await response.json()
     }
     catch {
-        return { tag: 'JSONDecodeError' }
+        return { tag: 'Error', message: 'Invalid data returned from Last.fm' }
     }
 
     if (!LastFMResult.guard(result)) {
-        return { tag: 'InvalidResponseData' }
+        return { tag: 'Error', message: 'Invalid data returned from Last.fm' }
     }
 
     return {

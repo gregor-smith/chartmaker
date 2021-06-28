@@ -2,7 +2,7 @@ import { FC, useRef, useEffect } from 'react'
 import { css } from 'emotion'
 import { useSideEffectReducer } from 'react-use-side-effect-reducer'
 
-import { reducer } from '@/reducer'
+import { createReducer } from '@/reducer'
 import {
     createInitialState,
     loadStateFromLocalStorage,
@@ -17,7 +17,8 @@ import {
 } from '@/style'
 import { Editor } from '@/pages/Editor'
 import { Viewer } from '@/pages/Viewer'
-import type { State } from '@/types'
+import type { Searcher, State } from '@/types'
+import { searchLastFM } from '@/api'
 
 
 function loadState(): State {
@@ -37,9 +38,23 @@ const rootStyle = css({
 })
 
 
-export const App: FC = () => {
+export type AppProps = {
+    searcher?: Searcher
+    showAPIKeyInput?: boolean
+    showCopyLinkButton?: boolean
+}
+
+
+export const App: FC<AppProps> = ({
+    searcher = searchLastFM,
+    showAPIKeyInput = true,
+    showCopyLinkButton = true
+}) => {
     const chartRef = useRef<HTMLElement>(null)
-    const [ state, dispatch ] = useSideEffectReducer(loadState, reducer)
+    const [ state, dispatch ] = useSideEffectReducer(
+        loadState,
+        createReducer(searcher)
+    )
     useEffect(
         () => saveStateToLocalStorage(state),
         [ state ]
@@ -64,7 +79,13 @@ export const App: FC = () => {
     let page: JSX.Element | null
     switch (state.route?.tag) {
         case 'Editor':
-            page = <Editor {...state} dispatch={dispatch} chartRef={chartRef}/>
+            page = (
+                <Editor {...state}
+                    dispatch={dispatch}
+                    chartRef={chartRef}
+                    showAPIKeyInput={showAPIKeyInput}
+                    showCopyLinkButton={showCopyLinkButton}/>
+            )
             break
         case 'Viewer':
             page = (

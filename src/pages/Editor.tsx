@@ -11,6 +11,8 @@ export type EditorProps =
     & Omit<State, 'version' | 'viewing'>
     & {
         chartRef: RefObject<HTMLElement>
+        showCopyLinkButton: boolean
+        showAPIKeyInput: boolean
     }
 
 
@@ -22,7 +24,9 @@ export const Editor: FC<EditorProps> = ({
     searchState,
     screenshotState,
     highlightedID,
-    chartRef
+    chartRef,
+    showAPIKeyInput,
+    showCopyLinkButton
 }) =>
     <>
         <EditorSidebar dispatch={dispatch}
@@ -31,7 +35,9 @@ export const Editor: FC<EditorProps> = ({
             apiKey={apiKey}
             searchState={searchState}
             screenshotState={screenshotState}
-            chartRef={chartRef}/>
+            chartRef={chartRef}
+            showAPIKeyInput={showAPIKeyInput}
+            showCopyLinkButton={showCopyLinkButton}/>
         <EditorChart {...charts[activeChartIndex]!}
             ref={chartRef}
             dispatch={dispatch}

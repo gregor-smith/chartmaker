@@ -22,14 +22,27 @@ const innerStyle = css({
 
 export type LoadSaveButtonsProps = DispatchProps & {
     chart: Chart
+    showCopyLinkButton: boolean
 }
 
 
-export const LoadSaveButtons: FC<LoadSaveButtonsProps> = ({ dispatch, chart }) =>
-    <SidebarGroup className={outerStyle}>
-        <div className={innerStyle}>
-            <LoadStateButton dispatch={dispatch}/>
-            <SaveStateButton dispatch={dispatch}/>
-        </div>
-        <CopyLinkButton chart={chart}/>
-    </SidebarGroup>
+export const LoadSaveButtons: FC<LoadSaveButtonsProps> = ({
+    dispatch,
+    chart,
+    showCopyLinkButton
+}) => {
+    let copyLinkButton: JSX.Element | undefined
+    if (showCopyLinkButton) {
+        copyLinkButton = <CopyLinkButton chart={chart}/>
+    }
+
+    return (
+        <SidebarGroup className={outerStyle}>
+            <div className={innerStyle}>
+                <LoadStateButton dispatch={dispatch}/>
+                <SaveStateButton dispatch={dispatch}/>
+            </div>
+            {copyLinkButton}
+        </SidebarGroup>
+    )
+}
