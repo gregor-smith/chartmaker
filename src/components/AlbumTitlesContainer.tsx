@@ -1,5 +1,6 @@
-import type { DispatchProps } from '../reducer.js'
 import type { FC } from 'react'
+
+import type { DispatchProps } from '../reducer.js'
 
 
 export const id = 'titles'
