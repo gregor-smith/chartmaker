@@ -1,4 +1,4 @@
-import { FC, useRef, useEffect } from 'react'
+import { FC, useRef, useEffect, ComponentType } from 'react'
 import { css } from 'emotion'
 import { useSideEffectReducer } from 'react-use-side-effect-reducer'
 
@@ -19,6 +19,8 @@ import { Editor } from './pages/Editor.js'
 import { Viewer } from './pages/Viewer.js'
 import type { Searcher, State } from './types.js'
 import { searchLastFM } from './api.js'
+import { APIKeyInput, APIKeyInputProps } from './components/APIKeyInput.js'
+import { CopyLinkButton, CopyLinkButtonProps } from './components/CopyLinkButton.js'
 
 
 function loadState(): State {
@@ -40,15 +42,15 @@ const rootStyle = css({
 
 export type AppProps = {
     searcher?: Searcher
-    showAPIKeyInput?: boolean
-    showCopyLinkButton?: boolean
+    keyInputComponent?: ComponentType<APIKeyInputProps>
+    copyLinkComponent?: ComponentType<CopyLinkButtonProps>
 }
 
 
 export const App: FC<AppProps> = ({
     searcher = searchLastFM,
-    showAPIKeyInput = true,
-    showCopyLinkButton = true
+    keyInputComponent = APIKeyInput,
+    copyLinkComponent = CopyLinkButton
 }) => {
     const chartRef = useRef<HTMLElement>(null)
     const [ state, dispatch ] = useSideEffectReducer(
@@ -83,8 +85,8 @@ export const App: FC<AppProps> = ({
                 <Editor {...state}
                     dispatch={dispatch}
                     chartRef={chartRef}
-                    showAPIKeyInput={showAPIKeyInput}
-                    showCopyLinkButton={showCopyLinkButton}/>
+                    keyInputComponent={keyInputComponent}
+                    copyLinkComponent={copyLinkComponent}/>
             )
             break
         case 'Viewer':

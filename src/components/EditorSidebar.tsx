@@ -1,15 +1,16 @@
-import type { FC, RefObject } from 'react'
+import type { ComponentType, FC, RefObject } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import type { Chart, SearchState, ScreenshotState } from '../types.js'
 import { ChartManager } from './ChartManager.js'
-import { APIKeyInput } from './APIKeyInput.js'
+import type { APIKeyInputProps } from './APIKeyInput.js'
 import { ScreenshotButtons } from './ScreenshotButtons.js'
 import { SearchBox } from './SearchBox.js'
 import { SearchResults } from './SearchResults.js'
 import { ChartShapeControls } from './ChartShapeControls.js'
 import { Sidebar } from './Sidebar.js'
 import { LoadSaveButtons } from './LoadSaveButtons.js'
+import type { CopyLinkButtonProps } from './CopyLinkButton.js'
 
 
 export type EditorSidebarProps = DispatchProps & {
@@ -19,8 +20,8 @@ export type EditorSidebarProps = DispatchProps & {
     searchState: SearchState
     screenshotState: ScreenshotState
     chartRef: RefObject<HTMLElement>
-    showAPIKeyInput: boolean
-    showCopyLinkButton: boolean
+    keyInputComponent: ComponentType<APIKeyInputProps>
+    copyLinkComponent: ComponentType<CopyLinkButtonProps>
 }
 
 
@@ -32,24 +33,19 @@ export const EditorSidebar: FC<EditorSidebarProps> = ({
     searchState,
     screenshotState,
     chartRef,
-    showAPIKeyInput,
-    showCopyLinkButton
+    copyLinkComponent: CopyLinkComponent,
+    keyInputComponent: KeyInputComponent
 }) => {
     let searchResults: JSX.Element | undefined
     if (searchState.tag === 'Complete' && searchState.albums.length > 0) {
         searchResults = <SearchResults albums={searchState.albums}/>
     }
 
-    let apiKeyInput: JSX.Element | undefined
-    if (showAPIKeyInput) {
-        apiKeyInput = <APIKeyInput dispatch={dispatch} apiKey={apiKey}/>
-    }
-
     return (
         <Sidebar>
-            <LoadSaveButtons dispatch={dispatch}
-                chart={charts[activeChartIndex]!}
-                showCopyLinkButton={showCopyLinkButton}/>
+            <LoadSaveButtons dispatch={dispatch}>
+                <CopyLinkComponent chart={charts[activeChartIndex]!}/>
+            </LoadSaveButtons>
             <ChartManager dispatch={dispatch}
                 charts={charts}
                 activeChartIndex={activeChartIndex}/>
@@ -58,7 +54,7 @@ export const EditorSidebar: FC<EditorSidebarProps> = ({
                 screenshotState={screenshotState}/>
             <ChartShapeControls {...charts[activeChartIndex]!}
                 dispatch={dispatch}/>
-            {apiKeyInput}
+            <KeyInputComponent dispatch={dispatch} apiKey={apiKey}/>
             <SearchBox dispatch={dispatch} searchState={searchState}/>
             {searchResults}
         </Sidebar>

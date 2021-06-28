@@ -8,6 +8,8 @@ import { BACKGROUND_COLOUR, TEXT_COLOUR, FONT_SIZE, CONTAINER_PADDING_SIZE } fro
 import { Editor } from './pages/Editor.js';
 import { Viewer } from './pages/Viewer.js';
 import { searchLastFM } from './api.js';
+import { APIKeyInput } from './components/APIKeyInput.js';
+import { CopyLinkButton } from './components/CopyLinkButton.js';
 function loadState() {
     return loadStateFromLocalStorage() ?? createInitialState();
 }
@@ -21,7 +23,7 @@ const rootStyle = css({
     fontSize: FONT_SIZE,
     padding: CONTAINER_PADDING_SIZE
 });
-export const App = ({ searcher = searchLastFM, showAPIKeyInput = true, showCopyLinkButton = true }) => {
+export const App = ({ searcher = searchLastFM, keyInputComponent = APIKeyInput, copyLinkComponent = CopyLinkButton }) => {
     const chartRef = useRef(null);
     const [state, dispatch] = useSideEffectReducer(loadState, createReducer(searcher));
     useEffect(() => saveStateToLocalStorage(state), [state]);
@@ -39,7 +41,7 @@ export const App = ({ searcher = searchLastFM, showAPIKeyInput = true, showCopyL
     let page;
     switch (state.route?.tag) {
         case 'Editor':
-            page = (_jsx(Editor, Object.assign({}, state, { dispatch: dispatch, chartRef: chartRef, showAPIKeyInput: showAPIKeyInput, showCopyLinkButton: showCopyLinkButton }), void 0));
+            page = (_jsx(Editor, Object.assign({}, state, { dispatch: dispatch, chartRef: chartRef, keyInputComponent: keyInputComponent, copyLinkComponent: copyLinkComponent }), void 0));
             break;
         case 'Viewer':
             page = (_jsx(Viewer, { dispatch: dispatch, chart: state.route.chart, chartRef: chartRef, highlighted: state.highlightedID, screenshotState: state.screenshotState }, void 0));
