@@ -12,7 +12,7 @@ const bundleDirectory = path.join(__dirname, 'bundle')
 
 
 module.exports = {
-    entry: path.join(sourceDirectory, 'index.tsx'),
+    entry: path.join(sourceDirectory, 'app.tsx'),
     output: {
         filename: '[name].js',
         path: bundleDirectory,

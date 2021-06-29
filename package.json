@@ -2,8 +2,8 @@
   "name": "chartmaker",
   "version": "0.1.0",
   "type": "module",
-  "main": "./dist/App.js",
-  "exports": "./dist/App.js",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/gregor-smith/chartmaker.git"
