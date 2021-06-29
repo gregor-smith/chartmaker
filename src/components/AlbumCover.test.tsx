@@ -1,6 +1,5 @@
 import type { DragEvent } from 'react'
 import { render } from 'react-dom'
-import { css } from 'emotion'
 import { act } from 'react-dom/test-utils'
 
 import type { UnidentifiedNamedAlbum } from '../types.js'
@@ -45,11 +44,11 @@ test('renders with image for named album', () => {
 })
 
 
-test('overlayClass prop merges styles', () => {
+test('overlayStyle prop merges styles', () => {
     render(
         <AlbumCover album={null}
                 size='2rem'
-                overlayClass={css({ color: 'red' })}>
+                overlayStyle={{ color: 'red' }}>
             Test children
         </AlbumCover>,
         container.element

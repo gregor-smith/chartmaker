@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import { SIDEBAR_LABEL_PADDING_SIZE } from '../style.js'
 
@@ -9,12 +8,12 @@ export type LabelProps = {
 }
 
 
-const style = css({
+const style: CSSProperties = {
     marginBottom: SIDEBAR_LABEL_PADDING_SIZE
-})
+}
 
 
 export const Label: FC<LabelProps> = ({ children, target }) =>
-    <label className={style} htmlFor={target}>
+    <label style={style} htmlFor={target}>
         {children}
     </label>

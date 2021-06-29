@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import { CONTAINER_PADDING_SIZE } from '../style.js'
@@ -8,12 +7,12 @@ import { CONTAINER_PADDING_SIZE } from '../style.js'
 export const id = 'rows'
 
 
-const style = css({
+const style: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     marginRight: CONTAINER_PADDING_SIZE
-})
+}
 
 
 export type AlbumRowsContainerProps = DispatchProps
@@ -25,7 +24,7 @@ export const AlbumRowsContainer: FC<AlbumRowsContainerProps> = ({ dispatch, chil
     }
 
     return (
-        <div id={id} className={style} onMouseLeave={mouseLeave}>
+        <div id={id} style={style} onMouseLeave={mouseLeave}>
             {children}
         </div>
     )

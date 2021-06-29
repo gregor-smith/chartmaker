@@ -1,6 +1,5 @@
 import 'bootstrap/scss/bootstrap-reboot.scss'
-import { FC, useRef, useEffect, ComponentType } from 'react'
-import { css } from 'emotion'
+import { FC, useRef, useEffect, ComponentType, CSSProperties } from 'react'
 import { useSideEffectReducer } from 'react-use-side-effect-reducer'
 
 import { createReducer } from './reducer.js'
@@ -29,7 +28,7 @@ function loadState(): State {
 }
 
 
-const rootStyle = css({
+const style: CSSProperties = {
     display: 'flex',
     alignItems: 'start',
     minHeight: '100vh',
@@ -38,7 +37,7 @@ const rootStyle = css({
     color: TEXT_COLOUR,
     fontSize: FONT_SIZE,
     padding: CONTAINER_PADDING_SIZE
-})
+}
 
 
 export type ChartmakerProps = {
@@ -104,7 +103,7 @@ export const Chartmaker: FC<ChartmakerProps> = ({
     }
 
     return (
-        <div className={rootStyle}>
+        <div style={style}>
             {page}
         </div>
     )

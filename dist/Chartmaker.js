@@ -1,7 +1,6 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import 'bootstrap/scss/bootstrap-reboot.scss';
 import { useRef, useEffect } from 'react';
-import { css } from 'emotion';
 import { useSideEffectReducer } from 'react-use-side-effect-reducer';
 import { createReducer } from './reducer.js';
 import { createInitialState, loadStateFromLocalStorage, routeFromHash, saveStateToLocalStorage } from './utils.js';
@@ -15,7 +14,7 @@ function loadState() {
     var _a;
     return (_a = loadStateFromLocalStorage()) !== null && _a !== void 0 ? _a : createInitialState();
 }
-const rootStyle = css({
+const style = {
     display: 'flex',
     alignItems: 'start',
     minHeight: '100vh',
@@ -24,7 +23,7 @@ const rootStyle = css({
     color: TEXT_COLOUR,
     fontSize: FONT_SIZE,
     padding: CONTAINER_PADDING_SIZE
-});
+};
 export const Chartmaker = ({ searcher = searchLastFM, keyInputComponent = APIKeyInput, copyLinkComponent = CopyLinkButton }) => {
     var _a;
     const chartRef = useRef(null);
@@ -52,6 +51,6 @@ export const Chartmaker = ({ searcher = searchLastFM, keyInputComponent = APIKey
         case undefined:
             page = null;
     }
-    return (_jsx("div", Object.assign({ className: rootStyle }, { children: page }), void 0));
+    return (_jsx("div", Object.assign({ style: style }, { children: page }), void 0));
 };
 //# sourceMappingURL=Chartmaker.js.map

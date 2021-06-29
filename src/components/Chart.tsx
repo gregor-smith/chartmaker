@@ -1,21 +1,25 @@
-import { forwardRef, PropsWithChildren } from 'react'
-import { css } from 'emotion'
+import { CSSProperties, forwardRef, PropsWithChildren } from 'react'
 
 import { CONTAINER_PADDING_SIZE, BORDER } from '../style.js'
 
 
-const outContainerStyle = css({
+const headerStyle: CSSProperties = {
+    fontSize: '2rem'
+}
+
+
+const outContainerStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     padding: CONTAINER_PADDING_SIZE,
     border: BORDER
-})
+}
 
 
-const innerContainerStyle = css({
+const innerContainerStyle: CSSProperties = {
     display: 'flex',
     alignItems: 'flex-start'
-})
+}
 
 
 export type ChartProps = {
@@ -25,9 +29,11 @@ export type ChartProps = {
 
 export const Chart = forwardRef<HTMLElement, PropsWithChildren<ChartProps>>(
     ({ name, children }, ref) =>
-        <main ref={ref} className={outContainerStyle}>
-            <h1>{name}</h1>
-            <div className={innerContainerStyle}>
+        <main ref={ref} style={outContainerStyle}>
+            <h1 style={headerStyle}>
+                {name}
+            </h1>
+            <div style={innerContainerStyle}>
                 {children}
             </div>
         </main>

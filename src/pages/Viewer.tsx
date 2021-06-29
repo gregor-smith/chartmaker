@@ -1,5 +1,4 @@
-import { css } from 'emotion'
-import type { FC, RefObject } from 'react'
+import type { CSSProperties, FC, RefObject } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import type { Chart, ScreenshotState } from '../types.js'
@@ -8,9 +7,9 @@ import { ViewerChart } from '../components/ViewerChart.js'
 import { ERROR_TEXT_COLOUR } from '../style.js'
 
 
-const errorStyle = css({
+const errorStyle: CSSProperties = {
     color: ERROR_TEXT_COLOUR
-})
+}
 
 
 export type ViewerProps =
@@ -34,7 +33,7 @@ export const Viewer: FC<ViewerProps> = ({
     if (chart === null) {
         content = (
             <main>
-                <h1 className={errorStyle}>
+                <h1 style={errorStyle}>
                     Invalid chart URL
                 </h1>
             </main>

@@ -1,5 +1,4 @@
-import { FC, useRef, ChangeEvent } from 'react'
-import { css } from 'emotion'
+import { FC, useRef, ChangeEvent, CSSProperties } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import { SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
@@ -9,14 +8,14 @@ import { Button } from './Button.js'
 export type LoadStateButtonProps = DispatchProps
 
 
-const inputStyle = css({
+const inputStyle: CSSProperties = {
     display: 'none'
-})
+}
 
 
-const buttonStyle = css({
+const buttonStyle: CSSProperties = {
     marginRight: SIDEBAR_ITEM_PADDING_SIZE
-})
+}
 
 
 export const LoadStateButton: FC<LoadStateButtonProps> = ({ dispatch }) => {
@@ -42,11 +41,11 @@ export const LoadStateButton: FC<LoadStateButtonProps> = ({ dispatch }) => {
     return (
         <>
             <input ref={inputRef}
-                className={inputStyle}
+                style={inputStyle}
                 type='file'
                 accept='application/json'
                 onChange={loadSelectedFile}/>
-            <Button className={buttonStyle} onClick={clickInput}>
+            <Button style={buttonStyle} onClick={clickInput}>
                 Load state
             </Button>
         </>

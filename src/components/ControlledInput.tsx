@@ -1,6 +1,6 @@
 import type { FC, ChangeEvent } from 'react'
 
-import { inputStyle } from '../style.js'
+import { inputClassName } from '../style.js'
 
 
 export type ControlledInputProps = {
@@ -19,6 +19,6 @@ export const ControlledInput: FC<ControlledInputProps> = ({ onChange, ...props }
     }
 
     return <input {...props}
-        className={inputStyle}
+        className={inputClassName()}
         onChange={controlledOnChange}/>
 }

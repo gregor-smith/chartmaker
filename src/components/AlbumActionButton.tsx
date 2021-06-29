@@ -1,5 +1,11 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
+
+
+const style: CSSProperties = {
+    background: 'none',
+    border: 0,
+    padding: 0
+}
 
 
 export type AlbumActionButtonProps = {
@@ -8,12 +14,6 @@ export type AlbumActionButtonProps = {
 }
 
 
-const style = css({
-    background: 'none',
-    border: 0,
-    padding: 0
-})
-
-
-export const AlbumActionButton: FC<AlbumActionButtonProps> = props =>
-    <button {...props} className={style}/>
+export const AlbumActionButton: FC<AlbumActionButtonProps> = props => {
+    return <button {...props} style={style}/>
+}

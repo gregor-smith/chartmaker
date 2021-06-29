@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import { CollageDimension, CollageSize, TopSize } from '../types.js'
@@ -14,9 +13,9 @@ export type ChartShapeControlsProps = DispatchProps & {
 }
 
 
-const style = css({
+const style: CSSProperties = {
     display: 'flex'
-})
+}
 
 
 export const ChartShapeControls: FC<ChartShapeControlsProps> = ({
@@ -96,7 +95,7 @@ export const ChartShapeControls: FC<ChartShapeControlsProps> = ({
 
     return (
         <SidebarGroup>
-            <div className={style}>
+            <div style={style}>
                 <ControlledRadioButton id='top40'
                         checked={size === 40}
                         onCheck={switchToTop40}>

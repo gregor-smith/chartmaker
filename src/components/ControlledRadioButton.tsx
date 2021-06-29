@@ -1,4 +1,4 @@
-import type { FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 import { css } from 'emotion'
 
 import { SIDEBAR_LABEL_PADDING_SIZE, SIDEBAR_ITEM_PADDING_SIZE } from '../style.js'
@@ -12,21 +12,9 @@ export type ControlledRadioButtonProps = {
 }
 
 
-const containerStyle = css({
-    display: 'flex',
-    alignItems: 'center',
-    ':not(:first-of-type)': {
-        marginLeft: SIDEBAR_ITEM_PADDING_SIZE
-    },
-    ':not(:last-of-type)': {
-        marginRight: SIDEBAR_ITEM_PADDING_SIZE
-    }
-})
-
-
-const inputStyle = css({
+const inputStyle: CSSProperties = {
     marginRight: SIDEBAR_LABEL_PADDING_SIZE
-})
+}
 
 
 export const ControlledRadioButton: FC<ControlledRadioButtonProps> = ({
@@ -34,14 +22,27 @@ export const ControlledRadioButton: FC<ControlledRadioButtonProps> = ({
     checked,
     onCheck,
     children
-}) =>
-    <div className={containerStyle}>
-        <input id={id}
-            className={inputStyle}
-            type='radio'
-            checked={checked}
-            onChange={onCheck}/>
-        <Label target={id}>
-            {children}
-        </Label>
-    </div>
+}) => {
+    const containerClassName = css({
+        display: 'flex',
+        alignItems: 'center',
+        ':not(:first-of-type)': {
+            marginLeft: SIDEBAR_ITEM_PADDING_SIZE
+        },
+        ':not(:last-of-type)': {
+            marginRight: SIDEBAR_ITEM_PADDING_SIZE
+        }
+    })
+    return (
+        <div className={containerClassName}>
+            <input id={id}
+                style={inputStyle}
+                type='radio'
+                checked={checked}
+                onChange={onCheck}/>
+            <Label target={id}>
+                {children}
+            </Label>
+        </div>
+    )
+}

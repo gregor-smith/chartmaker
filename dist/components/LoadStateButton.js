@@ -1,14 +1,13 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useRef } from 'react';
-import { css } from 'emotion';
 import { SIDEBAR_ITEM_PADDING_SIZE } from '../style.js';
 import { Button } from './Button.js';
-const inputStyle = css({
+const inputStyle = {
     display: 'none'
-});
-const buttonStyle = css({
+};
+const buttonStyle = {
     marginRight: SIDEBAR_ITEM_PADDING_SIZE
-});
+};
 export const LoadStateButton = ({ dispatch }) => {
     const inputRef = useRef(null);
     function loadSelectedFile(event) {
@@ -28,6 +27,6 @@ export const LoadStateButton = ({ dispatch }) => {
         var _a;
         (_a = inputRef.current) === null || _a === void 0 ? void 0 : _a.click();
     }
-    return (_jsxs(_Fragment, { children: [_jsx("input", { ref: inputRef, className: inputStyle, type: 'file', accept: 'application/json', onChange: loadSelectedFile }, void 0), _jsx(Button, Object.assign({ className: buttonStyle, onClick: clickInput }, { children: "Load state" }), void 0)] }, void 0));
+    return (_jsxs(_Fragment, { children: [_jsx("input", { ref: inputRef, style: inputStyle, type: 'file', accept: 'application/json', onChange: loadSelectedFile }, void 0), _jsx(Button, Object.assign({ style: buttonStyle, onClick: clickInput }, { children: "Load state" }), void 0)] }, void 0));
 };
 //# sourceMappingURL=LoadStateButton.js.map

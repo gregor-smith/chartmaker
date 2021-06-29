@@ -1,5 +1,5 @@
-import type { FC } from 'react';
+import type { CSSProperties, FC } from 'react';
 export declare type SidebarGroupProps = {
-    className?: string;
+    style?: CSSProperties;
 };
 export declare const SidebarGroup: FC<SidebarGroupProps>;

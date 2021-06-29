@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import type { Chart } from '../types.js'
@@ -17,11 +16,11 @@ export type ChartSelectorProps = DispatchProps & {
 }
 
 
-const containerStyle = css({
+const containerStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     marginBottom: SIDEBAR_ITEM_PADDING_SIZE
-})
+}
 
 
 export const ChartSelector: FC<ChartSelectorProps> = ({
@@ -43,7 +42,7 @@ export const ChartSelector: FC<ChartSelectorProps> = ({
     )
 
     return (
-        <div className={containerStyle}>
+        <div style={containerStyle}>
             <Label target={id}>
                 Active chart
             </Label>

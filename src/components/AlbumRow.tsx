@@ -1,13 +1,12 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 
-const style = css({
+const style: CSSProperties = {
     display: 'flex'
-})
+}
 
 
 export const AlbumRow: FC = ({ children }) =>
-    <div className={style}>
+    <div style={style}>
         {children}
     </div>

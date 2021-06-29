@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import type { UnidentifiedNamedAlbum } from '../types.js'
 import { SidebarGroup } from './SidebarGroup.js'
@@ -11,16 +10,16 @@ export type SearchResultsProps = {
 }
 
 
-const containerStyle = css({
+const containerStyle: CSSProperties = {
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-between'
-})
+}
 
 
-const groupStyle = css({
+const groupStyle: CSSProperties = {
     overflowY: 'scroll'
-})
+}
 
 
 export const SearchResults: FC<SearchResultsProps> = ({ albums }) => {
@@ -29,8 +28,8 @@ export const SearchResults: FC<SearchResultsProps> = ({ albums }) => {
     )
 
     return (
-        <SidebarGroup className={groupStyle}>
-            <div className={containerStyle}>
+        <SidebarGroup style={groupStyle}>
+            <div style={containerStyle}>
                 {albumCovers}
             </div>
         </SidebarGroup>

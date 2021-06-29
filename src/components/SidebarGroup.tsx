@@ -1,28 +1,29 @@
-import type { FC } from 'react'
-import { css, cx } from 'emotion'
+import type { CSSProperties, FC } from 'react'
+import { css } from 'emotion'
 
 import { BORDER, CONTAINER_PADDING_SIZE } from '../style.js'
 
 
-const style = css({
-    ':first-of-type': {
-        borderTop: BORDER,
-        paddingTop: CONTAINER_PADDING_SIZE
-    },
-    ':not(:last-of-type)': {
-        borderBottom: BORDER,
-        paddingBottom: CONTAINER_PADDING_SIZE,
-        marginBottom: CONTAINER_PADDING_SIZE
-    }
-})
-
-
 export type SidebarGroupProps = {
-    className?: string
+    style?: CSSProperties
 }
 
 
-export const SidebarGroup: FC<SidebarGroupProps> = ({ children, className }) =>
-    <div className={cx(style, className)}>
-        {children}
-    </div>
+export const SidebarGroup: FC<SidebarGroupProps> = ({ children, style }) => {
+    const className = css({
+        ':first-of-type': {
+            borderTop: BORDER,
+            paddingTop: CONTAINER_PADDING_SIZE
+        },
+        ':not(:last-of-type)': {
+            borderBottom: BORDER,
+            paddingBottom: CONTAINER_PADDING_SIZE,
+            marginBottom: CONTAINER_PADDING_SIZE
+        }
+    })
+    return (
+        <div className={className} style={style}>
+            {children}
+        </div>
+    )
+}

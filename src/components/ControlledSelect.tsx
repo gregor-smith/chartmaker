@@ -1,6 +1,6 @@
 import type { FC, ChangeEvent } from 'react'
 
-import { inputStyle } from '../style.js'
+import { inputClassName } from '../style.js'
 
 
 export type ControlledSelectProps = {
@@ -17,5 +17,5 @@ export const ControlledSelect: FC<ControlledSelectProps> = ({ onChange, ...props
         onChange(value)
     }
 
-    return <select {...props} className={inputStyle} onChange={change}/>
+    return <select {...props} className={inputClassName()} onChange={change}/>
 }

@@ -18,19 +18,25 @@ export const ALBUM_BUTTONS_PADDING_SIZE = '0.5rem';
 export const SIDEBAR_WIDTH = '20rem';
 export const SIDEBAR_ITEM_PADDING_SIZE = '0.5rem';
 export const SIDEBAR_LABEL_PADDING_SIZE = '0.25rem';
-export const buttonStyle = css({
-    background: BACKGROUND_COLOUR,
-    color: TEXT_COLOUR,
-    border: BORDER,
-    padding: SIDEBAR_LABEL_PADDING_SIZE,
-    ':hover': {
-        color: TEXT_COLOUR
-    }
-});
-export const inputStyle = cx(buttonStyle, css({
-    width: '100%'
-}));
-export const highlightBackgroundStyle = css({
-    opacity: 'calc(100% / 3 * 2)'
-});
+export function buttonClassName() {
+    return css({
+        background: BACKGROUND_COLOUR,
+        color: TEXT_COLOUR,
+        border: BORDER,
+        padding: SIDEBAR_LABEL_PADDING_SIZE,
+        ':hover': {
+            color: TEXT_COLOUR
+        }
+    });
+}
+export function inputClassName() {
+    return cx(buttonClassName(), css({
+        width: '100%'
+    }));
+}
+export function highlightBackgroundClassName() {
+    return css({
+        opacity: 'calc(100% / 3 * 2)'
+    });
+}
 //# sourceMappingURL=style.js.map

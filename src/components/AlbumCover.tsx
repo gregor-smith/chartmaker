@@ -1,9 +1,26 @@
-import type { FC, DragEvent } from 'react'
+import type { FC, DragEvent, CSSProperties } from 'react'
 import { css, cx } from 'emotion'
 
-import { TEXT_COLOUR, ALBUM_PADDING_SIZE, highlightBackgroundStyle } from '../style.js'
+import { TEXT_COLOUR, ALBUM_PADDING_SIZE, highlightBackgroundClassName } from '../style.js'
 import type { UnidentifiedAlbum } from '../types.js'
 import { unidentifiedAlbumIsPlaceholder } from '../utils.js'
+
+
+const imageStyle: CSSProperties = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    maxWidth: '100%',
+    height: '100%',
+    objectFit: 'contain'
+}
+
+
+const baseOverlayStyle: CSSProperties = {
+    ...imageStyle,
+    zIndex: 10
+}
 
 
 export type AlbumCoverProps = {
@@ -14,32 +31,9 @@ export type AlbumCoverProps = {
     onDragEnter?: (event: DragEvent<HTMLDivElement>) => void
     onDrop?: (event: DragEvent<HTMLDivElement>) => void
     onMouseEnter?: () => void
-    overlayClass?: string
+    overlayStyle?: CSSProperties
     highlighted?: boolean
 }
-
-
-const baseContainerStyle = css({
-    position: 'relative',
-    background: TEXT_COLOUR,
-    margin: ALBUM_PADDING_SIZE,
-    cursor: 'grab'
-})
-
-const imageStyle = css({
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    maxWidth: '100%',
-    height: '100%',
-    objectFit: 'contain'
-})
-
-const baseOverlayStyle = cx(
-    imageStyle,
-    css({ zIndex: 10 })
-)
 
 
 export const AlbumCover: FC<AlbumCoverProps> = ({
@@ -51,41 +45,44 @@ export const AlbumCover: FC<AlbumCoverProps> = ({
     onDrop,
     onMouseEnter,
     children,
-    overlayClass,
+    overlayStyle = {},
     highlighted
 }) => {
-    const containerStyle = cx(
-        baseContainerStyle,
-        css({
-            width: size,
-            height: size,
-            ':not(:hover) > div': {
-                display: 'none'
-            }
-        }),
-        highlighted === false
-            ? highlightBackgroundStyle
-            : undefined
-    )
-
     let image: JSX.Element | undefined
     if (!unidentifiedAlbumIsPlaceholder(album)) {
         image = (
             // lazy loading causes problems with html2canvas so keep it default
-            <img className={imageStyle}
+            <img style={imageStyle}
                 src={album.url}
                 alt={album.name}
                 crossOrigin='anonymous'/>
         )
         children = (
-            <div className={cx(baseOverlayStyle, overlayClass)}>
+            <div style={{ ...baseOverlayStyle, ...overlayStyle }}>
                 {children}
             </div>
         )
     }
 
+    const className = cx(
+        css({
+            position: 'relative',
+            background: TEXT_COLOUR,
+            margin: ALBUM_PADDING_SIZE,
+            cursor: 'grab',
+            width: size,
+            height: size,
+            ':not(:hover) > div': {
+                display: 'none !important'
+            }
+        }),
+        highlighted === false
+            ? highlightBackgroundClassName()
+            : undefined
+    )
+
     return (
-        <div className={containerStyle}
+        <div className={className}
                 draggable={!unidentifiedAlbumIsPlaceholder(album)}
                 onDragStart={onDragStart}
                 onDragEnter={onDragEnter}

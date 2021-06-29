@@ -1,21 +1,13 @@
-import type { FC } from 'react'
+import type { CSSProperties, FC } from 'react'
 import { css, cx } from 'emotion'
 
 import type { DispatchProps } from '../reducer.js'
-import { SIDEBAR_LABEL_PADDING_SIZE, highlightBackgroundStyle } from '../style.js'
+import { SIDEBAR_LABEL_PADDING_SIZE, highlightBackgroundClassName } from '../style.js'
 
 
-const style = css({
-    display: 'flex',
-    [':not(:hover) > *:not(:first-child)']: {
-        display: 'none'
-    }
-})
-
-
-const labelStyle = css({
+const labelStyle: CSSProperties = {
     marginRight: SIDEBAR_LABEL_PADDING_SIZE
-})
+}
 
 
 export type AlbumTitleProps = DispatchProps & {
@@ -39,14 +31,19 @@ export const AlbumTitle: FC<AlbumTitleProps> = ({
         })
     }
 
-    let className = style
+    let className = css({
+        display: 'flex',
+        [':not(:hover) > *:not(:first-child)']: {
+            display: 'none'
+        }
+    })
     if (highlighted !== null && id !== highlighted) {
-        className = cx(style, highlightBackgroundStyle)
+        className = cx(className, highlightBackgroundClassName())
     }
 
     return (
         <div className={className} onMouseEnter={mouseEnter}>
-            <span className={labelStyle}>
+            <span style={labelStyle}>
                 {name}
             </span>
             {children}

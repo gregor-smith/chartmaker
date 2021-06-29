@@ -1,8 +1,7 @@
-import type { FC, MouseEvent } from 'react'
-import { cx } from 'emotion'
+import type { CSSProperties, FC, MouseEvent } from 'react'
 
 import type { Action, DispatchProps } from '../reducer.js'
-import { buttonStyle } from '../style.js'
+import { buttonClassName } from '../style.js'
 import type { Route } from '../types.js'
 import { routeToHash } from '../utils.js'
 
@@ -17,14 +16,14 @@ const hash = routeToHash(route)
 
 
 export type ViewerNavigationLinkProps = DispatchProps & {
-    className?: string
+    style?: CSSProperties
     onClick?: () => void
 }
 
 
 export const ViewerNavigationLink: FC<ViewerNavigationLinkProps> = ({
     dispatch,
-    className,
+    style,
     onClick,
     children
 }) => {
@@ -35,7 +34,8 @@ export const ViewerNavigationLink: FC<ViewerNavigationLinkProps> = ({
     }
 
     return (
-        <a className={cx(buttonStyle, className)}
+        <a className={buttonClassName()}
+                style={style}
                 onClick={routeToEditor}
                 href={location.pathname + hash}>
             {children}

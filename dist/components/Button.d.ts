@@ -1,6 +1,7 @@
-import type { FC } from 'react';
+import type { CSSProperties, FC } from 'react';
 export declare type ButtonProps = {
     id?: string;
+    style?: CSSProperties;
     className?: string;
     disabled?: boolean;
     onClick?: () => void;

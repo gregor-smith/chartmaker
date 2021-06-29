@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import { ALBUM_BUTTONS_PADDING_SIZE } from '../style.js'
 import { AlbumCover, AlbumCoverProps } from './AlbumCover.js'
@@ -8,12 +7,12 @@ import type { DispatchProps } from '../reducer.js'
 import { getAlbumID, identifiedAlbumIsPlaceholder } from '../utils.js'
 
 
-const overlayStyle = css({
+const overlayStyle: CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'start',
     padding: ALBUM_BUTTONS_PADDING_SIZE
-})
+}
 
 
 export type ChartAlbumCoverProps =
@@ -46,7 +45,7 @@ export const ChartAlbumCover: FC<ChartAlbumCoverProps> = ({
                 ? undefined
                 : id === highlighted}
             album={identifiedAlbumIsPlaceholder(album) ? null : album}
-            overlayClass={overlayStyle}
+            overlayStyle={overlayStyle}
             onMouseEnter={mouseEnter}/>
     )
 }

@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import { SIDEBAR_LABEL_PADDING_SIZE, ERROR_TEXT_COLOUR } from '../style.js'
@@ -18,11 +17,11 @@ export type SearchBoxProps = DispatchProps & {
 }
 
 
-const errorStyle = css({
+const errorStyle: CSSProperties = {
     color: ERROR_TEXT_COLOUR,
     marginBottom: SIDEBAR_LABEL_PADDING_SIZE,
     userSelect: 'none'
-})
+}
 
 
 export const SearchBox: FC<SearchBoxProps> = ({ dispatch, searchState }) => {
@@ -41,7 +40,7 @@ export const SearchBox: FC<SearchBoxProps> = ({ dispatch, searchState }) => {
     let errorMessage: JSX.Element | undefined
     if (searchState.tag === 'Error') {
         errorMessage = (
-            <div className={errorStyle}>
+            <div style={errorStyle}>
                 {searchState.message}
             </div>
         )

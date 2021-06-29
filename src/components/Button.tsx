@@ -1,11 +1,12 @@
-import type { FC } from 'react'
 import { cx } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
-import { buttonStyle } from '../style.js'
+import { buttonClassName } from '../style.js'
 
 
 export type ButtonProps = {
     id?: string
+    style?: CSSProperties
     className?: string
     disabled?: boolean
     onClick?: () => void
@@ -14,4 +15,4 @@ export type ButtonProps = {
 
 
 export const Button: FC<ButtonProps> = ({ className, ...props }) =>
-    <button {...props} className={cx(buttonStyle, className)}/>
+    <button {...props} className={cx(buttonClassName(), className)}/>

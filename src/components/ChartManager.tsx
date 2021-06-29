@@ -1,5 +1,4 @@
-import type { FC } from 'react'
-import { css } from 'emotion'
+import type { CSSProperties, FC } from 'react'
 
 import type { DispatchProps } from '../reducer.js'
 import type { Chart } from '../types.js'
@@ -17,15 +16,15 @@ export type ChartManagerProps = DispatchProps & {
 }
 
 
-const buttonsContainerStyle = css({
+const buttonsContainerStyle: CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between'
-})
+}
 
 
-const groupStyle = css({
+const groupStyle: CSSProperties = {
     display: 'flex'
-})
+}
 
 
 export const ChartManager: FC<ChartManagerProps> = ({
@@ -37,13 +36,13 @@ export const ChartManager: FC<ChartManagerProps> = ({
         <ChartSelector dispatch={dispatch}
             charts={charts}
             activeChartIndex={activeChartIndex}/>
-        <div className={buttonsContainerStyle}>
-            <div className={groupStyle}>
+        <div style={buttonsContainerStyle}>
+            <div style={groupStyle}>
                 <NewChartButton dispatch={dispatch}/>
                 <RenameActiveChartButton dispatch={dispatch}/>
                 <DeleteActiveChartButton dispatch={dispatch}/>
             </div>
-            <div className={groupStyle}>
+            <div style={groupStyle}>
                 <MoveChartButton dispatch={dispatch}
                         direction='Up'
                         disabled={activeChartIndex === 0}>

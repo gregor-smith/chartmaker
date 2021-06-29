@@ -1,4 +1,4 @@
-import type { FC, DragEvent } from 'react';
+import type { FC, DragEvent, CSSProperties } from 'react';
 import type { UnidentifiedAlbum } from '../types.js';
 export declare type AlbumCoverProps = {
     album: UnidentifiedAlbum;
@@ -8,7 +8,7 @@ export declare type AlbumCoverProps = {
     onDragEnter?: (event: DragEvent<HTMLDivElement>) => void;
     onDrop?: (event: DragEvent<HTMLDivElement>) => void;
     onMouseEnter?: () => void;
-    overlayClass?: string;
+    overlayStyle?: CSSProperties;
     highlighted?: boolean;
 };
 export declare const AlbumCover: FC<AlbumCoverProps>;

@@ -1,7 +1,7 @@
-import type { FC } from 'react';
+import type { CSSProperties, FC } from 'react';
 import type { DispatchProps } from '../reducer.js';
 export declare type ViewerNavigationLinkProps = DispatchProps & {
-    className?: string;
+    style?: CSSProperties;
     onClick?: () => void;
 };
 export declare const ViewerNavigationLink: FC<ViewerNavigationLinkProps>;
