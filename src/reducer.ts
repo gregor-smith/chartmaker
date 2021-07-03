@@ -27,7 +27,8 @@ import type {
     Route,
     CollageSize,
     TopSize,
-    ScreenshotScale
+    ScreenshotScale,
+    Searcher
 } from './types.js'
 import { searchLastFM } from './api.js'
 
@@ -73,7 +74,25 @@ export type DispatchProps = {
 }
 
 
-export function createReducer(searcher = searchLastFM): SideEffectReducer<State, Action> {
+export type Alerter = (message: string) => PromiseLike<void> | void
+export type Confirmer = (message: string) => PromiseLike<boolean> | boolean
+export type Prompter = (message: string, _default: string) => Promise<string | null> | string | null
+export type CreateReducerOptions = {
+    searcher?: Searcher
+    alerter?: Alerter
+    confirmer?: Confirmer
+    prompter?: Prompter
+}
+
+
+export function createReducer(
+    {
+        searcher = searchLastFM,
+        alerter = alert,
+        confirmer = confirm,
+        prompter = prompt
+    }: CreateReducerOptions = {}
+): SideEffectReducer<State, Action> {
     return (state, action) => {
         switch (action.tag) {
             case 'PopRoute':
@@ -119,15 +138,14 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                 )
 
             case 'PromptForNewChart':
-                return sideEffect((dispatch, state) => {
+                return sideEffect(async (dispatch, state) => {
                     const activeChart = state.charts[state.activeChartIndex]!
-                    const name = prompt('Enter new chart name:', activeChart.name)?.trim()
+                    const name = (await prompter('Enter new chart name:', activeChart.name))?.trim()
                     if (name === undefined || name.length === 0) {
                         return
                     }
                     if (state.charts.some(chart => chart.name === name)) {
-                        alert('A chart with that name already exists')
-                        return
+                        return alerter('A chart with that name already exists')
                     }
                     dispatch({ tag: 'AddNewChart', name })
                 })
@@ -144,9 +162,9 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
             }
 
             case 'PromptToRenameActiveChart':
-                return sideEffect((dispatch, state) => {
+                return sideEffect(async (dispatch, state) => {
                     const activeChart = state.charts[state.activeChartIndex]!
-                    const name = prompt('Enter new chart name:', activeChart.name)?.trim()
+                    const name = (await prompter('Enter new chart name:', activeChart.name))?.trim()
                     if (name === undefined || name.length === 0) {
                         return
                     }
@@ -154,7 +172,7 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                         const chart = state.charts[index]!
                         if (chart.name === name) {
                             if (index !== state.activeChartIndex) {
-                                alert('A chart with that name already exists')
+                                return alerter('A chart with that name already exists')
                             }
                             return
                         }
@@ -170,8 +188,8 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                 )
 
             case 'PromptToDeleteActiveChart':
-                return sideEffect(dispatch => {
-                    if (confirm('Really delete active chart? This cannot be undone')) {
+                return sideEffect(async dispatch => {
+                    if (await confirmer('Really delete active chart? This cannot be undone')) {
                         dispatch({ tag: 'DeleteActiveChart' })
                     }
                 })
@@ -239,13 +257,11 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                         parsed = JSON.parse(json)
                     }
                     catch {
-                        alert('Selected file is invalid')
-                        return
+                        return alerter('Selected file is invalid')
                     }
                     const state = validateUnknownState(parsed)
                     if (state === null) {
-                        alert('Selected file is invalid')
-                        return
+                        return alerter('Selected file is invalid')
                     }
                     dispatch({ tag: 'LoadState', state })
                 })
@@ -438,7 +454,7 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
             }
 
             case 'PromptToRenameAlbum':
-                return sideEffect((dispatch, state) => {
+                return sideEffect(async (dispatch, state) => {
                     const album = state.charts[state.activeChartIndex]!
                         .albums
                         .find(album => getAlbumID(album) === action.id)
@@ -446,7 +462,7 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                         return
                     }
 
-                    const name = prompt('Enter new album name:', album.name)?.trim()
+                    const name = (await prompter('Enter new album name:', album.name))?.trim()
                     if (name === undefined || name.length === 0) {
                         return
                     }

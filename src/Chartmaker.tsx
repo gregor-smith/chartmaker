@@ -2,7 +2,7 @@ import 'bootstrap/scss/bootstrap-reboot.scss'
 import { FC, useRef, useEffect, ComponentType, CSSProperties } from 'react'
 import { useSideEffectReducer } from 'react-use-side-effect-reducer'
 
-import { createReducer } from './reducer.js'
+import { createReducer, CreateReducerOptions } from './reducer.js'
 import {
     createInitialState,
     loadStateFromLocalStorage,
@@ -17,7 +17,7 @@ import {
 } from './style.js'
 import { Editor } from './pages/Editor.js'
 import { Viewer } from './pages/Viewer.js'
-import type { Searcher, State } from './types.js'
+import type { State } from './types.js'
 import type { APIKeyInputProps } from './components/APIKeyInput.js'
 import type { CopyLinkButtonProps } from './components/CopyLinkButton.js'
 
@@ -39,8 +39,7 @@ const style: CSSProperties = {
 }
 
 
-export type ChartmakerProps = {
-    searcher?: Searcher
+export type ChartmakerProps = CreateReducerOptions & {
     keyInputComponent?: ComponentType<APIKeyInputProps>
     copyLinkComponent?: ComponentType<CopyLinkButtonProps>
 }
@@ -49,12 +48,15 @@ export type ChartmakerProps = {
 export const Chartmaker: FC<ChartmakerProps> = ({
     searcher,
     keyInputComponent,
-    copyLinkComponent
+    copyLinkComponent,
+    alerter,
+    confirmer,
+    prompter
 }) => {
     const chartRef = useRef<HTMLElement>(null)
     const [ state, dispatch ] = useSideEffectReducer(
         loadState,
-        createReducer(searcher)
+        createReducer({ searcher, alerter, confirmer, prompter })
     )
     useEffect(
         () => saveStateToLocalStorage(state),
