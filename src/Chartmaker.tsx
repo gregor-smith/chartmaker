@@ -58,7 +58,7 @@ export const Chartmaker: FC<ChartmakerProps> = ({
     )
     useEffect(
         () => saveStateToLocalStorage(state),
-        [ state ]
+        [ state.activeChartIndex, state.apiKey, state.charts, state.searchState.query ]
     )
     useEffect(
         () => {
