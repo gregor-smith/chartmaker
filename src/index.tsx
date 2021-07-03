@@ -4,6 +4,10 @@ export type { CopyLinkButtonProps } from './components/CopyLinkButton.js'
 export type {
     UnidentifiedNamedAlbum,
     AlbumSearcher,
+    AlertShower,
+    ChoiceConfirmer,
+    InputPrompter,
+    FileURIGetter,
     SearchResult,
     SearcherArguments
 } from './types.js'
