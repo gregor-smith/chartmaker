@@ -18,9 +18,8 @@ import {
 import { Editor } from './pages/Editor.js'
 import { Viewer } from './pages/Viewer.js'
 import type { Searcher, State } from './types.js'
-import { searchLastFM } from './api.js'
-import { APIKeyInput, APIKeyInputProps } from './components/APIKeyInput.js'
-import { CopyLinkButton, CopyLinkButtonProps } from './components/CopyLinkButton.js'
+import type { APIKeyInputProps } from './components/APIKeyInput.js'
+import type { CopyLinkButtonProps } from './components/CopyLinkButton.js'
 
 
 function loadState(): State {
@@ -48,9 +47,9 @@ export type ChartmakerProps = {
 
 
 export const Chartmaker: FC<ChartmakerProps> = ({
-    searcher = searchLastFM,
-    keyInputComponent = APIKeyInput,
-    copyLinkComponent = CopyLinkButton
+    searcher,
+    keyInputComponent,
+    copyLinkComponent
 }) => {
     const chartRef = useRef<HTMLElement>(null)
     const [ state, dispatch ] = useSideEffectReducer(

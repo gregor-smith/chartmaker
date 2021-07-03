@@ -13,8 +13,8 @@ export type EditorProps =
     & Omit<State, 'version' | 'viewing'>
     & {
         chartRef: RefObject<HTMLElement>
-        keyInputComponent: ComponentType<APIKeyInputProps>
-        copyLinkComponent: ComponentType<CopyLinkButtonProps>
+        keyInputComponent?: ComponentType<APIKeyInputProps>
+        copyLinkComponent?: ComponentType<CopyLinkButtonProps>
     }
 
 

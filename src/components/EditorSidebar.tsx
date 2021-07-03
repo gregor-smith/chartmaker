@@ -3,14 +3,14 @@ import type { ComponentType, FC, RefObject } from 'react'
 import type { DispatchProps } from '../reducer.js'
 import type { Chart, SearchState, ScreenshotState } from '../types.js'
 import { ChartManager } from './ChartManager.js'
-import type { APIKeyInputProps } from './APIKeyInput.js'
+import { APIKeyInput, APIKeyInputProps } from './APIKeyInput.js'
 import { ScreenshotButtons } from './ScreenshotButtons.js'
 import { SearchBox } from './SearchBox.js'
 import { SearchResults } from './SearchResults.js'
 import { ChartShapeControls } from './ChartShapeControls.js'
 import { Sidebar } from './Sidebar.js'
 import { LoadSaveButtons } from './LoadSaveButtons.js'
-import type { CopyLinkButtonProps } from './CopyLinkButton.js'
+import { CopyLinkButton, CopyLinkButtonProps } from './CopyLinkButton.js'
 
 
 export type EditorSidebarProps = DispatchProps & {
@@ -20,8 +20,8 @@ export type EditorSidebarProps = DispatchProps & {
     searchState: SearchState
     screenshotState: ScreenshotState
     chartRef: RefObject<HTMLElement>
-    keyInputComponent: ComponentType<APIKeyInputProps>
-    copyLinkComponent: ComponentType<CopyLinkButtonProps>
+    keyInputComponent?: ComponentType<APIKeyInputProps>
+    copyLinkComponent?: ComponentType<CopyLinkButtonProps>
 }
 
 
@@ -33,8 +33,8 @@ export const EditorSidebar: FC<EditorSidebarProps> = ({
     searchState,
     screenshotState,
     chartRef,
-    copyLinkComponent: CopyLinkComponent,
-    keyInputComponent: KeyInputComponent
+    copyLinkComponent: CopyLinkComponent = CopyLinkButton,
+    keyInputComponent: KeyInputComponent = APIKeyInput
 }) => {
     let searchResults: JSX.Element | undefined
     if (searchState.tag === 'Complete' && searchState.albums.length > 0) {

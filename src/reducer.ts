@@ -27,9 +27,9 @@ import type {
     Route,
     CollageSize,
     TopSize,
-    ScreenshotScale,
-    Searcher
+    ScreenshotScale
 } from './types.js'
+import { searchLastFM } from './api.js'
 
 
 export type Action =
@@ -75,7 +75,7 @@ export type DispatchProps = {
 }
 
 
-export function createReducer(searcher: Searcher): SideEffectReducer<State, Action> {
+export function createReducer(searcher = searchLastFM): SideEffectReducer<State, Action> {
     return (state, action) => {
         switch (action.tag) {
             case 'PopRoute':
