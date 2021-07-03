@@ -1,11 +1,10 @@
 import 'bootstrap/scss/bootstrap-reboot.scss';
-import { FC, ComponentType } from 'react';
-import type { Searcher } from './types.js';
-import { APIKeyInputProps } from './components/APIKeyInput.js';
-import { CopyLinkButtonProps } from './components/CopyLinkButton.js';
-export declare type ChartmakerProps = {
-    searcher?: Searcher;
+import { ComponentType } from 'react';
+import { CreateReducerOptions } from './reducer.js';
+import type { APIKeyInputProps } from './components/APIKeyInput.js';
+import type { CopyLinkButtonProps } from './components/CopyLinkButton.js';
+export declare type ChartmakerProps = CreateReducerOptions & {
     keyInputComponent?: ComponentType<APIKeyInputProps>;
     copyLinkComponent?: ComponentType<CopyLinkButtonProps>;
 };
-export declare const Chartmaker: FC<ChartmakerProps>;
+export declare function Chartmaker({ copyLinkComponent, keyInputComponent, ...reducerOptions }: ChartmakerProps): JSX.Element;

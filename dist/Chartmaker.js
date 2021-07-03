@@ -7,9 +7,6 @@ import { createInitialState, loadStateFromLocalStorage, routeFromHash, saveState
 import { BACKGROUND_COLOUR, TEXT_COLOUR, FONT_SIZE, CONTAINER_PADDING_SIZE } from './style.js';
 import { Editor } from './pages/Editor.js';
 import { Viewer } from './pages/Viewer.js';
-import { searchLastFM } from './api.js';
-import { APIKeyInput } from './components/APIKeyInput.js';
-import { CopyLinkButton } from './components/CopyLinkButton.js';
 function loadState() {
     var _a;
     return (_a = loadStateFromLocalStorage()) !== null && _a !== void 0 ? _a : createInitialState();
@@ -24,11 +21,11 @@ const style = {
     fontSize: FONT_SIZE,
     padding: CONTAINER_PADDING_SIZE
 };
-export const Chartmaker = ({ searcher = searchLastFM, keyInputComponent = APIKeyInput, copyLinkComponent = CopyLinkButton }) => {
+export function Chartmaker({ copyLinkComponent, keyInputComponent, ...reducerOptions }) {
     var _a;
     const chartRef = useRef(null);
-    const [state, dispatch] = useSideEffectReducer(loadState, createReducer(searcher));
-    useEffect(() => saveStateToLocalStorage(state), [state]);
+    const [state, dispatch] = useSideEffectReducer(loadState, createReducer(reducerOptions));
+    useEffect(() => saveStateToLocalStorage(state), [state.activeChartIndex, state.apiKey, state.charts, state.searchState.query]);
     useEffect(() => {
         function popRoute() {
             dispatch({
@@ -52,5 +49,5 @@ export const Chartmaker = ({ searcher = searchLastFM, keyInputComponent = APIKey
             page = null;
     }
     return (_jsx("div", Object.assign({ style: style }, { children: page }), void 0));
-};
+}
 //# sourceMappingURL=Chartmaker.js.map

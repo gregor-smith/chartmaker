@@ -1,5 +1,5 @@
 import 'bootstrap/scss/bootstrap-reboot.scss'
-import { FC, useRef, useEffect, ComponentType, CSSProperties } from 'react'
+import { useRef, useEffect, ComponentType, CSSProperties } from 'react'
 import { useSideEffectReducer } from 'react-use-side-effect-reducer'
 
 import { createReducer, CreateReducerOptions } from './reducer.js'
@@ -45,18 +45,17 @@ export type ChartmakerProps = CreateReducerOptions & {
 }
 
 
-export const Chartmaker: FC<ChartmakerProps> = ({
-    searcher,
-    keyInputComponent,
-    copyLinkComponent,
-    alerter,
-    confirmer,
-    prompter
-}) => {
+export function Chartmaker(
+    {
+        copyLinkComponent,
+        keyInputComponent,
+        ...reducerOptions
+    }: ChartmakerProps
+): JSX.Element {
     const chartRef = useRef<HTMLElement>(null)
     const [ state, dispatch ] = useSideEffectReducer(
         loadState,
-        createReducer({ searcher, alerter, confirmer, prompter })
+        createReducer(reducerOptions)
     )
     useEffect(
         () => saveStateToLocalStorage(state),

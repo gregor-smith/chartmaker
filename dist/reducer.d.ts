@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { Dispatch as Dispatch_, SideEffectReducer } from 'react-use-side-effect-reducer';
-import type { State, SearchState, Route, CollageSize, TopSize, ScreenshotScale, Searcher } from './types.js';
+import type { State, SearchState, Route, CollageSize, TopSize, ScreenshotScale, AlbumSearcher, AlertShower, ChoiceConfirmer, FileURIGetter, InputPrompter } from './types.js';
 export declare type Action = {
     tag: 'PopRoute';
     route: Route | null;
@@ -16,8 +16,6 @@ export declare type Action = {
     index: number;
 } | {
     tag: 'PromptForNewChart';
-} | {
-    tag: 'ShowChartNameTakenMessage';
 } | {
     tag: 'AddNewChart';
     name: string;
@@ -36,8 +34,6 @@ export declare type Action = {
 } | {
     tag: 'LoadStateFile';
     file: File;
-} | {
-    tag: 'ShowInvalidStateImportMessage';
 } | {
     tag: 'LoadState';
     state: State;
@@ -105,4 +101,11 @@ export declare type Dispatch = Dispatch_<Action>;
 export declare type DispatchProps = {
     dispatch: Dispatch;
 };
-export declare function createReducer(searcher: Searcher): SideEffectReducer<State, Action>;
+export declare type CreateReducerOptions = {
+    searchForAlbums?: AlbumSearcher;
+    showAlert?: AlertShower;
+    confirmChoice?: ChoiceConfirmer;
+    promptForInput?: InputPrompter;
+    getFileURI?: FileURIGetter;
+};
+export declare function createReducer({ searchForAlbums, showAlert, confirmChoice, promptForInput, getFileURI }?: CreateReducerOptions): SideEffectReducer<State, Action>;

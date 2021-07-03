@@ -178,7 +178,11 @@ export type SearcherArguments = {
     signal: AbortSignal
 }
 
-export type Searcher = (args: SearcherArguments) => PromiseLike<SearchResult> | SearchResult
+export type AlbumSearcher = (args: SearcherArguments) => PromiseLike<SearchResult> | SearchResult
+export type AlertShower = (message: string) => PromiseLike<void> | void
+export type ChoiceConfirmer = (message: string) => PromiseLike<boolean> | boolean
+export type InputPrompter = (message: string, _default: string) => PromiseLike<string | null> | string | null
+export type FileURIGetter = (file: File & { path?: string }) => PromiseLike<string> | string
 
 export type SearchState = (
     | { tag: 'Waiting' }

@@ -1,7 +1,8 @@
 import { update, sideEffect, noUpdate, updateWithSideEffect } from 'react-use-side-effect-reducer';
 import { produce } from 'immer';
 import { createChart, createExportState, validateUnknownState, findAlbumIndexWithID, getAlbumID, identifiedAlbumIsPlaceholder, routeToHash, elementToDataURI, downloadURI, jsonToDataURI, fileToDataURI } from './utils.js';
-export function createReducer(searcher) {
+import { searchLastFM } from './api.js';
+export function createReducer({ searchForAlbums = searchLastFM, showAlert = alert, confirmChoice = confirm, promptForInput = prompt, getFileURI = fileToDataURI } = {}) {
     return (state, action) => {
         var _a, _b, _c;
         switch (action.tag) {
@@ -37,21 +38,18 @@ export function createReducer(searcher) {
                     state.highlightedID = null;
                 }));
             case 'PromptForNewChart':
-                return sideEffect((dispatch, state) => {
+                return sideEffect(async (dispatch, state) => {
                     var _a;
                     const activeChart = state.charts[state.activeChartIndex];
-                    const name = (_a = prompt('Enter new chart name:', activeChart.name)) === null || _a === void 0 ? void 0 : _a.trim();
+                    const name = (_a = (await promptForInput('Enter new chart name:', activeChart.name))) === null || _a === void 0 ? void 0 : _a.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
                     if (state.charts.some(chart => chart.name === name)) {
-                        dispatch({ tag: 'ShowChartNameTakenMessage' });
-                        return;
+                        return showAlert('A chart with that name already exists');
                     }
                     dispatch({ tag: 'AddNewChart', name });
                 });
-            case 'ShowChartNameTakenMessage':
-                return sideEffect(() => alert('A chart with that name already exists'));
             case 'AddNewChart': {
                 const chart = createChart(action.name);
                 return update(produce(state, state => {
@@ -61,10 +59,10 @@ export function createReducer(searcher) {
                 }));
             }
             case 'PromptToRenameActiveChart':
-                return sideEffect((dispatch, state) => {
+                return sideEffect(async (dispatch, state) => {
                     var _a;
                     const activeChart = state.charts[state.activeChartIndex];
-                    const name = (_a = prompt('Enter new chart name:', activeChart.name)) === null || _a === void 0 ? void 0 : _a.trim();
+                    const name = (_a = (await promptForInput('Enter new chart name:', activeChart.name))) === null || _a === void 0 ? void 0 : _a.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -72,7 +70,7 @@ export function createReducer(searcher) {
                         const chart = state.charts[index];
                         if (chart.name === name) {
                             if (index !== state.activeChartIndex) {
-                                dispatch({ tag: 'ShowChartNameTakenMessage' });
+                                return showAlert('A chart with that name already exists');
                             }
                             return;
                         }
@@ -84,8 +82,8 @@ export function createReducer(searcher) {
                     state.charts[state.activeChartIndex].name = action.name;
                 }));
             case 'PromptToDeleteActiveChart':
-                return sideEffect(dispatch => {
-                    if (confirm('Really delete active chart? This cannot be undone')) {
+                return sideEffect(async (dispatch) => {
+                    if (await confirmChoice('Really delete active chart? This cannot be undone')) {
                         dispatch({ tag: 'DeleteActiveChart' });
                     }
                 });
@@ -138,18 +136,14 @@ export function createReducer(searcher) {
                         parsed = JSON.parse(json);
                     }
                     catch {
-                        dispatch({ tag: 'ShowInvalidStateImportMessage' });
-                        return;
+                        return showAlert('Selected file is invalid');
                     }
                     const state = validateUnknownState(parsed);
                     if (state === null) {
-                        dispatch({ tag: 'ShowInvalidStateImportMessage' });
-                        return;
+                        return showAlert('Selected file is invalid');
                     }
                     dispatch({ tag: 'LoadState', state });
                 });
-            case 'ShowInvalidStateImportMessage':
-                return sideEffect(() => alert('Selected file is invalid'));
             case 'LoadState': {
                 if (((_b = state.route) === null || _b === void 0 ? void 0 : _b.tag) !== 'Editor') {
                     return noUpdate;
@@ -187,7 +181,7 @@ export function createReducer(searcher) {
                         state.searchState = {
                             tag: 'Error',
                             query: state.searchState.query,
-                            message: 'Last.fm API key required'
+                            message: 'API key required'
                         };
                     }));
                 }
@@ -199,7 +193,7 @@ export function createReducer(searcher) {
                         controller
                     };
                 }), async (dispatch, state) => {
-                    const result = await searcher({
+                    const result = await searchForAlbums({
                         key: state.apiKey,
                         query: state.searchState.query,
                         signal: controller.signal
@@ -304,7 +298,7 @@ export function createReducer(searcher) {
                 }));
             }
             case 'PromptToRenameAlbum':
-                return sideEffect((dispatch, state) => {
+                return sideEffect(async (dispatch, state) => {
                     var _a;
                     const album = state.charts[state.activeChartIndex]
                         .albums
@@ -312,7 +306,7 @@ export function createReducer(searcher) {
                     if (album === undefined || identifiedAlbumIsPlaceholder(album)) {
                         return;
                     }
-                    const name = (_a = prompt('Enter new album name:', album.name)) === null || _a === void 0 ? void 0 : _a.trim();
+                    const name = (_a = (await promptForInput('Enter new album name:', album.name))) === null || _a === void 0 ? void 0 : _a.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -377,18 +371,13 @@ export function createReducer(searcher) {
                     chart.shape = action.shape;
                     chart.size = action.size;
                 }));
-            case 'DropExternalFile': {
-                const exists = state.charts[state.activeChartIndex].albums.some(album => getAlbumID(album) === action.targetID);
-                if (!exists) {
-                    return noUpdate;
-                }
+            case 'DropExternalFile':
                 return sideEffect(async (dispatch) => dispatch({
                     tag: 'LoadExternalFile',
                     targetID: action.targetID,
-                    uri: await fileToDataURI(action.file),
+                    uri: await getFileURI(action.file),
                     name: action.file.name
                 }));
-            }
             case 'LoadExternalFile': {
                 const targetIndex = findAlbumIndexWithID(state.charts[state.activeChartIndex].albums, action.targetID);
                 if (targetIndex === null) {
@@ -404,13 +393,10 @@ export function createReducer(searcher) {
             }
             case 'HighlightAlbum': {
                 const target = state.charts[state.activeChartIndex].albums.find(album => !identifiedAlbumIsPlaceholder(album) && album.id === action.targetID);
-                if (target === undefined) {
-                    return update(produce(state, state => {
-                        state.highlightedID = null;
-                    }));
-                }
                 return update(produce(state, state => {
-                    state.highlightedID = action.targetID;
+                    state.highlightedID = target === undefined
+                        ? null
+                        : action.targetID;
                 }));
             }
             case 'UnhighlightAlbum':

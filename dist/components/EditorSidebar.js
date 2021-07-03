@@ -1,12 +1,14 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { ChartManager } from './ChartManager.js';
+import { APIKeyInput } from './APIKeyInput.js';
 import { ScreenshotButtons } from './ScreenshotButtons.js';
 import { SearchBox } from './SearchBox.js';
 import { SearchResults } from './SearchResults.js';
 import { ChartShapeControls } from './ChartShapeControls.js';
 import { Sidebar } from './Sidebar.js';
 import { LoadSaveButtons } from './LoadSaveButtons.js';
-export const EditorSidebar = ({ dispatch, charts, activeChartIndex, apiKey, searchState, screenshotState, chartRef, copyLinkComponent: CopyLinkComponent, keyInputComponent: KeyInputComponent }) => {
+import { CopyLinkButton } from './CopyLinkButton.js';
+export const EditorSidebar = ({ dispatch, charts, activeChartIndex, apiKey, searchState, screenshotState, chartRef, copyLinkComponent: CopyLinkComponent = CopyLinkButton, keyInputComponent: KeyInputComponent = APIKeyInput }) => {
     let searchResults;
     if (searchState.tag === 'Complete' && searchState.albums.length > 0) {
         searchResults = _jsx(SearchResults, { albums: searchState.albums }, void 0);

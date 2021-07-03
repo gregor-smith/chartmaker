@@ -3,7 +3,7 @@ export type { APIKeyInputProps } from './components/APIKeyInput.js'
 export type { CopyLinkButtonProps } from './components/CopyLinkButton.js'
 export type {
     UnidentifiedNamedAlbum,
-    Searcher,
+    AlbumSearcher,
     SearchResult,
     SearcherArguments
 } from './types.js'

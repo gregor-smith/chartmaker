@@ -93,8 +93,8 @@ export declare const V1State: Record_<{
         })[], unknown>;
     }, false>, false>, {
         name: string;
-        rowsX: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
-        rowsY: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
+        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         shape: {
             tag: "Top";
             size: 40 | 42 | 100;
@@ -144,8 +144,8 @@ export declare const V2State: Record_<{
             id: number;
         }))[];
         name: string;
-        rowsX: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
-        rowsY: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
+        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         shape: {
             tag: "Top";
             size: 40 | 42 | 100;
@@ -183,7 +183,7 @@ export declare const ExportState: Record_<{
             url: string;
         } | null)[];
         name: string;
-        shape: [2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3, 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3];
+        shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
         size: 40 | 42 | 100 | null;
     }[], unknown>;
 }, false>;
@@ -210,7 +210,13 @@ export declare type SearcherArguments = {
     query: string;
     signal: AbortSignal;
 };
-export declare type Searcher = (args: SearcherArguments) => PromiseLike<SearchResult> | SearchResult;
+export declare type AlbumSearcher = (args: SearcherArguments) => PromiseLike<SearchResult> | SearchResult;
+export declare type AlertShower = (message: string) => PromiseLike<void> | void;
+export declare type ChoiceConfirmer = (message: string) => PromiseLike<boolean> | boolean;
+export declare type InputPrompter = (message: string, _default: string) => PromiseLike<string | null> | string | null;
+export declare type FileURIGetter = (file: File & {
+    path?: string;
+}) => PromiseLike<string> | string;
 export declare type SearchState = ({
     tag: 'Waiting';
 } | {

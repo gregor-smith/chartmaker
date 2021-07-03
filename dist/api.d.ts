@@ -1,5 +1,5 @@
 import { Record as Record_, Array as Array_, String as String_, Static } from 'runtypes';
-import type { Searcher } from './types.js';
+import type { AlbumSearcher } from './types.js';
 declare const LastFMAlbum: Record_<{
     name: String_;
     artist: String_;
@@ -22,5 +22,5 @@ declare const LastFMResult: Record_<{
 }, false>;
 export declare type LastFMAlbum = Static<typeof LastFMAlbum>;
 export declare type LastFMResult = Static<typeof LastFMResult>;
-export declare const searchLastFM: Searcher;
+export declare const searchLastFM: AlbumSearcher;
 export {};

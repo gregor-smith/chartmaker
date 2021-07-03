@@ -5,7 +5,7 @@ import {
     Static
 } from 'runtypes'
 
-import type { Searcher, UnidentifiedNamedAlbum } from './types.js'
+import type { AlbumSearcher, UnidentifiedNamedAlbum } from './types.js'
 
 
 const LastFMAlbum = Record_({
@@ -69,7 +69,7 @@ function joinURLQuery(base: string, query: Record<string, string>): string {
 }
 
 
-export const searchLastFM: Searcher = async ({ key, query, signal }) => {
+export const searchLastFM: AlbumSearcher = async ({ key, query, signal }) => {
     const url = joinURLQuery('https://ws.audioscrobbler.com/2.0/', {
         method: 'album.search',
         format: 'json',
