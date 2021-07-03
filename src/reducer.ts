@@ -38,7 +38,6 @@ export type Action =
     | { tag: 'UpdateAPIKey', apiKey: string }
     | { tag: 'UpdateActiveChart', index: number }
     | { tag: 'PromptForNewChart' }
-    | { tag: 'ShowChartNameTakenMessage' }
     | { tag: 'AddNewChart', name: string }
     | { tag: 'PromptToRenameActiveChart' }
     | { tag: 'RenameActiveChart', name: string }
@@ -46,7 +45,6 @@ export type Action =
     | { tag: 'DeleteActiveChart' }
     | { tag: 'MoveActiveChart', direction: 'Up' | 'Down' }
     | { tag: 'LoadStateFile', file: File }
-    | { tag: 'ShowInvalidStateImportMessage' }
     | { tag: 'LoadState', state: State }
     | { tag: 'PromptToSaveState' }
     | { tag: 'CancelSearchRequest' }
@@ -128,16 +126,11 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                         return
                     }
                     if (state.charts.some(chart => chart.name === name)) {
-                        dispatch({ tag: 'ShowChartNameTakenMessage' })
+                        alert('A chart with that name already exists')
                         return
                     }
                     dispatch({ tag: 'AddNewChart', name })
                 })
-
-            case 'ShowChartNameTakenMessage':
-                return sideEffect(() =>
-                    alert('A chart with that name already exists')
-                )
 
             case 'AddNewChart': {
                 const chart = createChart(action.name)
@@ -161,7 +154,7 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                         const chart = state.charts[index]!
                         if (chart.name === name) {
                             if (index !== state.activeChartIndex) {
-                                dispatch({ tag: 'ShowChartNameTakenMessage' })
+                                alert('A chart with that name already exists')
                             }
                             return
                         }
@@ -246,21 +239,16 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                         parsed = JSON.parse(json)
                     }
                     catch {
-                        dispatch({ tag: 'ShowInvalidStateImportMessage' })
+                        alert('Selected file is invalid')
                         return
                     }
                     const state = validateUnknownState(parsed)
                     if (state === null) {
-                        dispatch({ tag: 'ShowInvalidStateImportMessage' })
+                        alert('Selected file is invalid')
                         return
                     }
                     dispatch({ tag: 'LoadState', state })
                 })
-
-            case 'ShowInvalidStateImportMessage':
-                return sideEffect(() =>
-                    alert('Selected file is invalid')
-                )
 
             case 'LoadState': {
                 if (state.route?.tag !== 'Editor') {
@@ -307,7 +295,7 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                             state.searchState = {
                                 tag: 'Error',
                                 query: state.searchState.query,
-                                message: 'Last.fm API key required'
+                                message: 'API key required'
                             }
                         })
                     )
@@ -552,14 +540,7 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                     })
                 )
 
-            case 'DropExternalFile': {
-                const exists = state.charts[state.activeChartIndex]!.albums.some(album =>
-                    getAlbumID(album) === action.targetID
-                )
-                if (!exists) {
-                    return noUpdate
-                }
-
+            case 'DropExternalFile':
                 return sideEffect(async dispatch =>
                     dispatch({
                         tag: 'LoadExternalFile',
@@ -568,7 +549,6 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                         name: action.file.name
                     })
                 )
-            }
 
             case 'LoadExternalFile': {
                 const targetIndex = findAlbumIndexWithID(
@@ -578,7 +558,6 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                 if (targetIndex === null) {
                     return noUpdate
                 }
-
                 return update(
                     produce(state, state => {
                         state.charts[state.activeChartIndex]!.albums[targetIndex] = {
@@ -594,17 +573,11 @@ export function createReducer(searcher = searchLastFM): SideEffectReducer<State,
                 const target = state.charts[state.activeChartIndex]!.albums.find(album =>
                     !identifiedAlbumIsPlaceholder(album) && album.id === action.targetID
                 )
-                if (target === undefined) {
-                    return update(
-                        produce(state, state => {
-                            state.highlightedID = null
-                        })
-                    )
-                }
-
                 return update(
                     produce(state, state => {
-                        state.highlightedID = action.targetID
+                        state.highlightedID = target === undefined
+                            ? null
+                            : action.targetID
                     })
                 )
             }
