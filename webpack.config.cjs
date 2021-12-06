@@ -25,10 +25,10 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
+                test: /\.[cm]?tsx?$/,
                 exclude: '/node_modules/',
                 use: [
-                    { loader: 'babel-loader' },
+                    { loader: 'ts-loader' },
                     {
                         loader: 'string-replace-loader',
                         options: {
@@ -42,7 +42,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.js$/,
+                test: /\.[cm]?js$/,
                 enforce: 'pre',
                 loader: 'source-map-loader'
             },
