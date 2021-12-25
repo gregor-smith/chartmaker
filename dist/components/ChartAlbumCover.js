@@ -16,8 +16,8 @@ export const ChartAlbumCover = ({ dispatch, album, highlighted, ...props }) => {
             targetID: id
         });
     }
-    return (_jsx(AlbumCover, Object.assign({}, props, { highlighted: highlighted === null
+    return (_jsx(AlbumCover, { ...props, highlighted: highlighted === null
             ? undefined
-            : id === highlighted, album: identifiedAlbumIsPlaceholder(album) ? null : album, overlayStyle: overlayStyle, onMouseEnter: mouseEnter }), void 0));
+            : id === highlighted, album: identifiedAlbumIsPlaceholder(album) ? null : album, overlayStyle: overlayStyle, onMouseEnter: mouseEnter }, void 0));
 };
 //# sourceMappingURL=ChartAlbumCover.js.map

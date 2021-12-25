@@ -93,10 +93,10 @@ export declare const V1State: Record_<{
         })[], unknown>;
     }, false>, false>, {
         name: string;
-        rowsX: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
-        rowsY: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
+        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         shape: {
-            size: 40 | 42 | 100;
+            size: 100 | 40 | 42;
             tag: "Top";
         } | {
             tag: "Collage";
@@ -138,10 +138,10 @@ export declare const V2State: Record_<{
         }, false>]>;
     }, false>, false>, {
         name: string;
-        rowsX: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
-        rowsY: 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3;
+        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         shape: {
-            size: 40 | 42 | 100;
+            size: 100 | 40 | 42;
             tag: "Top";
         } | {
             tag: "Collage";
@@ -178,9 +178,9 @@ export declare const ExportState: Record_<{
         shape: Tuple<[Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>, Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>]>;
         size: Union<[Union<[Literal<40>, Literal<42>, Literal<100>]>, Literal<null>]>;
     }, false>, false>, {
-        size: 40 | 42 | 100 | null;
         name: string;
-        shape: [2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3, 2 | 1 | 10 | 9 | 8 | 7 | 6 | 5 | 4 | 3];
+        size: 100 | 40 | 42 | null;
+        shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
         albums: ({
             url: string;
             name: string;

@@ -3,5 +3,5 @@ import { SIDEBAR_LABEL_PADDING_SIZE } from '../style.js';
 const style = {
     marginBottom: SIDEBAR_LABEL_PADDING_SIZE
 };
-export const Label = ({ children, target }) => _jsx("label", Object.assign({ style: style, htmlFor: target }, { children: children }), void 0);
+export const Label = ({ children, target }) => _jsx("label", { style: style, htmlFor: target, children: children }, void 0);
 //# sourceMappingURL=Label.js.map

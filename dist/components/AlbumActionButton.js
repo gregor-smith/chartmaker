@@ -5,6 +5,6 @@ const style = {
     padding: 0
 };
 export const AlbumActionButton = props => {
-    return _jsx("button", Object.assign({}, props, { style: style }), void 0);
+    return _jsx("button", { ...props, style: style }, void 0);
 };
 //# sourceMappingURL=AlbumActionButton.js.map

@@ -186,7 +186,7 @@ export type FileURIGetter = (file: File & { path?: string }) => PromiseLike<stri
 
 export type SearchState = (
     | { tag: 'Waiting' }
-    | { tag: 'Loading', controller: AbortController }
+    | { tag: 'Loading' }
     | { tag: 'Complete', albums: UnidentifiedNamedAlbum[] }
     | { tag: 'Error', message: string }
 ) & {

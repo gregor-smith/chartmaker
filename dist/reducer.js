@@ -4,7 +4,6 @@ import { createChart, createExportState, validateUnknownState, findAlbumIndexWit
 import { searchLastFM } from './api.js';
 export function createReducer({ searchForAlbums = searchLastFM, showAlert = alert, confirmChoice = confirm, promptForInput = prompt, getFileURI = fileToDataURI } = {}) {
     return (state, action) => {
-        var _a, _b, _c;
         switch (action.tag) {
             case 'PopRoute':
                 return update({
@@ -12,7 +11,7 @@ export function createReducer({ searchForAlbums = searchLastFM, showAlert = aler
                     route: action.route
                 });
             case 'PushRoute': {
-                if (((_a = state.route) === null || _a === void 0 ? void 0 : _a.tag) === action.route.tag) {
+                if (state.route?.tag === action.route.tag) {
                     return noUpdate;
                 }
                 return updateWithSideEffect({
@@ -39,9 +38,8 @@ export function createReducer({ searchForAlbums = searchLastFM, showAlert = aler
                 }));
             case 'PromptForNewChart':
                 return sideEffect(async (dispatch, state) => {
-                    var _a;
                     const activeChart = state.charts[state.activeChartIndex];
-                    const name = (_a = (await promptForInput('Enter new chart name:', activeChart.name))) === null || _a === void 0 ? void 0 : _a.trim();
+                    const name = (await promptForInput('Enter new chart name:', activeChart.name))?.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -60,9 +58,8 @@ export function createReducer({ searchForAlbums = searchLastFM, showAlert = aler
             }
             case 'PromptToRenameActiveChart':
                 return sideEffect(async (dispatch, state) => {
-                    var _a;
                     const activeChart = state.charts[state.activeChartIndex];
-                    const name = (_a = (await promptForInput('Enter new chart name:', activeChart.name))) === null || _a === void 0 ? void 0 : _a.trim();
+                    const name = (await promptForInput('Enter new chart name:', activeChart.name))?.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -145,7 +142,7 @@ export function createReducer({ searchForAlbums = searchLastFM, showAlert = aler
                     dispatch({ tag: 'LoadState', state });
                 });
             case 'LoadState': {
-                if (((_b = state.route) === null || _b === void 0 ? void 0 : _b.tag) !== 'Editor') {
+                if (state.route?.tag !== 'Editor') {
                     return noUpdate;
                 }
                 return update({
@@ -299,14 +296,13 @@ export function createReducer({ searchForAlbums = searchLastFM, showAlert = aler
             }
             case 'PromptToRenameAlbum':
                 return sideEffect(async (dispatch, state) => {
-                    var _a;
                     const album = state.charts[state.activeChartIndex]
                         .albums
                         .find(album => getAlbumID(album) === action.id);
                     if (album === undefined || identifiedAlbumIsPlaceholder(album)) {
                         return;
                     }
-                    const name = (_a = (await promptForInput('Enter new album name:', album.name))) === null || _a === void 0 ? void 0 : _a.trim();
+                    const name = (await promptForInput('Enter new album name:', album.name))?.trim();
                     if (name === undefined || name.length === 0) {
                         return;
                     }
@@ -404,7 +400,7 @@ export function createReducer({ searchForAlbums = searchLastFM, showAlert = aler
                     state.highlightedID = null;
                 }));
             case 'ImportViewerChart': {
-                if (((_c = state.route) === null || _c === void 0 ? void 0 : _c.tag) !== 'Viewer' || state.route.chart === null) {
+                if (state.route?.tag !== 'Viewer' || state.route.chart === null) {
                     return noUpdate;
                 }
                 const { chart } = state.route;

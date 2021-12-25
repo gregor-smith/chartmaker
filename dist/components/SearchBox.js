@@ -23,8 +23,8 @@ export const SearchBox = ({ dispatch, searchState }) => {
     }
     let errorMessage;
     if (searchState.tag === 'Error') {
-        errorMessage = (_jsx("div", Object.assign({ style: errorStyle }, { children: searchState.message }), void 0));
+        errorMessage = (_jsx("div", { style: errorStyle, children: searchState.message }, void 0));
     }
-    return (_jsx(SidebarGroup, { children: _jsxs(ControlledForm, Object.assign({ onSubmit: sendSearchRequest }, { children: [_jsx(Label, Object.assign({ target: id }, { children: "Search for albums" }), void 0), errorMessage, _jsx(ControlledInput, { id: id, type: 'search', value: searchState.query, onChange: updateQuery, disabled: searchState.tag === 'Loading' }, void 0)] }), void 0) }, void 0));
+    return (_jsx(SidebarGroup, { children: _jsxs(ControlledForm, { onSubmit: sendSearchRequest, children: [_jsx(Label, { target: id, children: "Search for albums" }, void 0), errorMessage, _jsx(ControlledInput, { id: id, type: 'search', value: searchState.query, onChange: updateQuery, disabled: searchState.tag === 'Loading' }, void 0)] }, void 0) }, void 0));
 };
 //# sourceMappingURL=SearchBox.js.map

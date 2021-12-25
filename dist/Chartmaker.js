@@ -8,8 +8,7 @@ import { BACKGROUND_COLOUR, TEXT_COLOUR, FONT_SIZE, CONTAINER_PADDING_SIZE } fro
 import { Editor } from './pages/Editor.js';
 import { Viewer } from './pages/Viewer.js';
 function loadState() {
-    var _a;
-    return (_a = loadStateFromLocalStorage()) !== null && _a !== void 0 ? _a : createInitialState();
+    return loadStateFromLocalStorage() ?? createInitialState();
 }
 const style = {
     display: 'flex',
@@ -22,7 +21,6 @@ const style = {
     padding: CONTAINER_PADDING_SIZE
 };
 export function Chartmaker({ copyLinkComponent, keyInputComponent, ...reducerOptions }) {
-    var _a;
     const chartRef = useRef(null);
     const [state, dispatch] = useSideEffectReducer(loadState, createReducer(reducerOptions));
     useEffect(() => saveStateToLocalStorage(state), [state.activeChartIndex, state.apiKey, state.charts, state.searchState.query]);
@@ -38,9 +36,9 @@ export function Chartmaker({ copyLinkComponent, keyInputComponent, ...reducerOpt
         return () => removeEventListener('popstate', popRoute);
     }, []);
     let page;
-    switch ((_a = state.route) === null || _a === void 0 ? void 0 : _a.tag) {
+    switch (state.route?.tag) {
         case 'Editor':
-            page = (_jsx(Editor, Object.assign({}, state, { dispatch: dispatch, chartRef: chartRef, keyInputComponent: keyInputComponent, copyLinkComponent: copyLinkComponent }), void 0));
+            page = (_jsx(Editor, { ...state, dispatch: dispatch, chartRef: chartRef, keyInputComponent: keyInputComponent, copyLinkComponent: copyLinkComponent }, void 0));
             break;
         case 'Viewer':
             page = (_jsx(Viewer, { dispatch: dispatch, chart: state.route.chart, chartRef: chartRef, highlighted: state.highlightedID, screenshotState: state.screenshotState }, void 0));
@@ -48,6 +46,6 @@ export function Chartmaker({ copyLinkComponent, keyInputComponent, ...reducerOpt
         case undefined:
             page = null;
     }
-    return (_jsx("div", Object.assign({ style: style }, { children: page }), void 0));
+    return (_jsx("div", { style: style, children: page }, void 0));
 }
 //# sourceMappingURL=Chartmaker.js.map

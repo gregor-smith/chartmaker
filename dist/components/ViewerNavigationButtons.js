@@ -10,6 +10,6 @@ export const ViewerNavigationButtons = ({ dispatch, importDisabled }) => {
     if (!importDisabled) {
         editButton = _jsx(ViewerEditButton, { dispatch: dispatch }, void 0);
     }
-    return (_jsxs(SidebarGroup, Object.assign({ style: style }, { children: [_jsx(ViewerBackButton, { dispatch: dispatch }, void 0), editButton] }), void 0));
+    return (_jsxs(SidebarGroup, { style: style, children: [_jsx(ViewerBackButton, { dispatch: dispatch }, void 0), editButton] }, void 0));
 };
 //# sourceMappingURL=ViewerNavigationButtons.js.map

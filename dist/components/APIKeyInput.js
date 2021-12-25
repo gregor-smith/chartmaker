@@ -10,6 +10,6 @@ export const APIKeyInput = ({ dispatch, apiKey }) => {
             apiKey
         });
     }
-    return (_jsxs(SidebarGroup, { children: [_jsx(Label, Object.assign({ target: id }, { children: "Last.fm API key" }), void 0), _jsx(ControlledInput, { id: id, type: 'password', value: apiKey, onChange: updateAPIKey }, void 0)] }, void 0));
+    return (_jsxs(SidebarGroup, { children: [_jsx(Label, { target: id, children: "Last.fm API key" }, void 0), _jsx(ControlledInput, { id: id, type: 'password', value: apiKey, onChange: updateAPIKey }, void 0)] }, void 0));
 };
 //# sourceMappingURL=APIKeyInput.js.map

@@ -11,9 +11,9 @@ const hash = routeToHash(route);
 export const ViewerNavigationLink = ({ dispatch, style, onClick, children }) => {
     function routeToEditor(event) {
         event.preventDefault();
-        onClick === null || onClick === void 0 ? void 0 : onClick();
+        onClick?.();
         dispatch(action);
     }
-    return (_jsx("a", Object.assign({ className: buttonClassName(), style: style, onClick: routeToEditor, href: location.pathname + hash }, { children: children }), void 0));
+    return (_jsx("a", { className: buttonClassName(), style: style, onClick: routeToEditor, href: location.pathname + hash, children: children }, void 0));
 };
 //# sourceMappingURL=ViewerNavigationLink.js.map

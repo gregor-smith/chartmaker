@@ -1,3 +1,4 @@
+import { match, Unknown } from 'runtypes'
 import html2canvas from 'html2canvas'
 import { fromUint8Array as base64FromUint8Array } from 'js-base64'
 import {
@@ -100,18 +101,12 @@ export function createInitialState(): State {
 }
 
 
-export function validateUnknownState(state: unknown): State | null {
-    if (V3ExportState.guard(state)) {
-        return createStateFromV3ExportState(state)
-    }
-    if (V2ExportState.guard(state)) {
-        return createStateFromV2ExportState(state)
-    }
-    if (V1ExportState.guard(state)) {
-        return createStateFromV1ExportState(state)
-    }
-    return null
-}
+export const validateUnknownState: (state: unknown) => State | null = match(
+    [ V3ExportState, createStateFromV3ExportState ],
+    [ V2ExportState, createStateFromV2ExportState ],
+    [ V1ExportState, createStateFromV1ExportState ],
+    [ Unknown, () => null ]
+)
 
 
 function decodeExportAlbums(exportAlbums: UnidentifiedAlbum[]): Album[] {

@@ -4,6 +4,6 @@ export const ViewerEditButton = ({ dispatch }) => {
     function importChart() {
         dispatch({ tag: 'ImportViewerChart' });
     }
-    return (_jsx(ViewerNavigationLink, Object.assign({ dispatch: dispatch, onClick: importChart }, { children: "Edit" }), void 0));
+    return (_jsx(ViewerNavigationLink, { dispatch: dispatch, onClick: importChart, children: "Edit" }, void 0));
 };
 //# sourceMappingURL=ViewerEditButton.js.map

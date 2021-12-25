@@ -4,6 +4,6 @@ export const MoveChartButton = ({ dispatch, direction, disabled, children }) => 
     function moveChart() {
         dispatch({ tag: 'MoveActiveChart', direction });
     }
-    return (_jsx(Button, Object.assign({ disabled: disabled, onClick: moveChart, title: direction }, { children: children }), void 0));
+    return (_jsx(Button, { disabled: disabled, onClick: moveChart, title: direction, children: children }, void 0));
 };
 //# sourceMappingURL=MoveChartButton.js.map

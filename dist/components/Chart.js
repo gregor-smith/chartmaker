@@ -14,5 +14,5 @@ const innerContainerStyle = {
     display: 'flex',
     alignItems: 'flex-start'
 };
-export const Chart = forwardRef(({ name, children }, ref) => _jsxs("main", Object.assign({ ref: ref, style: outContainerStyle }, { children: [_jsx("h1", Object.assign({ style: headerStyle }, { children: name }), void 0), _jsx("div", Object.assign({ style: innerContainerStyle }, { children: children }), void 0)] }), void 0));
+export const Chart = forwardRef(({ name, children }, ref) => _jsxs("main", { ref: ref, style: outContainerStyle, children: [_jsx("h1", { style: headerStyle, children: name }, void 0), _jsx("div", { style: innerContainerStyle, children: children }, void 0)] }, void 0));
 //# sourceMappingURL=Chart.js.map

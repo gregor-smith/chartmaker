@@ -14,6 +14,5 @@ export type AlbumActionButtonProps = {
 }
 
 
-export const AlbumActionButton: FC<AlbumActionButtonProps> = props => {
-    return <button {...props} style={style}/>
-}
+export const AlbumActionButton: FC<AlbumActionButtonProps> = props =>
+    <button {...props} style={style}/>

@@ -5,6 +5,6 @@ export const ControlledInput = ({ onChange, ...props }) => {
         event.preventDefault();
         onChange(event.target.value);
     }
-    return _jsx("input", Object.assign({}, props, { className: inputClassName(), onChange: controlledOnChange }), void 0);
+    return _jsx("input", { ...props, className: inputClassName(), onChange: controlledOnChange }, void 0);
 };
 //# sourceMappingURL=ControlledInput.js.map

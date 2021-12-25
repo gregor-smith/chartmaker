@@ -13,6 +13,6 @@ export const SidebarGroup = ({ children, style }) => {
             marginBottom: CONTAINER_PADDING_SIZE
         }
     });
-    return (_jsx("div", Object.assign({ className: className, style: style }, { children: children }), void 0));
+    return (_jsx("div", { className: className, style: style, children: children }, void 0));
 };
 //# sourceMappingURL=SidebarGroup.js.map

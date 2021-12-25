@@ -6,9 +6,8 @@ import { ChartAlbumCover } from './ChartAlbumCover.js';
 const chartPattern = /^chart-([0-9]+)$/;
 const searchPattern = /^search-([0-9]+)$/;
 function matchDragEventData(event, pattern) {
-    var _a;
     for (const type of event.dataTransfer.types) {
-        const match = (_a = type.match(pattern)) === null || _a === void 0 ? void 0 : _a[1];
+        const match = type.match(pattern)?.[1];
         if (match !== undefined) {
             return Number(match);
         }
@@ -74,6 +73,6 @@ export const EditorChartAlbumCover = ({ dispatch, album, size, highlighted }) =>
         };
         buttons = (_jsxs(_Fragment, { children: [_jsx(RenameAlbumButton, { dispatch: dispatch, id: id }, void 0), _jsx(DeleteAlbumButton, { dispatch: dispatch, id: id }, void 0)] }, void 0));
     }
-    return (_jsx(ChartAlbumCover, Object.assign({ dispatch: dispatch, album: album, size: size, onDragStart: dragStart, onDragOver: dragOver, onDragEnter: dragEnter, onDrop: drop, highlighted: highlighted }, { children: buttons }), void 0));
+    return (_jsx(ChartAlbumCover, { dispatch: dispatch, album: album, size: size, onDragStart: dragStart, onDragOver: dragOver, onDragEnter: dragEnter, onDrop: drop, highlighted: highlighted, children: buttons }, void 0));
 };
 //# sourceMappingURL=EditorChartAlbumCover.js.map

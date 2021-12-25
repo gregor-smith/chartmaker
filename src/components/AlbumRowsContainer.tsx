@@ -19,12 +19,11 @@ export type AlbumRowsContainerProps = DispatchProps
 
 
 export const AlbumRowsContainer: FC<AlbumRowsContainerProps> = ({ dispatch, children }) => {
-    function mouseLeave() {
+    const unhighlightAlbum = () =>
         dispatch({ tag: 'UnhighlightAlbum' })
-    }
 
     return (
-        <div id={id} style={style} onMouseLeave={mouseLeave}>
+        <div id={id} style={style} onMouseLeave={unhighlightAlbum}>
             {children}
         </div>
     )

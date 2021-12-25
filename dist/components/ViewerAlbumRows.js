@@ -8,6 +8,6 @@ export const ViewerAlbumRows = ({ dispatch, rows, highlighted }) => {
         const covers = albums.map(album => _jsx(ChartAlbumCover, { dispatch: dispatch, album: album, highlighted: highlighted, size: size }, getAlbumID(album)));
         return (_jsx(AlbumRow, { children: covers }, index));
     });
-    return (_jsx(AlbumRowsContainer, Object.assign({ dispatch: dispatch }, { children: elements }), void 0));
+    return (_jsx(AlbumRowsContainer, { dispatch: dispatch, children: elements }, void 0));
 };
 //# sourceMappingURL=ViewerAlbumRows.js.map

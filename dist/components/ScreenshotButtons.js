@@ -21,6 +21,6 @@ export const ScreenshotButtons = ({ dispatch, screenshotState: { loading, scale 
             element: chartRef.current
         });
     }
-    return (_jsxs(SidebarGroup, { children: [_jsx(ControlledSlider, Object.assign({ id: sliderID, disabled: loading, value: scale, onChange: updateScreenshotScale, min: ScreenshotScale.alternatives[0].value, max: ScreenshotScale.alternatives[ScreenshotScale.alternatives.length - 1].value, step: 1 }, { children: "Scale" }), void 0), _jsx(Button, Object.assign({ id: buttonID, onClick: takeScreenshot, disabled: loading }, { children: "Screenshot" }), void 0)] }, void 0));
+    return (_jsxs(SidebarGroup, { children: [_jsx(ControlledSlider, { id: sliderID, disabled: loading, value: scale, onChange: updateScreenshotScale, min: ScreenshotScale.alternatives[0].value, max: ScreenshotScale.alternatives[ScreenshotScale.alternatives.length - 1].value, step: 1, children: "Scale" }, void 0), _jsx(Button, { id: buttonID, onClick: takeScreenshot, disabled: loading, children: "Screenshot" }, void 0)] }, void 0));
 };
 //# sourceMappingURL=ScreenshotButtons.js.map

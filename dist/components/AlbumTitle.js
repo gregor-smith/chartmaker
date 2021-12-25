@@ -20,6 +20,6 @@ export const AlbumTitle = ({ dispatch, id, name, highlighted, children }) => {
     if (highlighted !== null && id !== highlighted) {
         className = cx(className, highlightBackgroundClassName());
     }
-    return (_jsxs("div", Object.assign({ className: className, onMouseEnter: mouseEnter }, { children: [_jsx("span", Object.assign({ style: labelStyle }, { children: name }), void 0), children] }), void 0));
+    return (_jsxs("div", { className: className, onMouseEnter: mouseEnter, children: [_jsx("span", { style: labelStyle, children: name }, void 0), children] }, void 0));
 };
 //# sourceMappingURL=AlbumTitle.js.map

@@ -6,6 +6,6 @@ export const ControlledSelect = ({ onChange, ...props }) => {
         const value = Number(event.target.value);
         onChange(value);
     }
-    return _jsx("select", Object.assign({}, props, { className: inputClassName(), onChange: change }), void 0);
+    return _jsx("select", { ...props, className: inputClassName(), onChange: change }, void 0);
 };
 //# sourceMappingURL=ControlledSelect.js.map

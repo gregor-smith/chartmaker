@@ -1,8 +1,5 @@
-import 'bootstrap/scss/bootstrap-reboot.scss'
-import { useRef, useEffect, ComponentType, CSSProperties } from 'react'
-import { useSideEffectReducer } from 'react-use-side-effect-reducer'
+import { useRef, useEffect, ComponentType, CSSProperties, FC, useReducer } from 'react'
 
-import { createReducer, CreateReducerOptions } from './reducer.js'
 import {
     createInitialState,
     loadStateFromLocalStorage,
@@ -17,9 +14,17 @@ import {
 } from './style.js'
 import { Editor } from './pages/Editor.js'
 import { Viewer } from './pages/Viewer.js'
-import type { State } from './types.js'
+import type {
+    AlbumSearcher,
+    AlertShower,
+    ChoiceConfirmer,
+    FileURIGetter,
+    InputPrompter,
+    State
+} from './types.js'
 import type { APIKeyInputProps } from './components/APIKeyInput.js'
 import type { CopyLinkButtonProps } from './components/CopyLinkButton.js'
+import { reducer } from './reducer.js'
 
 
 function loadState(): State {
@@ -39,36 +44,41 @@ const style: CSSProperties = {
 }
 
 
-export type ChartmakerProps = CreateReducerOptions & {
+export type ChartmakerProps = {
     keyInputComponent?: ComponentType<APIKeyInputProps>
     copyLinkComponent?: ComponentType<CopyLinkButtonProps>
+    searchForAlbums?: AlbumSearcher
+    showAlert?: AlertShower
+    confirmChoice?: ChoiceConfirmer
+    promptForInput?: InputPrompter
+    getFileURI?: FileURIGetter
 }
 
 
-export function Chartmaker(
+export const Chartmaker: FC<ChartmakerProps> = (
     {
         copyLinkComponent,
         keyInputComponent,
-        ...reducerOptions
+        searchForAlbums,
+        showAlert,
+        confirmChoice,
+        promptForInput,
+        getFileURI
     }: ChartmakerProps
-): JSX.Element {
+) => {
     const chartRef = useRef<HTMLElement>(null)
-    const [ state, dispatch ] = useSideEffectReducer(
-        loadState,
-        createReducer(reducerOptions)
-    )
+    const [ state, dispatch ] = useReducer(reducer, undefined, loadState)
     useEffect(
         () => saveStateToLocalStorage(state),
         [ state.activeChartIndex, state.apiKey, state.charts, state.searchState.query ]
     )
     useEffect(
         () => {
-            function popRoute() {
+            const popRoute = () =>
                 dispatch({
                     tag: 'PopRoute',
                     route: routeFromHash(location.hash)
                 })
-            }
 
             popRoute()
             addEventListener('popstate', popRoute)

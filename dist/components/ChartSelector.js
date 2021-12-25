@@ -15,7 +15,7 @@ export const ChartSelector = ({ dispatch, charts, activeChartIndex }) => {
             index
         });
     }
-    const options = charts.map((chart, index) => _jsx("option", Object.assign({ value: index }, { children: chart.name }), chart.name));
-    return (_jsxs("div", Object.assign({ style: containerStyle }, { children: [_jsx(Label, Object.assign({ target: id }, { children: "Active chart" }), void 0), _jsx(ControlledSelect, Object.assign({ id: id, value: activeChartIndex, onChange: updateActiveChart }, { children: options }), void 0)] }), void 0));
+    const options = charts.map((chart, index) => _jsx("option", { value: index, children: chart.name }, chart.name));
+    return (_jsxs("div", { style: containerStyle, children: [_jsx(Label, { target: id, children: "Active chart" }, void 0), _jsx(ControlledSelect, { id: id, value: activeChartIndex, onChange: updateActiveChart, children: options }, void 0)] }, void 0));
 };
 //# sourceMappingURL=ChartSelector.js.map

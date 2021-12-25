@@ -1,25 +1,11 @@
-import {
-    Dispatch as Dispatch_,
-    update,
-    sideEffect,
-    noUpdate,
-    updateWithSideEffect,
-    SideEffectReducer
-} from 'react-use-side-effect-reducer'
 import { produce } from 'immer'
+import type { Reducer, Dispatch as Dispatch_ } from 'react'
 
 import {
     createChart,
-    createExportState,
-    validateUnknownState,
     findAlbumIndexWithID,
     getAlbumID,
-    identifiedAlbumIsPlaceholder,
-    routeToHash,
-    elementToDataURI,
-    downloadURI,
-    jsonToDataURI,
-    fileToDataURI
+    identifiedAlbumIsPlaceholder
 } from './utils.js'
 import type {
     State,
@@ -27,14 +13,8 @@ import type {
     Route,
     CollageSize,
     TopSize,
-    ScreenshotScale,
-    AlbumSearcher,
-    AlertShower,
-    ChoiceConfirmer,
-    FileURIGetter,
-    InputPrompter
+    ScreenshotScale
 } from './types.js'
-import { searchLastFM } from './api.js'
 
 
 export type Action =
@@ -42,30 +22,22 @@ export type Action =
     | { tag: 'PushRoute', route: Route, replace: boolean }
     | { tag: 'UpdateAPIKey', apiKey: string }
     | { tag: 'UpdateActiveChart', index: number }
-    | { tag: 'PromptForNewChart' }
     | { tag: 'AddNewChart', name: string }
-    | { tag: 'PromptToRenameActiveChart' }
     | { tag: 'RenameActiveChart', name: string }
-    | { tag: 'PromptToDeleteActiveChart' }
     | { tag: 'DeleteActiveChart' }
     | { tag: 'MoveActiveChart', direction: 'Up' | 'Down' }
-    | { tag: 'LoadStateFile', file: File }
     | { tag: 'LoadState', state: State }
-    | { tag: 'PromptToSaveState' }
     | { tag: 'CancelSearchRequest' }
     | { tag: 'SendSearchRequest' }
     | { tag: 'UpdateSearchState', state: SearchState }
     | { tag: 'UpdateSearchQuery', query: string }
     | { tag: 'DragChartAlbum', sourceID: number, targetID: number }
     | { tag: 'DropSearchAlbum', sourceIndex: number, targetID: number }
-    | { tag: 'PromptToRenameAlbum', id: number }
     | { tag: 'RenameAlbum', id: number, name: string }
     | { tag: 'DeleteAlbum', id: number }
     | { tag: 'UpdateScreenshotLoading', loading: boolean }
     | { tag: 'UpdateScreenshotScale', scale: ScreenshotScale }
-    | { tag: 'TakeScreenshot', element: HTMLElement }
     | { tag: 'UpdateChartShape', shape: CollageSize, size: TopSize | null }
-    | { tag: 'DropExternalFile', file: File, targetID: number }
     | { tag: 'LoadExternalFile', uri: string, name: string, targetID: number }
     | { tag: 'HighlightAlbum', targetID: number }
     | { tag: 'UnhighlightAlbum' }
@@ -78,549 +50,322 @@ export type DispatchProps = {
 }
 
 
-export type CreateReducerOptions = {
-    searchForAlbums?: AlbumSearcher
-    showAlert?: AlertShower
-    confirmChoice?: ChoiceConfirmer
-    promptForInput?: InputPrompter
-    getFileURI?: FileURIGetter
-}
+export const reducer: Reducer<State, Action> = (state, action) => {
+    switch (action.tag) {
+        case 'PopRoute':
+            return {
+                ...state,
+                route: action.route
+            }
 
+        case 'PushRoute': {
+            if (state.route?.tag === action.route.tag) {
+                return state
+            }
+            return {
+                ...state,
+                route: action.route
+            }
+        }
 
-export function createReducer(
-    {
-        searchForAlbums = searchLastFM,
-        showAlert = alert,
-        confirmChoice = confirm,
-        promptForInput = prompt,
-        getFileURI = fileToDataURI
-    }: CreateReducerOptions = {}
-): SideEffectReducer<State, Action> {
-    return (state, action) => {
-        switch (action.tag) {
-            case 'PopRoute':
-                return update({
+        case 'UpdateAPIKey':
+            return {
+                ...state,
+                apiKey: action.apiKey
+            }
+
+        case 'UpdateActiveChart':
+            return {
+                ...state,
+                activeChartIndex: action.index,
+                highlightedID: null
+            }
+
+        case 'AddNewChart': {
+            const chart = createChart(action.name)
+            return produce(state, state => {
+                state.charts.push(chart)
+                state.activeChartIndex = state.charts.length - 1
+                state.highlightedID = null
+            })
+        }
+
+        case 'RenameActiveChart':
+            return produce(state, state => {
+                state.charts[state.activeChartIndex]!.name = action.name
+            })
+
+        case 'DeleteActiveChart': {
+            if (state.charts.length === 1) {
+                return {
                     ...state,
-                    route: action.route
-                })
-
-            case 'PushRoute': {
-                if (state.route?.tag === action.route.tag) {
-                    return noUpdate
+                    charts: [ createChart() ],
+                    activeChartIndex: 0,
+                    highlightedID: null
                 }
-                return updateWithSideEffect<State, Action>(
-                    {
-                        ...state,
-                        route: action.route
-                    },
-                    () => {
-                        const url = location.pathname + routeToHash(action.route)
-                        if (action.replace) {
-                            history.replaceState(null, '', url)
-                        }
-                        else {
-                            history.pushState(null, '', url)
-                        }
-                    }
-                )
+            }
+            return produce(state, state => {
+                state.charts.splice(state.activeChartIndex, 1)
+                state.activeChartIndex = state.activeChartIndex - 1 < 0
+                    ? state.charts.length - 1
+                    : state.activeChartIndex - 1
+                state.highlightedID = null
+            })
+        }
+
+        case 'MoveActiveChart': {
+            if (state.charts.length === 1) {
+                return state
             }
 
-            case 'UpdateAPIKey':
-                return update(
-                    produce(state, state => {
-                        state.apiKey = action.apiKey
-                    })
-                )
-
-            case 'UpdateActiveChart':
-                return update(
-                    produce(state, state => {
-                        state.activeChartIndex = action.index
-                        state.highlightedID = null
-                    })
-                )
-
-            case 'PromptForNewChart':
-                return sideEffect(async (dispatch, state) => {
-                    const activeChart = state.charts[state.activeChartIndex]!
-                    const name = (await promptForInput('Enter new chart name:', activeChart.name))?.trim()
-                    if (name === undefined || name.length === 0) {
-                        return
-                    }
-                    if (state.charts.some(chart => chart.name === name)) {
-                        return showAlert('A chart with that name already exists')
-                    }
-                    dispatch({ tag: 'AddNewChart', name })
-                })
-
-            case 'AddNewChart': {
-                const chart = createChart(action.name)
-                return update(
-                    produce(state, state => {
-                        state.charts.push(chart)
-                        state.activeChartIndex = state.charts.length - 1
-                        state.highlightedID = null
-                    })
-                )
-            }
-
-            case 'PromptToRenameActiveChart':
-                return sideEffect(async (dispatch, state) => {
-                    const activeChart = state.charts[state.activeChartIndex]!
-                    const name = (await promptForInput('Enter new chart name:', activeChart.name))?.trim()
-                    if (name === undefined || name.length === 0) {
-                        return
-                    }
-                    for (let index = 0; index < state.charts.length; index++) {
-                        const chart = state.charts[index]!
-                        if (chart.name === name) {
-                            if (index !== state.activeChartIndex) {
-                                return showAlert('A chart with that name already exists')
-                            }
-                            return
-                        }
-                    }
-                    dispatch({ tag: 'RenameActiveChart', name })
-                })
-
-            case 'RenameActiveChart':
-                return update(
-                    produce(state, state => {
-                        state.charts[state.activeChartIndex]!.name = action.name
-                    })
-                )
-
-            case 'PromptToDeleteActiveChart':
-                return sideEffect(async dispatch => {
-                    if (await confirmChoice('Really delete active chart? This cannot be undone')) {
-                        dispatch({ tag: 'DeleteActiveChart' })
-                    }
-                })
-
-            case 'DeleteActiveChart': {
-                if (state.charts.length === 1) {
-                    return update(
-                        produce(state, state => {
-                            state.charts = [ createChart() ]
-                            state.activeChartIndex = 0
-                            state.highlightedID = null
-                        })
-                    )
+            if (action.direction === 'Up') {
+                if (state.activeChartIndex === 0) {
+                    return state
                 }
-
-                return update(
-                    produce(state, state => {
-                        state.charts.splice(state.activeChartIndex, 1)
-                        state.activeChartIndex = state.activeChartIndex - 1 < 0
-                            ? state.charts.length - 1
-                            : state.activeChartIndex - 1
-                        state.highlightedID = null
-                    })
-                )
-            }
-
-            case 'MoveActiveChart': {
-                if (state.charts.length === 1) {
-                    return noUpdate
-                }
-
-                if (action.direction === 'Up') {
-                    if (state.activeChartIndex === 0) {
-                        return noUpdate
-                    }
-                    return update(
-                        produce(state, state => {
-                            const temp = state.charts[state.activeChartIndex - 1]!
-                            state.charts[state.activeChartIndex - 1] = state.charts[state.activeChartIndex]!
-                            state.charts[state.activeChartIndex] = temp
-                            state.activeChartIndex--
-                        })
-                    )
-                }
-
-                if (state.activeChartIndex === state.charts.length - 1) {
-                    return noUpdate
-                }
-
-                return update(
-                    produce(state, state => {
-                        const temp = state.charts[state.activeChartIndex + 1]!
-                        state.charts[state.activeChartIndex + 1] = state.charts[state.activeChartIndex]!
-                        state.charts[state.activeChartIndex] = temp
-                        state.activeChartIndex++
-                    })
-                )
-            }
-
-            case 'LoadStateFile':
-                return sideEffect(async dispatch => {
-                    let parsed: unknown
-                    try {
-                        const json = await action.file.text()
-                        parsed = JSON.parse(json)
-                    }
-                    catch {
-                        return showAlert('Selected file is invalid')
-                    }
-                    const state = validateUnknownState(parsed)
-                    if (state === null) {
-                        return showAlert('Selected file is invalid')
-                    }
-                    dispatch({ tag: 'LoadState', state })
-                })
-
-            case 'LoadState': {
-                if (state.route?.tag !== 'Editor') {
-                    return noUpdate
-                }
-                return update({
-                    ...action.state,
-                    route: state.route
+                return produce(state, state => {
+                    const temp = state.charts[state.activeChartIndex - 1]!
+                    state.charts[state.activeChartIndex - 1] = state.charts[state.activeChartIndex]!
+                    state.charts[state.activeChartIndex] = temp
+                    state.activeChartIndex--
                 })
             }
 
-            case 'PromptToSaveState':
-                return sideEffect((_dispatch, state) => {
-                    const json = JSON.stringify(createExportState(state))
-                    const uri = jsonToDataURI(json)
-                    downloadURI(uri, 'state.json')
-                })
-
-            case 'CancelSearchRequest': {
-                if (state.searchState.tag !== 'Loading') {
-                    return noUpdate
-                }
-                const controller = state.searchState.controller
-                return updateWithSideEffect<State, Action>(
-                    produce(state, state => {
-                        state.searchState = {
-                            tag: 'Waiting',
-                            query: state.searchState.query
-                        }
-                    }),
-                    () => controller.abort()
-                )
+            if (state.activeChartIndex === state.charts.length - 1) {
+                return state
             }
 
-            case 'SendSearchRequest': {
-                if (state.searchState.tag === 'Loading'
-                        || state.searchState.query.trim().length === 0) {
-                    return noUpdate
+            return produce(state, state => {
+                const temp = state.charts[state.activeChartIndex + 1]!
+                state.charts[state.activeChartIndex + 1] = state.charts[state.activeChartIndex]!
+                state.charts[state.activeChartIndex] = temp
+                state.activeChartIndex++
+            })
+        }
+
+        case 'LoadState': {
+            if (state.route?.tag !== 'Editor') {
+                return state
+            }
+            return {
+                ...action.state,
+                route: state.route
+            }
+        }
+
+        case 'CancelSearchRequest': {
+            if (state.searchState.tag !== 'Loading') {
+                return state
+            }
+            return {
+                ...state,
+                searchState: {
+                    tag: 'Waiting',
+                    query: state.searchState.query
                 }
+            }
+        }
 
-                if (state.apiKey.trim().length === 0) {
-                    return update(
-                        produce(state, state => {
-                            state.searchState = {
-                                tag: 'Error',
-                                query: state.searchState.query,
-                                message: 'API key required'
-                            }
-                        })
-                    )
-                }
-
-                const controller = new AbortController()
-                return updateWithSideEffect<State, Action>(
-                    produce(state, state => {
-                        state.searchState = {
-                            tag: 'Loading',
-                            query: state.searchState.query,
-                            controller
-                        }
-                    }),
-                    async (dispatch, state) => {
-                        const result = await searchForAlbums({
-                            key: state.apiKey,
-                            query: state.searchState.query,
-                            signal: controller.signal
-                        })
-                        switch (result.tag) {
-                            case 'Ok': {
-                                dispatch({
-                                    tag: 'LoadState',
-                                    state: produce(state, state => {
-                                        state.searchState = {
-                                            tag: 'Complete',
-                                            query: state.searchState.query,
-                                            albums: result.albums
-                                        }
-                                    })
-                                })
-                                break
-                            }
-                            case 'Error':
-                                dispatch({
-                                    tag: 'UpdateSearchState',
-                                    state: {
-                                        tag: 'Error',
-                                        query: state.searchState.query,
-                                        message: result.message
-                                    }
-                                })
-
-                            // 'Aborted' is not handled because the only time the
-                            // request is aborted is when another is sent, in
-                            // which case the search state is updated to 'Loading'
-                            // anyway
-                        }
-                    }
-                )
+        case 'SendSearchRequest': {
+            if (state.searchState.tag === 'Loading'
+                    || state.searchState.query.trim().length === 0) {
+                return state
             }
 
-            case 'UpdateSearchState':
-                return update(
-                    produce(state, state => {
-                        state.searchState = action.state
-                    })
-                )
-
-            case 'UpdateSearchQuery': {
-                if (state.searchState.tag === 'Loading') {
-                    return noUpdate
-                }
-                return update(
-                    produce(state, state => {
-                        state.searchState.query = action.query
-                    })
-                )
-            }
-
-            case 'DragChartAlbum': {
-                if (action.sourceID === action.targetID) {
-                    return noUpdate
-                }
-
-                const activeChart = state.charts[state.activeChartIndex]!
-
-                let sourceIndex: number | undefined
-                let targetIndex: number | undefined
-                for (let index = 0; index < activeChart.albums.length; index++) {
-                    const album = activeChart.albums[index]!
-                    const id = getAlbumID(album)
-                    if (id === action.sourceID) {
-                        sourceIndex = index
-                    }
-                    else if (id === action.targetID) {
-                        targetIndex = index
+            if (state.apiKey.trim().length === 0) {
+                return {
+                    ...state,
+                    searchState: {
+                        tag: 'Error',
+                        query: state.searchState.query,
+                        message: 'API key required'
                     }
                 }
-                if (sourceIndex === undefined || targetIndex === undefined) {
-                    return noUpdate
-                }
-
-                return update(
-                    produce(state, state => {
-                        const albums = state.charts[state.activeChartIndex]!.albums
-                        const source = albums[sourceIndex!]!
-                        if (sourceIndex! < targetIndex!) {
-                            for (let index = sourceIndex!; index < targetIndex!; index++) {
-                                albums[index] = albums[index + 1]!
-                            }
-                        }
-                        else {
-                            for (let index = sourceIndex!; index > targetIndex!; index--) {
-                                albums[index] = albums[index - 1]!
-                            }
-                        }
-                        albums[targetIndex!] = source
-                    })
-                )
             }
 
-            case 'DropSearchAlbum': {
-                if (state.searchState.tag !== 'Complete') {
-                    return noUpdate
+            return {
+                ...state,
+                searchState: {
+                    tag: 'Loading',
+                    query: state.searchState.query
                 }
+            }
+        }
 
-                const source = state.searchState.albums[action.sourceIndex]
-                if (source === undefined) {
-                    return noUpdate
+        case 'UpdateSearchState':
+            return {
+                ...state,
+                searchState: action.state
+            }
+
+        case 'UpdateSearchQuery': {
+            if (state.searchState.tag === 'Loading') {
+                return state
+            }
+            return produce(state, state => {
+                state.searchState.query = action.query
+            })
+        }
+
+        case 'DragChartAlbum': {
+            if (action.sourceID === action.targetID) {
+                return state
+            }
+
+            const activeChart = state.charts[state.activeChartIndex]!
+
+            let sourceIndex: number | undefined
+            let targetIndex: number | undefined
+            for (let index = 0; index < activeChart.albums.length; index++) {
+                const album = activeChart.albums[index]!
+                const id = getAlbumID(album)
+                if (id === action.sourceID) {
+                    sourceIndex = index
                 }
+                else if (id === action.targetID) {
+                    targetIndex = index
+                }
+            }
+            if (sourceIndex === undefined || targetIndex === undefined) {
+                return state
+            }
 
+            return produce(state, state => {
+                const albums = state.charts[state.activeChartIndex]!.albums
+                const source = albums[sourceIndex!]!
+                if (sourceIndex! < targetIndex!) {
+                    for (let index = sourceIndex!; index < targetIndex!; index++) {
+                        albums[index] = albums[index + 1]!
+                    }
+                }
+                else {
+                    for (let index = sourceIndex!; index > targetIndex!; index--) {
+                        albums[index] = albums[index - 1]!
+                    }
+                }
+                albums[targetIndex!] = source
+            })
+        }
+
+        case 'DropSearchAlbum': {
+            if (state.searchState.tag !== 'Complete') {
+                return state
+            }
+
+            const source = state.searchState.albums[action.sourceIndex]
+            if (source === undefined) {
+                return state
+            }
+
+            const chart = state.charts[state.activeChartIndex]!
+
+            const targetIndex = findAlbumIndexWithID(chart.albums, action.targetID)
+            if (targetIndex === null) {
+                return state
+            }
+            const id = getAlbumID(chart.albums[targetIndex]!)
+
+            return produce(state, state => {
+                state.charts[state.activeChartIndex]!.albums[targetIndex] = {
+                    ...source,
+                    id
+                }
+            })
+        }
+
+        case 'RenameAlbum': {
+            const chart = state.charts[state.activeChartIndex]!
+
+            const index = findAlbumIndexWithID(chart.albums, action.id)
+            if (index === null) {
+                return state
+            }
+
+            const album = chart.albums[index]!
+            if (identifiedAlbumIsPlaceholder(album)) {
+                return state
+            }
+
+            return produce(state, state => {
                 const chart = state.charts[state.activeChartIndex]!
-
-                const targetIndex = findAlbumIndexWithID(chart.albums, action.targetID)
-                if (targetIndex === null) {
-                    return noUpdate
-                }
-                const id = getAlbumID(chart.albums[targetIndex]!)
-
-                return update(
-                    produce(state, state => {
-                        state.charts[state.activeChartIndex]!.albums[targetIndex] = {
-                            ...source,
-                            id
-                        }
-                    })
-                )
-            }
-
-            case 'PromptToRenameAlbum':
-                return sideEffect(async (dispatch, state) => {
-                    const album = state.charts[state.activeChartIndex]!
-                        .albums
-                        .find(album => getAlbumID(album) === action.id)
-                    if (album === undefined || identifiedAlbumIsPlaceholder(album)) {
-                        return
-                    }
-
-                    const name = (await promptForInput('Enter new album name:', album.name))?.trim()
-                    if (name === undefined || name.length === 0) {
-                        return
-                    }
-                    dispatch({
-                        tag: 'RenameAlbum',
-                        id: action.id,
-                        name
-                    })
+                chart.albums[index] = produce(album, album => {
+                    album.name = action.name
                 })
+            })
+        }
 
-            case 'RenameAlbum': {
+        case 'DeleteAlbum': {
+            const index = findAlbumIndexWithID(
+                state.charts[state.activeChartIndex]!.albums,
+                action.id
+            )
+            if (index === null) {
+                return state
+            }
+            return produce(state, state => {
+                state.charts[state.activeChartIndex]!.albums[index] = action.id
+            })
+        }
+
+        case 'UpdateScreenshotLoading':
+            return produce(state, state => {
+                state.screenshotState.loading = action.loading
+            })
+
+        case 'UpdateScreenshotScale':
+            return produce(state, state => {
+                state.screenshotState.scale = action.scale
+            })
+
+        case 'UpdateChartShape':
+            return produce(state, state => {
                 const chart = state.charts[state.activeChartIndex]!
+                chart.shape = action.shape
+                chart.size = action.size
+            })
 
-                const index = findAlbumIndexWithID(chart.albums, action.id)
-                if (index === null) {
-                    return noUpdate
+        case 'LoadExternalFile': {
+            const targetIndex = findAlbumIndexWithID(
+                state.charts[state.activeChartIndex]!.albums,
+                action.targetID
+            )
+            if (targetIndex === null) {
+                return state
+            }
+            return produce(state, state => {
+                state.charts[state.activeChartIndex]!.albums[targetIndex] = {
+                    id: action.targetID,
+                    name: action.name,
+                    url: action.uri
                 }
+            })
+        }
 
-                const album = chart.albums[index]!
-                if (identifiedAlbumIsPlaceholder(album)) {
-                    return noUpdate
-                }
+        case 'HighlightAlbum': {
+            const target = state.charts[state.activeChartIndex]!.albums.find(album =>
+                !identifiedAlbumIsPlaceholder(album) && album.id === action.targetID
+            )
+            return {
+                ...state,
+                highlightedID: target === undefined ? null : action.targetID
+            }
+        }
 
-                return update(
-                    produce(state, state => {
-                        const chart = state.charts[state.activeChartIndex]!
-                        chart.albums[index] = produce(album, album => {
-                            album.name = action.name
-                        })
-                    })
-                )
+        case 'UnhighlightAlbum':
+            return {
+                ...state,
+                highlightedID: null
             }
 
-            case 'DeleteAlbum': {
-                const index = findAlbumIndexWithID(
-                    state.charts[state.activeChartIndex]!.albums,
-                    action.id
-                )
-                if (index === null) {
-                    return noUpdate
-                }
-                return update(
-                    produce(state, state => {
-                        state.charts[state.activeChartIndex]!.albums[index] = action.id
-                    })
-                )
+        case 'ImportViewerChart': {
+            if (state.route?.tag !== 'Viewer' || state.route.chart === null) {
+                return state
             }
-
-            case 'UpdateScreenshotLoading':
-                return update(
-                    produce(state, state => {
-                        state.screenshotState.loading = action.loading
-                    })
-                )
-
-            case 'UpdateScreenshotScale':
-                return update(
-                    produce(state, state => {
-                        state.screenshotState.scale = action.scale
-                    })
-                )
-
-            case 'TakeScreenshot': {
-                if (state.screenshotState.loading) {
-                    return noUpdate
-                }
-                return updateWithSideEffect<State, Action>(
-                    produce(state, state => {
-                        state.screenshotState.loading = true
-                    }),
-                    async (dispatch, state) => {
-                        const uri = await elementToDataURI(
-                            action.element,
-                            state.screenshotState.scale
-                        )
-                        downloadURI(uri, 'chart.png')
-                        dispatch({
-                            tag: 'UpdateScreenshotLoading',
-                            loading: false
-                        })
-                    }
-                )
-            }
-
-            case 'UpdateChartShape':
-                return update(
-                    produce(state, state => {
-                        const chart = state.charts[state.activeChartIndex]!
-                        chart.shape = action.shape
-                        chart.size = action.size
-                    })
-                )
-
-            case 'DropExternalFile':
-                return sideEffect(async dispatch =>
-                    dispatch({
-                        tag: 'LoadExternalFile',
-                        targetID: action.targetID,
-                        uri: await getFileURI(action.file),
-                        name: action.file.name
-                    })
-                )
-
-            case 'LoadExternalFile': {
-                const targetIndex = findAlbumIndexWithID(
-                    state.charts[state.activeChartIndex]!.albums,
-                    action.targetID
-                )
-                if (targetIndex === null) {
-                    return noUpdate
-                }
-                return update(
-                    produce(state, state => {
-                        state.charts[state.activeChartIndex]!.albums[targetIndex] = {
-                            id: action.targetID,
-                            name: action.name,
-                            url: action.uri
-                        }
-                    })
-                )
-            }
-
-            case 'HighlightAlbum': {
-                const target = state.charts[state.activeChartIndex]!.albums.find(album =>
-                    !identifiedAlbumIsPlaceholder(album) && album.id === action.targetID
-                )
-                return update(
-                    produce(state, state => {
-                        state.highlightedID = target === undefined
-                            ? null
-                            : action.targetID
-                    })
-                )
-            }
-
-            case 'UnhighlightAlbum':
-                return update(
-                    produce(state, state => {
-                        state.highlightedID = null
-                    })
-                )
-
-            case 'ImportViewerChart': {
-                if (state.route?.tag !== 'Viewer' || state.route.chart === null) {
-                    return noUpdate
-                }
-                const { chart } = state.route
-                return update(
-                    produce(state, state => {
-                        state.charts.push(chart)
-                        state.activeChartIndex = state.charts.length - 1
-                        state.highlightedID = null
-                    })
-                )
-            }
+            const { chart } = state.route
+            return produce(state, state => {
+                state.charts.push(chart)
+                state.activeChartIndex = state.charts.length - 1
+                state.highlightedID = null
+            })
         }
     }
 }
