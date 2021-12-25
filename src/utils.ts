@@ -4,6 +4,7 @@ import {
     compressToEncodedURIComponent,
     decompressFromEncodedURIComponent
 } from 'lz-string'
+import { match, Unknown, when } from 'runtypes'
 
 import {
     DEFAULT_CHART_NAME,
@@ -100,18 +101,12 @@ export function createInitialState(): State {
 }
 
 
-export function validateUnknownState(state: unknown): State | null {
-    if (V3ExportState.guard(state)) {
-        return createStateFromV3ExportState(state)
-    }
-    if (V2ExportState.guard(state)) {
-        return createStateFromV2ExportState(state)
-    }
-    if (V1ExportState.guard(state)) {
-        return createStateFromV1ExportState(state)
-    }
-    return null
-}
+export const validateUnknownState = match(
+    when(V3ExportState, createStateFromV3ExportState),
+    when(V2ExportState, createStateFromV2ExportState),
+    when(V1ExportState, createStateFromV1ExportState),
+    when(Unknown, () => null)
+)
 
 
 function decodeExportAlbums(exportAlbums: UnidentifiedAlbum[]): Album[] {
