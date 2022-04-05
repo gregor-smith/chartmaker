@@ -1,55 +1,55 @@
-import { String as String_, Number as Number_, Array as Array_, Record as Record_, Static, Literal, Boolean as Boolean_ } from 'runtypes';
-export declare const CollageDimension: import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>;
-declare const CollageSize: import("runtypes").Tuple2<import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>, import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>>;
-declare const TopSize: import("runtypes").Union3<Literal<40>, Literal<42>, Literal<100>>;
+import { String as String_, Number as Number_, Array as Array_, Record as Record_, Static, Union, Literal, Tuple, Boolean as Boolean_ } from 'runtypes';
+export declare const CollageDimension: Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>;
+declare const CollageSize: Tuple<[Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>, Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>]>;
+declare const TopSize: Union<[Literal<40>, Literal<42>, Literal<100>]>;
 declare const UnidentifiedNamedAlbum: Record_<{
     name: import("runtypes").Constraint<String_, string, unknown>;
     url: import("runtypes").Constraint<String_, string, unknown>;
 }, false>;
-declare const UnidentifiedAlbum: import("runtypes").Union2<Record_<{
+declare const UnidentifiedAlbum: Union<[Record_<{
     name: import("runtypes").Constraint<String_, string, unknown>;
     url: import("runtypes").Constraint<String_, string, unknown>;
-}, false>, Literal<null>>;
-declare const NamedAlbum: import("runtypes").Intersect2<Record_<{
-    name: import("runtypes").Constraint<String_, string, unknown>;
-    url: import("runtypes").Constraint<String_, string, unknown>;
-}, false>, Record_<{
-    id: import("runtypes").Constraint<Number_, number, unknown>;
-}, false>>;
-declare const Album: import("runtypes").Union2<import("runtypes").Intersect2<Record_<{
+}, false>, Literal<null>]>;
+declare const NamedAlbum: import("runtypes").Intersect<[Record_<{
     name: import("runtypes").Constraint<String_, string, unknown>;
     url: import("runtypes").Constraint<String_, string, unknown>;
 }, false>, Record_<{
     id: import("runtypes").Constraint<Number_, number, unknown>;
-}, false>>, import("runtypes").Constraint<Number_, number, unknown>>;
+}, false>]>;
+declare const Album: Union<[import("runtypes").Intersect<[Record_<{
+    name: import("runtypes").Constraint<String_, string, unknown>;
+    url: import("runtypes").Constraint<String_, string, unknown>;
+}, false>, Record_<{
+    id: import("runtypes").Constraint<Number_, number, unknown>;
+}, false>]>, import("runtypes").Constraint<Number_, number, unknown>]>;
 declare const Chart: Record_<{
     name: import("runtypes").Constraint<String_, string, unknown>;
-    shape: import("runtypes").Tuple2<import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>, import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>>;
-    size: import("runtypes").Union2<import("runtypes").Union3<Literal<40>, Literal<42>, Literal<100>>, Literal<null>>;
-    albums: import("runtypes").Constraint<Array_<import("runtypes").Union2<import("runtypes").Intersect2<Record_<{
+    shape: Tuple<[Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>, Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>]>;
+    size: Union<[Union<[Literal<40>, Literal<42>, Literal<100>]>, Literal<null>]>;
+    albums: import("runtypes").Constraint<Array_<Union<[import("runtypes").Intersect<[Record_<{
         name: import("runtypes").Constraint<String_, string, unknown>;
         url: import("runtypes").Constraint<String_, string, unknown>;
     }, false>, Record_<{
         id: import("runtypes").Constraint<Number_, number, unknown>;
-    }, false>>, import("runtypes").Constraint<Number_, number, unknown>>, false>, (number | ({
-        name: string;
+    }, false>]>, import("runtypes").Constraint<Number_, number, unknown>]>, false>, (number | ({
         url: string;
+        name: string;
     } & {
         id: number;
     }))[], unknown>;
 }, false>;
 export declare const ViewerChart: Record_<{
     name: import("runtypes").Constraint<String_, string, unknown>;
-    albums: Array_<import("runtypes").Union2<Record_<{
+    albums: Array_<Union<[Record_<{
         name: import("runtypes").Constraint<String_, string, unknown>;
         url: import("runtypes").Constraint<String_, string, unknown>;
-    }, false>, Literal<null>>, false>;
-    size: import("runtypes").Union2<import("runtypes").Tuple2<import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>, import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>>, import("runtypes").Union3<Literal<40>, Literal<42>, Literal<100>>>;
+    }, false>, Literal<null>]>, false>;
+    size: Union<[Tuple<[Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>, Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>]>, Union<[Literal<40>, Literal<42>, Literal<100>]>]>;
 }, false>;
-export declare const ScreenshotScale: import("runtypes").Union3<Literal<1>, Literal<2>, Literal<3>>;
+export declare const ScreenshotScale: Union<[Literal<1>, Literal<2>, Literal<3>]>;
 declare const ScreenshotState: Record_<{
     loading: Boolean_;
-    scale: import("runtypes").Union3<Literal<1>, Literal<2>, Literal<3>>;
+    scale: Union<[Literal<1>, Literal<2>, Literal<3>]>;
 }, false>;
 export declare const V1State: Record_<{
     apiKey: String_;
@@ -60,98 +60,98 @@ export declare const V1State: Record_<{
     }, false>;
     screenshot: Record_<{
         loading: Boolean_;
-        scale: import("runtypes").Union3<Literal<1>, Literal<2>, Literal<3>>;
+        scale: Union<[Literal<1>, Literal<2>, Literal<3>]>;
     }, false>;
     charts: import("runtypes").Constraint<Array_<Record_<{
         name: import("runtypes").Constraint<String_, string, unknown>;
-        rowsX: import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>;
-        rowsY: import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>;
-        shape: import("runtypes").Union2<Record_<{
+        rowsX: Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>;
+        rowsY: Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>;
+        shape: Union<[Record_<{
             tag: Literal<"Top">;
-            size: import("runtypes").Union3<Literal<40>, Literal<42>, Literal<100>>;
+            size: Union<[Literal<40>, Literal<42>, Literal<100>]>;
         }, false>, Record_<{
             tag: Literal<"Collage">;
-        }, false>>;
-        albums: import("runtypes").Constraint<Array_<import("runtypes").Union2<import("runtypes").Intersect2<Record_<{
+        }, false>]>;
+        albums: import("runtypes").Constraint<Array_<Union<[import("runtypes").Intersect<[Record_<{
             name: import("runtypes").Constraint<String_, string, unknown>;
             url: import("runtypes").Constraint<String_, string, unknown>;
         }, false>, Record_<{
             placeholder: Literal<false>;
             id: import("runtypes").Constraint<Number_, number, unknown>;
-        }, false>>, Record_<{
+        }, false>]>, Record_<{
             placeholder: Literal<true>;
             id: import("runtypes").Constraint<Number_, number, unknown>;
-        }, false>>, false>, (({
-            name: string;
+        }, false>]>, false>, (({
             url: string;
+            name: string;
         } & {
+            id: number;
             placeholder: false;
-            id: number;
         }) | {
-            placeholder: true;
             id: number;
+            placeholder: true;
         })[], unknown>;
     }, false>, false>, {
         name: string;
-        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         shape: {
-            tag: "Top";
             size: 40 | 42 | 100;
+            tag: "Top";
         } | {
             tag: "Collage";
         };
+        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         albums: (({
-            name: string;
             url: string;
+            name: string;
         } & {
+            id: number;
             placeholder: false;
-            id: number;
         }) | {
-            placeholder: true;
             id: number;
+            placeholder: true;
         })[];
     }[], unknown>;
 }, false>;
 export declare const V2State: Record_<{
     version: Literal<2>;
     charts: import("runtypes").Constraint<Array_<Record_<{
-        albums: import("runtypes").Constraint<Array_<import("runtypes").Union2<import("runtypes").Intersect2<Record_<{
+        albums: import("runtypes").Constraint<Array_<Union<[import("runtypes").Intersect<[Record_<{
             name: import("runtypes").Constraint<String_, string, unknown>;
             url: import("runtypes").Constraint<String_, string, unknown>;
         }, false>, Record_<{
             id: import("runtypes").Constraint<Number_, number, unknown>;
-        }, false>>, import("runtypes").Constraint<Number_, number, unknown>>, false>, (number | ({
-            name: string;
+        }, false>]>, import("runtypes").Constraint<Number_, number, unknown>]>, false>, (number | ({
             url: string;
+            name: string;
         } & {
             id: number;
         }))[], unknown>;
         name: import("runtypes").Constraint<String_, string, unknown>;
-        rowsX: import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>;
-        rowsY: import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>;
-        shape: import("runtypes").Union2<Record_<{
+        rowsX: Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>;
+        rowsY: Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>;
+        shape: Union<[Record_<{
             tag: Literal<"Top">;
-            size: import("runtypes").Union3<Literal<40>, Literal<42>, Literal<100>>;
+            size: Union<[Literal<40>, Literal<42>, Literal<100>]>;
         }, false>, Record_<{
             tag: Literal<"Collage">;
-        }, false>>;
+        }, false>]>;
     }, false>, false>, {
-        albums: (number | ({
-            name: string;
-            url: string;
-        } & {
-            id: number;
-        }))[];
         name: string;
-        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
-        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
         shape: {
-            tag: "Top";
             size: 40 | 42 | 100;
+            tag: "Top";
         } | {
             tag: "Collage";
         };
+        rowsX: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        rowsY: 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+        albums: (number | ({
+            url: string;
+            name: string;
+        } & {
+            id: number;
+        }))[];
     }[], unknown>;
     apiKey: String_;
     activeChartIndex: import("runtypes").Constraint<Number_, number, unknown>;
@@ -161,7 +161,7 @@ export declare const V2State: Record_<{
     }, false>;
     screenshot: Record_<{
         loading: Boolean_;
-        scale: import("runtypes").Union3<Literal<1>, Literal<2>, Literal<3>>;
+        scale: Union<[Literal<1>, Literal<2>, Literal<3>]>;
     }, false>;
 }, false>;
 export declare const ExportState: Record_<{
@@ -170,21 +170,21 @@ export declare const ExportState: Record_<{
     apiKey: String_;
     search: String_;
     charts: import("runtypes").Constraint<Array_<Record_<{
-        albums: Array_<import("runtypes").Union2<Record_<{
+        albums: Array_<Union<[Record_<{
             name: import("runtypes").Constraint<String_, string, unknown>;
             url: import("runtypes").Constraint<String_, string, unknown>;
-        }, false>, Literal<null>>, false>;
+        }, false>, Literal<null>]>, false>;
         name: import("runtypes").Constraint<String_, string, unknown>;
-        shape: import("runtypes").Tuple2<import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>, import("runtypes").Union10<Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>>>;
-        size: import("runtypes").Union2<import("runtypes").Union3<Literal<40>, Literal<42>, Literal<100>>, Literal<null>>;
+        shape: Tuple<[Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>, Union<[Literal<1>, Literal<2>, Literal<3>, Literal<4>, Literal<5>, Literal<6>, Literal<7>, Literal<8>, Literal<9>, Literal<10>]>]>;
+        size: Union<[Union<[Literal<40>, Literal<42>, Literal<100>]>, Literal<null>]>;
     }, false>, false>, {
-        albums: ({
-            name: string;
-            url: string;
-        } | null)[];
         name: string;
-        shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
         size: 40 | 42 | 100 | null;
+        shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
+        albums: ({
+            url: string;
+            name: string;
+        } | null)[];
     }[], unknown>;
 }, false>;
 export declare type State = {

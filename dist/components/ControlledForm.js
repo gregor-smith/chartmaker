@@ -4,6 +4,6 @@ export const ControlledForm = ({ children, onSubmit }) => {
         event.preventDefault();
         onSubmit();
     }
-    return (_jsx("form", Object.assign({ onSubmit: submit }, { children: children }), void 0));
+    return (_jsx("form", { onSubmit: submit, children: children }));
 };
 //# sourceMappingURL=ControlledForm.js.map

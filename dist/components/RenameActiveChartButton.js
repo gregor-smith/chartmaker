@@ -8,6 +8,6 @@ export const RenameActiveChartButton = ({ dispatch }) => {
     function renameActiveChart() {
         dispatch({ tag: 'PromptToRenameActiveChart' });
     }
-    return (_jsx(Button, Object.assign({ style: style, onClick: renameActiveChart }, { children: "Rename" }), void 0));
+    return (_jsx(Button, { style: style, onClick: renameActiveChart, children: "Rename" }));
 };
 //# sourceMappingURL=RenameActiveChartButton.js.map

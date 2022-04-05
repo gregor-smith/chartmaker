@@ -20,8 +20,8 @@ export const AlbumCover = ({ album, size, onDragStart, onDragEnter, onDragOver, 
     if (!unidentifiedAlbumIsPlaceholder(album)) {
         image = (
         // lazy loading causes problems with html2canvas so keep it default
-        _jsx("img", { style: imageStyle, src: album.url, alt: album.name, crossOrigin: 'anonymous' }, void 0));
-        children = (_jsx("div", Object.assign({ style: { ...baseOverlayStyle, ...overlayStyle } }, { children: children }), void 0));
+        _jsx("img", { style: imageStyle, src: album.url, alt: album.name, crossOrigin: 'anonymous' }));
+        children = (_jsx("div", { style: { ...baseOverlayStyle, ...overlayStyle }, children: children }));
     }
     const className = cx(css({
         position: 'relative',
@@ -36,6 +36,6 @@ export const AlbumCover = ({ album, size, onDragStart, onDragEnter, onDragOver, 
     }), highlighted === false
         ? highlightBackgroundClassName()
         : undefined);
-    return (_jsxs("div", Object.assign({ className: className, draggable: !unidentifiedAlbumIsPlaceholder(album), onDragStart: onDragStart, onDragEnter: onDragEnter, onDragOver: onDragOver, onDrop: onDrop, onMouseEnter: onMouseEnter, title: album === null || album === void 0 ? void 0 : album.name }, { children: [image, children] }), void 0));
+    return (_jsxs("div", { className: className, draggable: !unidentifiedAlbumIsPlaceholder(album), onDragStart: onDragStart, onDragEnter: onDragEnter, onDragOver: onDragOver, onDrop: onDrop, onMouseEnter: onMouseEnter, title: album === null || album === void 0 ? void 0 : album.name, children: [image, children] }));
 };
 //# sourceMappingURL=AlbumCover.js.map

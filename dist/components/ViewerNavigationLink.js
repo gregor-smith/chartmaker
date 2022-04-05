@@ -14,6 +14,6 @@ export const ViewerNavigationLink = ({ dispatch, style, onClick, children }) => 
         onClick === null || onClick === void 0 ? void 0 : onClick();
         dispatch(action);
     }
-    return (_jsx("a", Object.assign({ className: buttonClassName(), style: style, onClick: routeToEditor, href: location.pathname + hash }, { children: children }), void 0));
+    return (_jsx("a", { className: buttonClassName(), style: style, onClick: routeToEditor, href: location.pathname + hash, children: children }));
 };
 //# sourceMappingURL=ViewerNavigationLink.js.map

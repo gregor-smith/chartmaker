@@ -11,6 +11,6 @@ const groupStyle = {
 };
 export const SearchResults = ({ albums }) => {
     const albumCovers = albums.map((album, index) => _jsx(SearchAlbumCover, { album: album, index: index }, index));
-    return (_jsx(SidebarGroup, Object.assign({ style: groupStyle }, { children: _jsx("div", Object.assign({ style: containerStyle }, { children: albumCovers }), void 0) }), void 0));
+    return (_jsx(SidebarGroup, { style: groupStyle, children: _jsx("div", { style: containerStyle, children: albumCovers }) }));
 };
 //# sourceMappingURL=SearchResults.js.map

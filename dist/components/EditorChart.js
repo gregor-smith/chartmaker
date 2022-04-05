@@ -6,6 +6,6 @@ import { EditorAlbumRows } from './EditorAlbumRows.js';
 import { EditorAlbumTitles } from './EditorAlbumTitles.js';
 export const EditorChart = forwardRef(({ dispatch, albums, highlighted, name, shape, size }, ref) => {
     const [rows, groups] = splitAlbumsAccordingToShape(albums, shape, size);
-    return (_jsxs(Chart, Object.assign({ ref: ref, name: name }, { children: [_jsx(EditorAlbumRows, { dispatch: dispatch, rows: rows, highlighted: highlighted }, void 0), _jsx(EditorAlbumTitles, { dispatch: dispatch, groups: groups, highlighted: highlighted }, void 0)] }), void 0));
+    return (_jsxs(Chart, { ref: ref, name: name, children: [_jsx(EditorAlbumRows, { dispatch: dispatch, rows: rows, highlighted: highlighted }), _jsx(EditorAlbumTitles, { dispatch: dispatch, groups: groups, highlighted: highlighted })] }));
 });
 //# sourceMappingURL=EditorChart.js.map

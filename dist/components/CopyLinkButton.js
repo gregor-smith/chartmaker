@@ -6,6 +6,6 @@ export const CopyLinkButton = ({ chart }) => {
         const hash = routeToHash({ tag: 'Viewer', chart });
         navigator.clipboard.writeText(location.origin + location.pathname + hash);
     }
-    return (_jsx(Button, Object.assign({ onClick: copyLink }, { children: "Copy link" }), void 0));
+    return (_jsx(Button, { onClick: copyLink, children: "Copy link" }));
 };
 //# sourceMappingURL=CopyLinkButton.js.map

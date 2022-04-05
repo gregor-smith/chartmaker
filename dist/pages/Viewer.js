@@ -8,11 +8,11 @@ const errorStyle = {
 export const Viewer = ({ dispatch, chartRef, chart, screenshotState, highlighted }) => {
     let content;
     if (chart === null) {
-        content = (_jsx("main", { children: _jsx("h1", Object.assign({ style: errorStyle }, { children: "Invalid chart URL" }), void 0) }, void 0));
+        content = (_jsx("main", { children: _jsx("h1", { style: errorStyle, children: "Invalid chart URL" }) }));
     }
     else {
-        content = (_jsx(ViewerChart, Object.assign({}, chart, { ref: chartRef, dispatch: dispatch, highlighted: highlighted }), void 0));
+        content = (_jsx(ViewerChart, { ...chart, ref: chartRef, dispatch: dispatch, highlighted: highlighted }));
     }
-    return (_jsxs(_Fragment, { children: [_jsx(ViewerSidebar, { dispatch: dispatch, chartRef: chartRef, screenshotState: screenshotState, importDisabled: chart === null }, void 0), content] }, void 0));
+    return (_jsxs(_Fragment, { children: [_jsx(ViewerSidebar, { dispatch: dispatch, chartRef: chartRef, screenshotState: screenshotState, importDisabled: chart === null }), content] }));
 };
 //# sourceMappingURL=Viewer.js.map

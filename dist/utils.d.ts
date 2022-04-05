@@ -5,7 +5,7 @@ export declare function fileToDataURI(file: File): Promise<string>;
 export declare function downloadURI(uri: string, filename: string): void;
 export declare function createChart(name?: string): Chart;
 export declare function createInitialState(): State;
-export declare function validateUnknownState(state: unknown): State | null;
+export declare const validateUnknownState: (state: unknown) => State | null;
 export declare function createExportState(state: State): V3ExportState;
 export declare function loadStateFromLocalStorage(): State | null;
 export declare function saveStateToLocalStorage(state: State): void;

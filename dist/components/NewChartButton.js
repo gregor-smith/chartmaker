@@ -4,6 +4,6 @@ export const NewChartButton = ({ dispatch }) => {
     function addNewChart() {
         dispatch({ tag: 'PromptForNewChart' });
     }
-    return (_jsx(Button, Object.assign({ onClick: addNewChart }, { children: "New" }), void 0));
+    return (_jsx(Button, { onClick: addNewChart, children: "New" }));
 };
 //# sourceMappingURL=NewChartButton.js.map

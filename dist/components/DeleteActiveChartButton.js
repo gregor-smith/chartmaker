@@ -4,6 +4,6 @@ export const DeleteActiveChartButton = ({ dispatch }) => {
     function deleteActiveChart() {
         dispatch({ tag: 'PromptToDeleteActiveChart' });
     }
-    return (_jsx(Button, Object.assign({ onClick: deleteActiveChart }, { children: "Delete" }), void 0));
+    return (_jsx(Button, { onClick: deleteActiveChart, children: "Delete" }));
 };
 //# sourceMappingURL=DeleteActiveChartButton.js.map

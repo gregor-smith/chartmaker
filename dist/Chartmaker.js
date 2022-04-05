@@ -40,14 +40,14 @@ export function Chartmaker({ copyLinkComponent, keyInputComponent, ...reducerOpt
     let page;
     switch ((_a = state.route) === null || _a === void 0 ? void 0 : _a.tag) {
         case 'Editor':
-            page = (_jsx(Editor, Object.assign({}, state, { dispatch: dispatch, chartRef: chartRef, keyInputComponent: keyInputComponent, copyLinkComponent: copyLinkComponent }), void 0));
+            page = (_jsx(Editor, { ...state, dispatch: dispatch, chartRef: chartRef, keyInputComponent: keyInputComponent, copyLinkComponent: copyLinkComponent }));
             break;
         case 'Viewer':
-            page = (_jsx(Viewer, { dispatch: dispatch, chart: state.route.chart, chartRef: chartRef, highlighted: state.highlightedID, screenshotState: state.screenshotState }, void 0));
+            page = (_jsx(Viewer, { dispatch: dispatch, chart: state.route.chart, chartRef: chartRef, highlighted: state.highlightedID, screenshotState: state.screenshotState }));
             break;
         case undefined:
             page = null;
     }
-    return (_jsx("div", Object.assign({ style: style }, { children: page }), void 0));
+    return (_jsx("div", { style: style, children: page }));
 }
 //# sourceMappingURL=Chartmaker.js.map

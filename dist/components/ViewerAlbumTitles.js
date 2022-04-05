@@ -7,6 +7,6 @@ export const ViewerAlbumTitles = ({ dispatch, groups, highlighted }) => {
         const titles = group.map(({ id, name }) => _jsx(AlbumTitle, { dispatch: dispatch, id: id, name: name, highlighted: highlighted }, id));
         return (_jsx(AlbumTitleGroup, { children: titles }, index));
     });
-    return (_jsx(AlbumTitlesContainer, Object.assign({ dispatch: dispatch }, { children: elements }), void 0));
+    return (_jsx(AlbumTitlesContainer, { dispatch: dispatch, children: elements }));
 };
 //# sourceMappingURL=ViewerAlbumTitles.js.map

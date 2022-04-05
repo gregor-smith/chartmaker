@@ -6,6 +6,6 @@ export const SearchAlbumCover = ({ album, index }) => {
         event.dataTransfer.setData(`search-${index}`, '');
         event.dataTransfer.effectAllowed = 'copy';
     }
-    return (_jsx(AlbumCover, { album: album, size: SMALL_ALBUM_SIZE, onDragStart: dragStart }, void 0));
+    return (_jsx(AlbumCover, { album: album, size: SMALL_ALBUM_SIZE, onDragStart: dragStart }));
 };
 //# sourceMappingURL=SearchAlbumCover.js.map

@@ -16,6 +16,6 @@ export const ControlledRadioButton = ({ id, checked, onCheck, children }) => {
             marginRight: SIDEBAR_ITEM_PADDING_SIZE
         }
     });
-    return (_jsxs("div", Object.assign({ className: containerClassName }, { children: [_jsx("input", { id: id, style: inputStyle, type: 'radio', checked: checked, onChange: onCheck }, void 0), _jsx(Label, Object.assign({ target: id }, { children: children }), void 0)] }), void 0));
+    return (_jsxs("div", { className: containerClassName, children: [_jsx("input", { id: id, style: inputStyle, type: 'radio', checked: checked, onChange: onCheck }), _jsx(Label, { target: id, children: children })] }));
 };
 //# sourceMappingURL=ControlledRadioButton.js.map

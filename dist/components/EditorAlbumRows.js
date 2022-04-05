@@ -8,6 +8,6 @@ export const EditorAlbumRows = ({ dispatch, rows, highlighted }) => {
         const covers = albums.map(album => _jsx(EditorChartAlbumCover, { dispatch: dispatch, album: album, highlighted: highlighted, size: size }, getAlbumID(album)));
         return (_jsx(AlbumRow, { children: covers }, index));
     });
-    return (_jsx(AlbumRowsContainer, Object.assign({ dispatch: dispatch }, { children: elements }), void 0));
+    return (_jsx(AlbumRowsContainer, { dispatch: dispatch, children: elements }));
 };
 //# sourceMappingURL=EditorAlbumRows.js.map

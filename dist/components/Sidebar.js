@@ -8,5 +8,5 @@ const style = {
     height: `calc(100vh - (${CONTAINER_PADDING_SIZE} * 2))`,
     marginRight: CONTAINER_PADDING_SIZE
 };
-export const Sidebar = ({ children }) => _jsx("aside", Object.assign({ style: style }, { children: children }), void 0);
+export const Sidebar = ({ children }) => _jsx("aside", { style: style, children: children });
 //# sourceMappingURL=Sidebar.js.map

@@ -72,8 +72,8 @@ export const EditorChartAlbumCover = ({ dispatch, album, size, highlighted }) =>
             event.dataTransfer.setData(`chart-${id}`, '');
             event.dataTransfer.effectAllowed = 'copyMove';
         };
-        buttons = (_jsxs(_Fragment, { children: [_jsx(RenameAlbumButton, { dispatch: dispatch, id: id }, void 0), _jsx(DeleteAlbumButton, { dispatch: dispatch, id: id }, void 0)] }, void 0));
+        buttons = (_jsxs(_Fragment, { children: [_jsx(RenameAlbumButton, { dispatch: dispatch, id: id }), _jsx(DeleteAlbumButton, { dispatch: dispatch, id: id })] }));
     }
-    return (_jsx(ChartAlbumCover, Object.assign({ dispatch: dispatch, album: album, size: size, onDragStart: dragStart, onDragOver: dragOver, onDragEnter: dragEnter, onDrop: drop, highlighted: highlighted }, { children: buttons }), void 0));
+    return (_jsx(ChartAlbumCover, { dispatch: dispatch, album: album, size: size, onDragStart: dragStart, onDragOver: dragOver, onDragEnter: dragEnter, onDrop: drop, highlighted: highlighted, children: buttons }));
 };
 //# sourceMappingURL=EditorChartAlbumCover.js.map

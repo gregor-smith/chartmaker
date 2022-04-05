@@ -15,6 +15,6 @@ export const ControlledSlider = ({ id, onChange, children, value, ...props }) =>
     const className = cx(css({
         margin: `0 ${SIDEBAR_ITEM_PADDING_SIZE}`
     }), inputClassName());
-    return (_jsxs("div", Object.assign({ style: containerStyle }, { children: [_jsx(Label, Object.assign({ target: id }, { children: children }), void 0), _jsx("input", Object.assign({}, props, { id: id, className: className, type: 'range', onChange: change, value: value }), void 0), _jsx(Label, Object.assign({ target: id }, { children: value }), void 0)] }), void 0));
+    return (_jsxs("div", { style: containerStyle, children: [_jsx(Label, { target: id, children: children }), _jsx("input", { ...props, id: id, className: className, type: 'range', onChange: change, value: value }), _jsx(Label, { target: id, children: value })] }));
 };
 //# sourceMappingURL=ControlledSlider.js.map

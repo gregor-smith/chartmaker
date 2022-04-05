@@ -6,11 +6,11 @@ export declare type ViewerChartProps = DispatchProps & ChartState & {
 };
 export declare const ViewerChart: import("react").ForwardRefExoticComponent<DispatchProps & {
     name: string;
-    shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
     size: 40 | 42 | 100 | null;
+    shape: [2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10, 2 | 1 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10];
     albums: (number | ({
-        name: string;
         url: string;
+        name: string;
     } & {
         id: number;
     }))[];

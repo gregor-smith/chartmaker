@@ -27,6 +27,6 @@ export const LoadStateButton = ({ dispatch }) => {
         var _a;
         (_a = inputRef.current) === null || _a === void 0 ? void 0 : _a.click();
     }
-    return (_jsxs(_Fragment, { children: [_jsx("input", { ref: inputRef, style: inputStyle, type: 'file', accept: 'application/json', onChange: loadSelectedFile }, void 0), _jsx(Button, Object.assign({ style: buttonStyle, onClick: clickInput }, { children: "Load state" }), void 0)] }, void 0));
+    return (_jsxs(_Fragment, { children: [_jsx("input", { ref: inputRef, style: inputStyle, type: 'file', accept: 'application/json', onChange: loadSelectedFile }), _jsx(Button, { style: buttonStyle, onClick: clickInput, children: "Load state" })] }));
 };
 //# sourceMappingURL=LoadStateButton.js.map

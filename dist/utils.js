@@ -1,6 +1,7 @@
 import html2canvas from 'html2canvas';
 import { fromUint8Array as base64FromUint8Array } from 'js-base64';
 import { compressToEncodedURIComponent, decompressFromEncodedURIComponent } from 'lz-string';
+import { match, Unknown, when } from 'runtypes';
 import { DEFAULT_CHART_NAME, CHART_ALBUMS_COUNT, LOCAL_STORAGE_KEY, DEFAULT_CHART_SHAPE, DEFAULT_CHART_SIZE } from './constants.js';
 import { LARGE_ALBUM_SIZE, MEDIUM_ALBUM_SIZE, SMALL_ALBUM_SIZE, TINY_ALBUM_SIZE, VERY_LARGE_ALBUM_SIZE, VERY_SMALL_ALBUM_SIZE, BACKGROUND_COLOUR } from './style.js';
 import { V1State as V1ExportState, V2State as V2ExportState, ExportState as V3ExportState, ViewerChart } from './types.js';
@@ -55,18 +56,7 @@ export function createInitialState() {
         highlightedID: null
     };
 }
-export function validateUnknownState(state) {
-    if (V3ExportState.guard(state)) {
-        return createStateFromV3ExportState(state);
-    }
-    if (V2ExportState.guard(state)) {
-        return createStateFromV2ExportState(state);
-    }
-    if (V1ExportState.guard(state)) {
-        return createStateFromV1ExportState(state);
-    }
-    return null;
-}
+export const validateUnknownState = match(when(V3ExportState, createStateFromV3ExportState), when(V2ExportState, createStateFromV2ExportState), when(V1ExportState, createStateFromV1ExportState), when(Unknown, () => null));
 function decodeExportAlbums(exportAlbums) {
     const albums = [];
     for (let index = 0; index < CHART_ALBUMS_COUNT; index++) {
@@ -400,9 +390,6 @@ function collageGroups(albums, [rowsX, rowsY]) {
     return [rows, groups];
 }
 export function splitAlbumsAccordingToShape(albums, shape, size) {
-    if (size === null) {
-        return collageGroups(albums, shape);
-    }
     let rows;
     switch (size) {
         case 40:
@@ -413,6 +400,9 @@ export function splitAlbumsAccordingToShape(albums, shape, size) {
             break;
         case 100:
             rows = top100Rows(albums);
+            break;
+        case null:
+            return collageGroups(albums, shape);
     }
     return [rows, titleGroupsFromRows(rows)];
 }

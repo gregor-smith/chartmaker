@@ -101,7 +101,7 @@ export function createInitialState(): State {
 }
 
 
-export const validateUnknownState = match(
+export const validateUnknownState: (state: unknown) => State | null = match(
     when(V3ExportState, createStateFromV3ExportState),
     when(V2ExportState, createStateFromV2ExportState),
     when(V1ExportState, createStateFromV1ExportState),
@@ -509,10 +509,6 @@ export function splitAlbumsAccordingToShape(
     shape: CollageSize,
     size: TopSize | null
 ): [ AlbumRow[], NamedAlbum[][] ] {
-    if (size === null) {
-        return collageGroups(albums, shape)
-    }
-
     let rows: AlbumRow[]
     switch (size) {
         case 40:
@@ -523,6 +519,9 @@ export function splitAlbumsAccordingToShape(
             break
         case 100:
             rows = top100Rows(albums)
+            break
+        case null:
+            return collageGroups(albums, shape)
     }
     return [ rows, titleGroupsFromRows(rows) ]
 }

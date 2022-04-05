@@ -9,5 +9,5 @@ const outerStyle = {
 const innerStyle = {
     display: 'flex'
 };
-export const LoadSaveButtons = ({ dispatch, children }) => _jsxs(SidebarGroup, Object.assign({ style: outerStyle }, { children: [_jsxs("div", Object.assign({ style: innerStyle }, { children: [_jsx(LoadStateButton, { dispatch: dispatch }, void 0), _jsx(SaveStateButton, { dispatch: dispatch }, void 0)] }), void 0), children] }), void 0);
+export const LoadSaveButtons = ({ dispatch, children }) => _jsxs(SidebarGroup, { style: outerStyle, children: [_jsxs("div", { style: innerStyle, children: [_jsx(LoadStateButton, { dispatch: dispatch }), _jsx(SaveStateButton, { dispatch: dispatch })] }), children] });
 //# sourceMappingURL=LoadSaveButtons.js.map
