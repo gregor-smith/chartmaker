@@ -20,6 +20,7 @@ function isLastFMNullString(value) {
     return value === '' || value === '(null)';
 }
 function formatLastFMResult(result) {
+    var _a, _b, _c;
     const albums = [];
     for (const album of result.results.albummatches.album) {
         if (isLastFMNullString(album.artist)
@@ -28,30 +29,25 @@ function formatLastFMResult(result) {
             || album.image.some(image => isLastFMNullString(image['#text']))) {
             continue;
         }
+        const url = (_a = album.image[album.image.length - 1]) === null || _a === void 0 ? void 0 : _a['#text'];
+        if (url === undefined) {
+            continue;
+        }
         albums.push({
             name: `${album.artist} - ${album.name}`,
-            url: album.image[album.image.length - 1]['#text']
+            url: (_c = (_b = /\/([0-9a-f]{32})\.png$/.exec(url)) === null || _b === void 0 ? void 0 : _b[1]) !== null && _c !== void 0 ? _c : url
         });
     }
     return albums;
 }
-function joinURLQuery(base, query) {
-    const joinedQuery = Object.entries(query)
-        .map(([key, value]) => {
-        key = encodeURIComponent(key.trim());
-        value = encodeURIComponent(value.trim());
-        return `${key}=${value}`;
-    })
-        .join('&');
-    return `${base}?${joinedQuery}`;
-}
 export const searchLastFM = async ({ key, query, signal }) => {
-    const url = joinURLQuery('https://ws.audioscrobbler.com/2.0/', {
+    const params = new URLSearchParams({
         method: 'album.search',
         format: 'json',
         api_key: key,
         album: query
     });
+    const url = `https://ws.audioscrobbler.com/2.0/?${params}`;
     let response;
     try {
         response = await fetch(url, { signal, credentials: 'omit' });

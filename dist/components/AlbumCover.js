@@ -18,9 +18,12 @@ const baseOverlayStyle = {
 export const AlbumCover = ({ album, size, onDragStart, onDragEnter, onDragOver, onDrop, onMouseEnter, children, overlayStyle = {}, highlighted }) => {
     let image;
     if (!unidentifiedAlbumIsPlaceholder(album)) {
+        const url = /^[0-9a-f]{32}$/.test(album.url)
+            ? `https://lastfm.freetls.fastly.net/i/u/300x300/${album.url}.png`
+            : album.url;
         image = (
         // lazy loading causes problems with html2canvas so keep it default
-        _jsx("img", { style: imageStyle, src: album.url, alt: album.name, crossOrigin: 'anonymous' }));
+        _jsx("img", { style: imageStyle, src: url, alt: album.name, crossOrigin: 'anonymous' }));
         children = (_jsx("div", { style: { ...baseOverlayStyle, ...overlayStyle }, children: children }));
     }
     const className = cx(css({

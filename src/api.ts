@@ -48,9 +48,13 @@ function formatLastFMResult(result: LastFMResult): UnidentifiedNamedAlbum[] {
                 || album.image.some(image => isLastFMNullString(image['#text']))) {
             continue
         }
+        const url = album.image[album.image.length - 1]?.['#text']
+        if (url === undefined) {
+            continue
+        }
         albums.push({
             name: `${album.artist} - ${album.name}`,
-            url: album.image[album.image.length - 1]!['#text']
+            url: /\/([0-9a-f]{32})\.png$/.exec(url)?.[1] ?? url
         })
     }
     return albums

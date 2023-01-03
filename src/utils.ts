@@ -144,9 +144,7 @@ function encodeExportAlbums(albums: Album[]): UnidentifiedAlbum[] {
             sliceIndex = undefined
         }
     }
-    return sliceIndex === undefined
-        ? exportAlbums
-        : exportAlbums.slice(0, sliceIndex)
+    return exportAlbums.slice(0, sliceIndex)
 }
 
 

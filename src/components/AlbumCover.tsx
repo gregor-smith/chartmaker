@@ -50,10 +50,13 @@ export const AlbumCover: FC<AlbumCoverProps> = ({
 }) => {
     let image: JSX.Element | undefined
     if (!unidentifiedAlbumIsPlaceholder(album)) {
+        const url = /^[0-9a-f]{32}$/.test(album.url)
+            ? `https://lastfm.freetls.fastly.net/i/u/300x300/${album.url}.png`
+            : album.url
         image = (
             // lazy loading causes problems with html2canvas so keep it default
             <img style={imageStyle}
-                src={album.url}
+                src={url}
                 alt={album.name}
                 crossOrigin='anonymous'/>
         )

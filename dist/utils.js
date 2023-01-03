@@ -88,9 +88,7 @@ function encodeExportAlbums(albums) {
             sliceIndex = undefined;
         }
     }
-    return sliceIndex === undefined
-        ? exportAlbums
-        : exportAlbums.slice(0, sliceIndex);
+    return exportAlbums.slice(0, sliceIndex);
 }
 function createStateFromV1ExportState(state) {
     return {
