@@ -57,25 +57,14 @@ function formatLastFMResult(result: LastFMResult): UnidentifiedNamedAlbum[] {
 }
 
 
-function joinURLQuery(base: string, query: Record<string, string>): string {
-    const joinedQuery = Object.entries(query)
-        .map(([ key, value ]) => {
-            key = encodeURIComponent(key.trim())
-            value = encodeURIComponent(value.trim())
-            return `${key}=${value}`
-        })
-        .join('&')
-    return `${base}?${joinedQuery}`
-}
-
-
 export const searchLastFM: AlbumSearcher = async ({ key, query, signal }) => {
-    const url = joinURLQuery('https://ws.audioscrobbler.com/2.0/', {
+    const params = new URLSearchParams({
         method: 'album.search',
         format: 'json',
         api_key: key,
         album: query
     })
+    const url = `https://ws.audioscrobbler.com/2.0/?${params}`
 
     let response: Response
     try {
